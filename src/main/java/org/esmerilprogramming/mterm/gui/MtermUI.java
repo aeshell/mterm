@@ -44,6 +44,7 @@ public class MtermUI {
     private GridBagLayout gridBagLayout;
     private GridBagConstraints gridBagConstraints;
     private JTextArea textSpace;
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
     public MtermUI() {
         new MFrame();
@@ -78,9 +79,12 @@ public class MtermUI {
                     .addMenu("View")
                     .addMenu("Search")
                     .addMenu("Terminal")
-                    .addMenu("Help");
+                    .addMenu("Help")
+                    .addSubMenu(0, "New")
+                    .addSubMenu(0, "Exit");
 
-            this.setJMenuBar(m.get());
+            this.setJMenuBar(m.create());
+
 
             initTextSpace();
             try {
@@ -91,11 +95,22 @@ public class MtermUI {
             }
 
             panel.setSize(600, 400);
-            panel.add(textSpace);
+
+            JScrollPane scrollPane = new JScrollPane(textSpace);
+            scrollPane.setMinimumSize(new Dimension(730, 500));
+
+            panel.add(scrollPane);
 
             this.add(panel);
-
             this.setVisible(true);
+
+            try {
+                baos.write("pwd".getBytes());
+                baos.flush();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -115,14 +130,10 @@ public class MtermUI {
 
         PipedOutputStream pos = new PipedOutputStream();
         PipedInputStream pis = new PipedInputStream(pos);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-        System.setIn(new ByteArrayInputStream(textSpace.getText().getBytes()));
-        SettingsBuilder sb = new SettingsBuilder();
-        sb.readInputrc(false);
-        sb.inputStream(System.in);
-        sb.outputStream(new MtermPrintStream(textSpace, baos));
-        sb.logging(true);
+        SettingsBuilder sb = new SettingsBuilder()
+                .inputStream(pis)
+                .outputStream(new MtermPrintStream(textSpace, baos));
 
         CommandRegistry registry = new AeshCommandRegistryBuilder()
                 .command(ExitCommand.class)

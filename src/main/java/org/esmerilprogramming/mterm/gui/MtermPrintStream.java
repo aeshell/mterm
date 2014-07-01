@@ -30,4 +30,5 @@ public class MtermPrintStream extends PrintStream {
     public void print(String s) {
         jTextArea.append(s);
     }
+
 }
