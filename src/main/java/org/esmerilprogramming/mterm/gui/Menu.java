@@ -7,6 +7,8 @@
 package org.esmerilprogramming.mterm.gui;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The main class.
@@ -31,16 +33,28 @@ public class Menu {
         return this;
     }
 
-    public JMenuBar get() {
+    public JMenuBar create() {
+        registerActions();
         return this.menuBar;
     }
 
-    //menuItemExit = new JMenuItem("Exit");
-    //menuFile.add(menuItemExit);
-    //menuItemExit.addActionListener(new ActionListener() {
-    //    public void actionPerformed(ActionEvent actionEvent) {
-    //        System.exit(0);
-    //    }
-    //});
+    private void registerActions() {
+        this.menuBar.getMenu(0).getItem(0).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new MtermUI();
+                    }
+                });
+            }
+        });
+
+        this.menuBar.getMenu(0).getItem(1).addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                System.exit(0);
+            }
+        });
+    }
 
 }
