@@ -1,4 +1,4 @@
 mterm
 =====
 
-a simple java terminal app
+A simple java terminal app
