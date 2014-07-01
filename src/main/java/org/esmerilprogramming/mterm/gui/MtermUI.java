@@ -6,8 +6,33 @@
  */
 package org.esmerilprogramming.mterm.gui;
 
+import org.jboss.aesh.cl.CommandDefinition;
+import org.jboss.aesh.console.AeshConsole;
+import org.jboss.aesh.console.AeshConsoleBuilder;
+import org.jboss.aesh.console.Prompt;
+import org.jboss.aesh.console.command.Command;
+import org.jboss.aesh.console.command.CommandResult;
+import org.jboss.aesh.console.command.invocation.CommandInvocation;
+import org.jboss.aesh.console.command.registry.AeshCommandRegistryBuilder;
+import org.jboss.aesh.console.command.registry.CommandRegistry;
+import org.jboss.aesh.console.settings.SettingsBuilder;
+import org.jboss.aesh.extensions.cat.Cat;
+import org.jboss.aesh.extensions.clear.Clear;
+import org.jboss.aesh.extensions.grep.Grep;
+import org.jboss.aesh.extensions.groovy.GroovyCommand;
+import org.jboss.aesh.extensions.harlem.aesh.Harlem;
+import org.jboss.aesh.extensions.less.aesh.Less;
+import org.jboss.aesh.extensions.matrix.Matrix;
+import org.jboss.aesh.extensions.more.aesh.More;
+import org.jboss.aesh.extensions.pwd.Pwd;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 
 /**
  * Main gui class.
@@ -18,6 +43,7 @@ public class MtermUI {
 
     private GridBagLayout gridBagLayout;
     private GridBagConstraints gridBagConstraints;
+    private JTextArea textSpace;
 
     public MtermUI() {
         new MFrame();
@@ -25,20 +51,13 @@ public class MtermUI {
 
     private class MFrame extends JFrame {
 
-        private JMenuBar menuBar;
-        private JMenu menuFile;
-        private JMenu menuEdit;
-        private JMenu menuView;
-        private JMenuItem menuSearch;
-        private JMenuItem menuTerminal;
-        private JMenuItem menuHelp;
         private JPanel panel;
 
         public MFrame() {
-            this.initComponents();
+            this.init();
         }
 
-        public void initComponents() {
+        public void init() {
             this.setTitle("$mterm");
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.setSize(730, 500);
@@ -53,38 +72,87 @@ public class MtermUI {
             panel = new JPanel();
             panel.setLayout(gridBagLayout);
 
-            menuBar = new JMenuBar();
-            this.setJMenuBar(menuBar);
+            Menu m = new Menu()
+                    .addMenu("File")
+                    .addMenu("Edit")
+                    .addMenu("View")
+                    .addMenu("Search")
+                    .addMenu("Terminal")
+                    .addMenu("Help");
 
-            menuFile = new JMenu("File");
-            menuBar.add(menuFile);
+            this.setJMenuBar(m.get());
 
-            menuEdit = new JMenu("Edit");
-            menuBar.add(menuEdit);
+            initTextSpace();
+            try {
+                initAesh();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            menuView = new JMenu("View");
-            menuBar.add(menuView);
-
-            menuSearch = new JMenu("Search");
-            menuBar.add(menuSearch);
-
-            menuTerminal = new JMenu("Terminal");
-            menuBar.add(menuTerminal);
-
-            menuHelp = new JMenu("Help");
-            menuBar.add(menuHelp);
-
-            //menuItemExit = new JMenuItem("Exit");
-            //menuFile.add(menuItemExit);
-            //menuItemExit.addActionListener(new ActionListener() {
-            //    public void actionPerformed(ActionEvent actionEvent) {
-            //        System.exit(0);
-            //    }
-            //});
+            panel.setSize(600, 400);
+            panel.add(textSpace);
 
             this.add(panel);
+
             this.setVisible(true);
         }
 
+    }
+
+    private void initTextSpace() {
+        textSpace = new JTextArea();
+        textSpace.setColumns(20);
+        textSpace.setRows(80);
+        textSpace.setMinimumSize(new Dimension(730, 500));
+        JScrollPane scrollPane = new JScrollPane(textSpace);
+        textSpace.setEditable(true);
+        textSpace.setCaretPosition(0);
+    }
+
+
+    private void initAesh() throws IOException {
+
+        PipedOutputStream pos = new PipedOutputStream();
+        PipedInputStream pis = new PipedInputStream(pos);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        System.setIn(new ByteArrayInputStream(textSpace.getText().getBytes()));
+        SettingsBuilder sb = new SettingsBuilder();
+        sb.readInputrc(false);
+        sb.inputStream(System.in);
+        sb.outputStream(new MtermPrintStream(textSpace, baos));
+        sb.logging(true);
+
+        CommandRegistry registry = new AeshCommandRegistryBuilder()
+                .command(ExitCommand.class)
+                .command(Less.class)
+                .command(More.class)
+                .command(Harlem.class)
+                .command(Clear.class)
+                .command(Matrix.class)
+                .command(GroovyCommand.class)
+                .command(Grep.class)
+                .command(Cat.class)
+                .command(Pwd.class)
+                .create();
+
+        AeshConsole aeshConsole = new AeshConsoleBuilder()
+                .commandRegistry(registry)
+                .settings(sb.create())
+                .prompt(new Prompt("$ "))
+                .create();
+
+        aeshConsole.start();
+    }
+
+    @CommandDefinition(name="exit", description = "exit the program")
+    public static class ExitCommand implements Command {
+
+        @Override
+        public CommandResult execute(CommandInvocation commandInvocation) throws IOException {
+            commandInvocation.stop();
+            return CommandResult.SUCCESS;
+        }
     }
 }
