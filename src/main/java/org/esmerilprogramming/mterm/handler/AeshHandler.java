@@ -20,6 +20,7 @@ import java.io.PipedOutputStream;
 import java.io.PrintStream;
 import java.util.Set;
 
+import org.esmerilprogramming.mterm.gui.MessageDialog;
 import org.jboss.aesh.console.AeshConsole;
 import org.jboss.aesh.console.AeshConsoleBuilder;
 import org.jboss.aesh.console.Config;
@@ -58,7 +59,7 @@ public class AeshHandler {
     try {
       pis = new PipedInputStream(pos);
     } catch (IOException e) {
-      e.printStackTrace();
+      new MessageDialog().error(e.getMessage());
     }
     stream = new ByteArrayOutputStream();
 
@@ -70,7 +71,7 @@ public class AeshHandler {
       add(Cd.class, Ls.class, Mkdir.class, Pwd.class, Rm.class, Touch.class, Cat.class,
           Clear.class, Echo.class);
     } catch (IOException e) {
-      e.printStackTrace();
+      new MessageDialog().error(e.getMessage());
     }
 
   }
@@ -110,7 +111,7 @@ public class AeshHandler {
     try {
       Thread.sleep(100);
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      new MessageDialog().error(e.getMessage());
     }
   }
 

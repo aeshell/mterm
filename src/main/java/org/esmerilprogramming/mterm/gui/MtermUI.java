@@ -33,7 +33,7 @@ import org.esmerilprogramming.mterm.handler.AeshHandler;
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 @SuppressWarnings("serial")
-public class MtermUI extends JFrame {
+public final class MtermUI extends JFrame {
 
   private AeshHandler aesh;
   private JTextArea textArea;
