@@ -11,25 +11,28 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.esmerilprogramming.mterm;
+package org.esmerilprogramming.mterm.gui;
 
-import javax.swing.SwingUtilities;
-
-import org.esmerilprogramming.mterm.gui.MtermUI;
+import java.io.*;
+import javax.swing.*;
 
 /**
- * The main class.
+ * To write bytes on textArea. 
+ *
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
-public class Mterm {
+public class MtermOutputStream extends OutputStream {
 
-  public static void main(String... args) {
-    SwingUtilities.invokeLater(new Runnable() {
-      @Override
-      public void run() {
-        new MtermUI();
-      }
-    });
+  private JTextArea textArea;
+
+  public MtermOutputStream(JTextArea textArea) {
+    this.textArea = textArea;
+  }
+
+  @Override
+  public void write(int b) throws IOException {
+    this.textArea.append(String.valueOf((char) b));
+    this.textArea.setCaretPosition(this.textArea.getDocument().getLength());
   }
 
 }

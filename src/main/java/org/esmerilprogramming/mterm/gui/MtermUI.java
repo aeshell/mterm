@@ -13,164 +13,74 @@
  */
 package org.esmerilprogramming.mterm.gui;
 
-import org.jboss.aesh.cl.CommandDefinition;
-import org.jboss.aesh.console.AeshConsole;
-import org.jboss.aesh.console.AeshConsoleBuilder;
-import org.jboss.aesh.console.Prompt;
-import org.jboss.aesh.console.command.Command;
-import org.jboss.aesh.console.command.CommandResult;
-import org.jboss.aesh.console.command.invocation.CommandInvocation;
-import org.jboss.aesh.console.command.registry.AeshCommandRegistryBuilder;
-import org.jboss.aesh.console.command.registry.CommandRegistry;
-import org.jboss.aesh.console.settings.SettingsBuilder;
-import org.jboss.aesh.extensions.cat.Cat;
-import org.jboss.aesh.extensions.clear.Clear;
-import org.jboss.aesh.extensions.grep.Grep;
-import org.jboss.aesh.extensions.groovy.GroovyCommand;
-import org.jboss.aesh.extensions.harlem.aesh.Harlem;
-import org.jboss.aesh.extensions.less.aesh.Less;
-import org.jboss.aesh.extensions.matrix.Matrix;
-import org.jboss.aesh.extensions.more.aesh.More;
-import org.jboss.aesh.extensions.pwd.Pwd;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.io.PrintStream;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
+
+import org.esmerilprogramming.mterm.event.AeshAction;
+import org.esmerilprogramming.mterm.event.MtermDocListener;
+import org.esmerilprogramming.mterm.handler.AeshHandler;
 
 /**
  * Main gui class.
  *
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
-public class MtermUI {
+@SuppressWarnings("serial")
+public class MtermUI extends JFrame {
 
-    private GridBagLayout gridBagLayout;
-    private GridBagConstraints gridBagConstraints;
-    private JTextArea textSpace;
-    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+  private AeshHandler aesh;
+  private JTextArea textArea;
 
-    public MtermUI() {
-        new MFrame();
-    }
+  public MtermUI() {
 
-    private class MFrame extends JFrame {
+    setTitle("$mterm");
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setSize(730, 500);
+    setResizable(false);
 
-        private JPanel panel;
+    Menu m =
+        new Menu().addMenu("File").addMenu("Edit").addMenu("View").addMenu("Search")
+            .addMenu("Terminal").addMenu("Help").addSubMenu(0, "New").addSubMenu(0, "Exit");
+    setJMenuBar(m.create());
 
-        public MFrame() {
-            this.init();
-        }
+    textArea = new JTextArea(80, 20);
 
-        public void init() {
-            this.setTitle("$mterm");
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            this.setSize(730, 500);
-            this.setResizable(false);
-            this.setLocationRelativeTo(null);
+    PrintStream printStream = new PrintStream(new MtermOutputStream(textArea));
+    System.setErr(printStream);
+    System.setOut(printStream);
 
-            gridBagLayout = new GridBagLayout();
-            gridBagConstraints = new GridBagConstraints();
-            gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
-            gridBagConstraints.insets = new Insets(15, 0, 38, 0);
+    setLayout(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    gbc.insets = new Insets(10, 10, 10, 10);
+    gbc.anchor = GridBagConstraints.WEST;
+    gbc.gridx = 1;
+    gbc.gridx = 0;
+    gbc.gridy = 1;
+    gbc.gridwidth = 2;
+    gbc.fill = GridBagConstraints.BOTH;
+    gbc.weightx = 1.0;
+    gbc.weighty = 1.0;
+    add(new JScrollPane(textArea), gbc);
 
-            panel = new JPanel();
-            panel.setLayout(gridBagLayout);
+    aesh = new AeshHandler();
 
-            Menu m = new Menu()
-                    .addMenu("File")
-                    .addMenu("Edit")
-                    .addMenu("View")
-                    .addMenu("Search")
-                    .addMenu("Terminal")
-                    .addMenu("Help")
-                    .addSubMenu(0, "New")
-                    .addSubMenu(0, "Exit");
+    textArea.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "run");
+    textArea.getActionMap().put("run", new AeshAction(textArea, aesh));
+    textArea.getDocument().addDocumentListener(new MtermDocListener());
 
-            this.setJMenuBar(m.create());
+    setLocationRelativeTo(null);
+    setVisible(true);
 
+    System.out.print("[mterm@localhost ~]$ ");
+  }
 
-            initTextSpace();
-            try {
-                initAesh();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            panel.setSize(600, 400);
-
-            JScrollPane scrollPane = new JScrollPane(textSpace);
-            scrollPane.setMinimumSize(new Dimension(730, 500));
-
-            panel.add(scrollPane);
-
-            this.add(panel);
-            this.setVisible(true);
-
-            try {
-                baos.write("pwd".getBytes());
-                baos.flush();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    private void initTextSpace() {
-        textSpace = new JTextArea();
-        textSpace.setColumns(20);
-        textSpace.setRows(80);
-        textSpace.setMinimumSize(new Dimension(730, 500));
-        JScrollPane scrollPane = new JScrollPane(textSpace);
-        textSpace.setEditable(true);
-        textSpace.setCaretPosition(0);
-    }
-
-
-    private void initAesh() throws IOException {
-
-        PipedOutputStream pos = new PipedOutputStream();
-        PipedInputStream pis = new PipedInputStream(pos);
-
-        SettingsBuilder sb = new SettingsBuilder()
-                .inputStream(pis)
-                .outputStream(new MtermPrintStream(textSpace, baos));
-
-        CommandRegistry registry = new AeshCommandRegistryBuilder()
-                .command(ExitCommand.class)
-                .command(Less.class)
-                .command(More.class)
-                .command(Harlem.class)
-                .command(Clear.class)
-                .command(Matrix.class)
-                .command(GroovyCommand.class)
-                .command(Grep.class)
-                .command(Cat.class)
-                .command(Pwd.class)
-                .create();
-
-        AeshConsole aeshConsole = new AeshConsoleBuilder()
-                .commandRegistry(registry)
-                .settings(sb.create())
-                .prompt(new Prompt("$ "))
-                .create();
-
-        aeshConsole.start();
-    }
-
-    @CommandDefinition(name="exit", description = "exit the program")
-    public static class ExitCommand implements Command {
-
-        @Override
-        public CommandResult execute(CommandInvocation commandInvocation) throws IOException {
-            commandInvocation.stop();
-            return CommandResult.SUCCESS;
-        }
-    }
 }

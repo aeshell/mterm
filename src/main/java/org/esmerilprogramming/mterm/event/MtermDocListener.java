@@ -11,31 +11,31 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.esmerilprogramming.mterm.gui;
+package org.esmerilprogramming.mterm.event;
 
-import java.io.*;
-import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
- * The main class.
+ * Custom implementation of KeyListener.
  *
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
-public class MtermPrintStream extends PrintStream {
+public class MtermDocListener implements DocumentListener {
 
-    private JTextArea jTextArea;
+  @Override
+  public void changedUpdate(DocumentEvent e) {
+  
+  }
 
-    public MtermPrintStream(JTextArea jTextArea, OutputStream os) {
-        super(os);
-        this.jTextArea = jTextArea;
-    }
+  @Override
+  public void insertUpdate(DocumentEvent e) {
+    
+  }
 
-    public void println(String s) {
-        jTextArea.append(s + "\n");
-    }
-
-    public void print(String s) {
-        jTextArea.append(s);
-    }
-
+  @Override
+  public void removeUpdate(DocumentEvent e) {
+    
+  }
+  
 }
