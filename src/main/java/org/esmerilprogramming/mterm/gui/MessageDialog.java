@@ -11,31 +11,32 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.esmerilprogramming.mterm.event;
+package org.esmerilprogramming.mterm.gui;
 
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import javax.swing.JOptionPane;
 
 /**
- * Custom implementation of DocumentListener.
+ * MessageDialog class is a JOPtionPane handler to show exceptions and others
+ * types of messages.
  *
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
-public class MtermDocListener implements DocumentListener {
+public class MessageDialog {
 
-  @Override
-  public void changedUpdate(DocumentEvent e) {
+  /**
+   * Shows the error message from exception.
+   * @param message String
+   */
+  public void error(String message) {
+    JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+  }
   
-  }
-
-  @Override
-  public void insertUpdate(DocumentEvent e) {
-    
-  }
-
-  @Override
-  public void removeUpdate(DocumentEvent e) {
-    
+  /**
+   * Shows the info message.
+   * @param message String
+   */
+  public void info(String message) {
+    JOptionPane.showMessageDialog(null, message, "Info", JOptionPane.INFORMATION_MESSAGE);
   }
   
 }

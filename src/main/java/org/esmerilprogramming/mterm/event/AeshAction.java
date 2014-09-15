@@ -20,6 +20,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 
+import org.esmerilprogramming.mterm.gui.MessageDialog;
 import org.esmerilprogramming.mterm.handler.AeshHandler;
 
 /**
@@ -60,11 +61,11 @@ public class AeshAction extends AbstractAction {
         aesh.reset();
         System.out.print(result + PS1);
       } catch (IOException e) {
-        e.printStackTrace();
+        new MessageDialog().error(e.getMessage());
       }
 
-    } catch (BadLocationException ex) {
-      System.out.println(ex.getMessage());
+    } catch (BadLocationException e) {
+      new MessageDialog().error(e.getMessage());
     }
 
   }
@@ -73,7 +74,7 @@ public class AeshAction extends AbstractAction {
     try {
       textArea.getDocument().remove(0, textArea.getDocument().getLength());
     } catch (BadLocationException e) {
-      e.printStackTrace();
+      new MessageDialog().error(e.getMessage());
     }
   }
   
