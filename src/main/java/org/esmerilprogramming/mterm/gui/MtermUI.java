@@ -28,6 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
+import org.esmerilprogramming.mterm.Mterm;
 import org.esmerilprogramming.mterm.event.AeshAction;
 import org.esmerilprogramming.mterm.event.MtermDocListener;
 import org.esmerilprogramming.mterm.handler.AeshHandler;
@@ -42,13 +43,12 @@ public final class MtermUI extends JFrame {
 
   private AeshHandler aesh;
   private JTextArea textArea;
-
-  private Boolean fullScreen;
+  private boolean fullScreen;
 
   public MtermUI() {
     initGraphComponents();
     applyEventsAndStreams();
-    System.out.print("[mterm@localhost ~]$ ");
+    System.out.print(Mterm.buildPS1());
   }
 
   private void initGraphComponents() {
@@ -112,17 +112,17 @@ public final class MtermUI extends JFrame {
     textArea.getActionMap().put("run", new AeshAction(textArea, aesh));
     textArea.getDocument().addDocumentListener(new MtermDocListener());
   }
-
-  public Boolean isFullScreen() {
-    return fullScreen;
-  }
-
-  public void setFullScreen(Boolean fullScreen) {
-    this.fullScreen = fullScreen;
-  }
   
   public JTextArea getTextArea() {
     return textArea;
   }
 
+  public boolean isFullScreen() {
+    return fullScreen;
+  }
+
+  public void setFullScreen(boolean fullScreen) {
+    this.fullScreen = fullScreen;
+  }
+  
 }

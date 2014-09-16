@@ -39,8 +39,6 @@ public class Menu {
 
   private JMenuBar menuBar;
 
-  private boolean fullScreen;
-
   public Menu() {
     menuBar = new JMenuBar();
   }
@@ -109,13 +107,13 @@ public class Menu {
 
     this.menuBar.getMenu(2).getItem(0).addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
-        if (!fullScreen) {
+        if (!((MtermUI) menuBar.getParent().getParent().getParent()).isFullScreen()) {
           ((JFrame) menuBar.getParent().getParent().getParent())
               .setExtendedState(Frame.MAXIMIZED_BOTH);
-          fullScreen = true;
+          ((MtermUI) menuBar.getParent().getParent().getParent()).setFullScreen(true);
         } else {
           ((JFrame) menuBar.getParent().getParent().getParent()).setExtendedState(Frame.NORMAL);
-          fullScreen = false;
+          ((MtermUI) menuBar.getParent().getParent().getParent()).setFullScreen(false);
         }
       }
     });
