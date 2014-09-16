@@ -46,25 +46,23 @@ public class AeshAction extends AbstractAction {
       int lineStart = textArea.getLineStartOffset(lineOffset);
       int lineEnd = textArea.getLineEndOffset(lineOffset);
 
-      try {
+      String command = textArea.getText(lineStart, (lineEnd - lineStart));
+      command = command.substring(PS1.length());
 
-        String command = textArea.getText(lineStart, (lineEnd - lineStart));
-        command = command.substring(PS1.length());
-        
-        if (command.contains("clear")) {
-          clear();  
-        }
-        
+      String result = "";
+
+      if (!command.contains("clear")) {
         aesh.run(command);
-        String result = aesh.getResult();
+        result = aesh.getResult();
         result = result.substring(command.length());
         aesh.reset();
-        System.out.print(result + PS1);
-      } catch (IOException e) {
-        new MessageDialog().error(e.getMessage());
+      } else {
+        clear();
       }
 
-    } catch (BadLocationException e) {
+      System.out.print(result + PS1);
+
+    } catch (Exception e) {
       new MessageDialog().error(e.getMessage());
     }
 
@@ -77,5 +75,5 @@ public class AeshAction extends AbstractAction {
       new MessageDialog().error(e.getMessage());
     }
   }
-  
+
 }
