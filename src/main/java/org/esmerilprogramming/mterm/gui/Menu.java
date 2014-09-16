@@ -13,9 +13,11 @@
  */
 package org.esmerilprogramming.mterm.gui;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -29,6 +31,8 @@ import javax.swing.SwingUtilities;
 public class Menu {
 
   private JMenuBar menuBar;
+  
+  private boolean fullScreen;
 
   public Menu() {
     menuBar = new JMenuBar();
@@ -64,6 +68,20 @@ public class Menu {
     this.menuBar.getMenu(0).getItem(1).addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
         System.exit(0);
+      }
+    });
+    
+    this.menuBar.getMenu(2).getItem(0).addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent actionEvent) {
+        if (!fullScreen) {
+          ((JFrame)menuBar.getParent().getParent().getParent())
+          .setExtendedState(Frame.MAXIMIZED_BOTH);
+          fullScreen = true;
+        } else {
+          ((JFrame)menuBar.getParent().getParent().getParent())
+          .setExtendedState(Frame.NORMAL);
+          fullScreen = false;
+        }
       }
     });
   }

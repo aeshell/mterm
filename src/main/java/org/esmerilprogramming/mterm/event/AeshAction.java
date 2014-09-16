@@ -14,7 +14,6 @@
 package org.esmerilprogramming.mterm.event;
 
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
@@ -42,13 +41,8 @@ public class AeshAction extends AbstractAction {
 
   public void actionPerformed(ActionEvent ev) {
     try {
-      int lineOffset = textArea.getLineOfOffset(textArea.getCaretPosition());
-      int lineStart = textArea.getLineStartOffset(lineOffset);
-      int lineEnd = textArea.getLineEndOffset(lineOffset);
 
-      String command = textArea.getText(lineStart, (lineEnd - lineStart));
-      command = command.substring(PS1.length());
-
+      String command = getCommand();
       String result = "";
 
       if (!command.contains("clear")) {
@@ -66,6 +60,20 @@ public class AeshAction extends AbstractAction {
       new MessageDialog().error(e.getMessage());
     }
 
+  }
+
+  private String getCommand() {
+    String command = "";
+    try {
+      int lineOffset = textArea.getLineOfOffset(textArea.getCaretPosition());
+      int lineStart = textArea.getLineStartOffset(lineOffset);
+      int lineEnd = textArea.getLineEndOffset(lineOffset);
+      command = textArea.getText(lineStart, (lineEnd - lineStart));
+      command = command.substring(PS1.length());
+    } catch (Exception e) {
+      new MessageDialog().error(e.getMessage());
+    }
+    return command;
   }
 
   private void clear() {
