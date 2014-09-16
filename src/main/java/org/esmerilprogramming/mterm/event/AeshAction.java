@@ -19,6 +19,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 
+import org.esmerilprogramming.mterm.Mterm;
 import org.esmerilprogramming.mterm.gui.MessageDialog;
 import org.esmerilprogramming.mterm.handler.AeshHandler;
 
@@ -32,8 +33,7 @@ public class AeshAction extends AbstractAction {
 
   private AeshHandler aesh;
   private JTextArea textArea;
-  private String PS1 = "[mterm@localhost ~]$ ";
-
+  
   public AeshAction(JTextArea textArea, AeshHandler aesh) {
     this.textArea = textArea;
     this.aesh = aesh;
@@ -54,7 +54,7 @@ public class AeshAction extends AbstractAction {
         clear();
       }
 
-      System.out.print(result + PS1);
+      System.out.print(result + Mterm.buildPS1());
 
     } catch (Exception e) {
       new MessageDialog().error(e.getMessage());
@@ -69,7 +69,7 @@ public class AeshAction extends AbstractAction {
       int lineStart = textArea.getLineStartOffset(lineOffset);
       int lineEnd = textArea.getLineEndOffset(lineOffset);
       command = textArea.getText(lineStart, (lineEnd - lineStart));
-      command = command.substring(PS1.length());
+      command = command.substring(Mterm.buildPS1().length());
     } catch (Exception e) {
       new MessageDialog().error(e.getMessage());
     }
