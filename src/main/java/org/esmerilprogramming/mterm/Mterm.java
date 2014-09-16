@@ -14,11 +14,14 @@
 package org.esmerilprogramming.mterm;
 
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
+import org.esmerilprogramming.mterm.gui.MessageDialog;
 import org.esmerilprogramming.mterm.gui.MtermUI;
 
 /**
  * The main class.
+ * 
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 public class Mterm {
@@ -27,9 +30,13 @@ public class Mterm {
     SwingUtilities.invokeLater(new Runnable() {
       @Override
       public void run() {
+        try {
+          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+          new MessageDialog().error(e.getMessage());
+        }
         new MtermUI();
       }
     });
   }
-
 }
