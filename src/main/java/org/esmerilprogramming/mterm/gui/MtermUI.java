@@ -17,9 +17,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.io.IOException;
 import java.io.PrintStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -53,6 +56,15 @@ public final class MtermUI extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(730, 500);
     setMinimumSize(new Dimension(320, 150));
+
+    Image image = null;
+    try {
+      image =
+          ImageIO.read(this.getClass().getResource("/org/esmerilprogramming/mterm/gui/icon.png"));
+    } catch (IOException e) {
+      new MessageDialog().error(e.getMessage());
+    }
+    setIconImage(image);
 
     Menu m =
         new Menu().addMenu("File").addMenu("Edit").addMenu("View").addMenu("Search")
