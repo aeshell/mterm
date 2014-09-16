@@ -13,6 +13,7 @@
  */
 package org.esmerilprogramming.mterm.gui;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -51,7 +52,13 @@ public final class MtermUI extends JFrame {
     setJMenuBar(m.create());
 
     textArea = new JTextArea(80, 20);
-
+    textArea.setLineWrap(true);
+    textArea.setWrapStyleWord(true);
+    textArea.setBackground(new Color(0,43,54));
+    Color fg = new Color(101,123,131);
+    textArea.setForeground(fg);
+    textArea.setCaretColor(fg);
+    
     PrintStream printStream = new PrintStream(new MtermOutputStream(textArea));
     System.setErr(printStream);
     System.setOut(printStream);

@@ -13,6 +13,7 @@
  */
 package org.esmerilprogramming.mterm.event;
 
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -26,16 +27,17 @@ public class MtermDocListener implements DocumentListener {
   @Override
   public void changedUpdate(DocumentEvent e) {
   
+    JOptionPane.showMessageDialog(null, "change");
   }
 
   @Override
   public void insertUpdate(DocumentEvent e) {
-    
+    //JOptionPane.showMessageDialog(null, "insert");
   }
 
   @Override
   public void removeUpdate(DocumentEvent e) {
-    
+    JOptionPane.showMessageDialog(null, "remove");
   }
   
 }
