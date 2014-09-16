@@ -69,7 +69,7 @@ public final class MtermUI extends JFrame {
     Menu m =
         new Menu().addMenu("File").addMenu("Edit").addMenu("View").addMenu("Search")
             .addMenu("Terminal").addMenu("Help").addSubMenu(0, "New").addSubMenu(0, "Exit")
-            .addSubMenu(2, "Full Screen");
+            .addSubMenu(1, "Copy").addSubMenu(1, "Paste").addSubMenu(2, "Full Screen");
 
     setJMenuBar(m.create());
 
@@ -119,6 +119,10 @@ public final class MtermUI extends JFrame {
 
   public void setFullScreen(Boolean fullScreen) {
     this.fullScreen = fullScreen;
+  }
+  
+  public JTextArea getTextArea() {
+    return textArea;
   }
 
 }
