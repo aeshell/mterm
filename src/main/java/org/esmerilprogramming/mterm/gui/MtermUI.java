@@ -14,6 +14,7 @@
 package org.esmerilprogramming.mterm.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -39,29 +40,34 @@ public final class MtermUI extends JFrame {
   private AeshHandler aesh;
   private JTextArea textArea;
 
-  public MtermUI() {
+  private Boolean fullScreen;
 
+  public MtermUI() {
+    initGraphComponents();
+    applyEventsAndStreams();
+    System.out.print("[mterm@localhost ~]$ ");
+  }
+
+  private void initGraphComponents() {
     setTitle("$mterm");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(730, 500);
-    setResizable(false);
+    setMinimumSize(new Dimension(320, 150));
 
     Menu m =
         new Menu().addMenu("File").addMenu("Edit").addMenu("View").addMenu("Search")
-            .addMenu("Terminal").addMenu("Help").addSubMenu(0, "New").addSubMenu(0, "Exit");
+            .addMenu("Terminal").addMenu("Help").addSubMenu(0, "New").addSubMenu(0, "Exit")
+            .addSubMenu(2, "Full Screen");
+
     setJMenuBar(m.create());
 
     textArea = new JTextArea(80, 20);
     textArea.setLineWrap(true);
     textArea.setWrapStyleWord(true);
-    textArea.setBackground(new Color(0,43,54));
-    Color fg = new Color(101,123,131);
+    textArea.setBackground(new Color(0, 43, 54));
+    Color fg = new Color(101, 123, 131);
     textArea.setForeground(fg);
     textArea.setCaretColor(fg);
-    
-    PrintStream printStream = new PrintStream(new MtermOutputStream(textArea));
-    System.setErr(printStream);
-    System.setOut(printStream);
 
     setLayout(new GridBagLayout());
     GridBagConstraints gbc = new GridBagConstraints();
@@ -78,16 +84,29 @@ public final class MtermUI extends JFrame {
     gbc.weighty = 1.0;
     add(new JScrollPane(textArea), gbc);
 
+    setLocationRelativeTo(null);
+    setFullScreen(false);
+    setVisible(true);
+  }
+
+  private void applyEventsAndStreams() {
+    PrintStream printStream = new PrintStream(new MtermOutputStream(textArea));
+    System.setErr(printStream);
+    System.setOut(printStream);
+
     aesh = new AeshHandler();
 
     textArea.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "run");
     textArea.getActionMap().put("run", new AeshAction(textArea, aesh));
     textArea.getDocument().addDocumentListener(new MtermDocListener());
+  }
 
-    setLocationRelativeTo(null);
-    setVisible(true);
+  public Boolean isFullScreen() {
+    return fullScreen;
+  }
 
-    System.out.print("[mterm@localhost ~]$ ");
+  public void setFullScreen(Boolean fullScreen) {
+    this.fullScreen = fullScreen;
   }
 
 }
