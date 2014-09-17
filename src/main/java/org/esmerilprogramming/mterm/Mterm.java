@@ -32,7 +32,7 @@ public class Mterm {
   public static String buildPS1() {
     String ps1 = "[" + System.getProperty("user.name") + "@";
     try {
-      ps1 += InetAddress.getLocalHost().getHostName() + " ~]$ ";
+      ps1 += InetAddress.getLocalHost().getHostName().split("\\.")[0] + " ~]$ ";
     } catch (UnknownHostException e) {
       new MessageDialog().error(e.getMessage());
     }
