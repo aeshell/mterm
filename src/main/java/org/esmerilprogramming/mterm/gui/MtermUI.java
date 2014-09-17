@@ -29,8 +29,9 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 import org.esmerilprogramming.mterm.Mterm;
-import org.esmerilprogramming.mterm.event.AeshAction;
+import org.esmerilprogramming.mterm.event.RunAction;
 import org.esmerilprogramming.mterm.event.MtermDocListener;
+import org.esmerilprogramming.mterm.event.TabAction;
 import org.esmerilprogramming.mterm.handler.AeshHandler;
 
 /**
@@ -109,7 +110,9 @@ public final class MtermUI extends JFrame {
     aesh = new AeshHandler();
 
     textArea.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "run");
-    textArea.getActionMap().put("run", new AeshAction(textArea, aesh));
+    textArea.getActionMap().put("run", new RunAction(textArea, aesh));
+    textArea.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "tab");
+    textArea.getActionMap().put("tab", new TabAction(textArea, aesh));
     textArea.getDocument().addDocumentListener(new MtermDocListener());
   }
   

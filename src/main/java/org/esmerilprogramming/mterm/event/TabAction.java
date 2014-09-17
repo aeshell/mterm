@@ -14,27 +14,28 @@
 package org.esmerilprogramming.mterm.event;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
-import javax.swing.text.BadLocationException;
 
 import org.esmerilprogramming.mterm.Mterm;
 import org.esmerilprogramming.mterm.gui.MessageDialog;
 import org.esmerilprogramming.mterm.handler.AeshHandler;
 
 /**
- * AeshAction class.
+ * TabAction class.
  *
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 @SuppressWarnings("serial")
-public class AeshAction extends AbstractAction {
+public class TabAction extends AbstractAction {
 
   private AeshHandler aesh;
   private JTextArea textArea;
-  
-  public AeshAction(JTextArea textArea, AeshHandler aesh) {
+
+  public TabAction(JTextArea textArea, AeshHandler aesh) {
     this.textArea = textArea;
     this.aesh = aesh;
   }
@@ -43,23 +44,37 @@ public class AeshAction extends AbstractAction {
     try {
 
       String command = getCommand();
-      String result = "";
+      String commands = "";
+      Object[] registeredCommands = aesh.getRegisteredCommands().toArray();
 
-      if (!command.contains("clear")) {
-        aesh.run(command);
-        result = aesh.getResult();
-        result = result.substring(command.length());
-        aesh.reset();
+      List<String> filteredCommands = new ArrayList<>();
+      if (!command.trim().isEmpty()) {
+        for (Object o : registeredCommands) {
+          if (o.toString().startsWith(command)) {
+            filteredCommands.add(o.toString());
+          }
+        }
       } else {
-        clear();
+        for (Object o : registeredCommands) {
+          filteredCommands.add(o.toString());
+        }
       }
 
-      System.out.print(result + Mterm.buildPS1());
-
+      int count = 1;
+      for (String s : filteredCommands) {
+        commands += s + "\u0009";
+        if (count % 6 == 0) {
+          commands += "\n";
+        }
+        count++;
+      }
+      System.out.print("\n");
+      System.out.print(commands);
+      System.out.print("\n");
+      System.out.print(Mterm.buildPS1());
     } catch (Exception e) {
       new MessageDialog().error(e.getMessage());
     }
-
   }
 
   private String getCommand() {
@@ -74,14 +89,6 @@ public class AeshAction extends AbstractAction {
       new MessageDialog().error(e.getMessage());
     }
     return command;
-  }
-
-  private void clear() {
-    try {
-      textArea.getDocument().remove(0, textArea.getDocument().getLength());
-    } catch (BadLocationException e) {
-      new MessageDialog().error(e.getMessage());
-    }
   }
 
 }

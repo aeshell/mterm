@@ -28,7 +28,7 @@ import org.esmerilprogramming.mterm.gui.MtermUI;
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 public class Mterm {
-
+  
   public static String buildPS1() {
     String ps1 = "[" + System.getProperty("user.name") + "@";
     try {
