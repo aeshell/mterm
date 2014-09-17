@@ -13,6 +13,7 @@
  */
 package org.esmerilprogramming.mterm.gui;
 
+import java.awt.Desktop;
 import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -23,6 +24,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.URI;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -117,6 +119,42 @@ public class Menu {
         }
       }
     });
+
+    this.menuBar.getMenu(5).getItem(0).addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent actionEvent) {
+        String url = "https://github.com/EsmerilProgramming/mterm";
+        try {
+          if (Desktop.isDesktopSupported()) {
+            Desktop.getDesktop().browse(new URI(url));
+          } else {
+            Runtime runtime = Runtime.getRuntime();
+            runtime.exec("firefox -new-window " + url);
+          }
+        } catch (Exception e) {
+          new MessageDialog().error(e.getMessage());
+        }
+      }
+    });
+
+    this.menuBar.getMenu(5).getItem(1).addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent actionEvent) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 20; i++) {
+          sb.append(" ");  
+        }
+        sb.append("\n-=-=-=-= Mterm =-=-=-=-");
+        sb.append("\n\n\nA simple java terminal emulator");
+        for (int i = 0; i < 10; i++) {
+          sb.append(" ");  
+        }
+        for (int i = 0; i < 5; i++) {
+          sb.append("\n");  
+        }
+        sb.append("Created by Helio Frota");
+        new MessageDialog().info(sb.toString());
+      }
+    });
+
   }
 
 }

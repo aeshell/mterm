@@ -15,6 +15,7 @@ package org.esmerilprogramming.mterm.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -29,8 +30,8 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 import org.esmerilprogramming.mterm.Mterm;
-import org.esmerilprogramming.mterm.event.RunAction;
 import org.esmerilprogramming.mterm.event.MtermDocListener;
+import org.esmerilprogramming.mterm.event.RunAction;
 import org.esmerilprogramming.mterm.event.TabAction;
 import org.esmerilprogramming.mterm.handler.AeshHandler;
 
@@ -55,7 +56,7 @@ public final class MtermUI extends JFrame {
   private void initGraphComponents() {
     setTitle("$mterm");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setSize(730, 500);
+    setSize(730, 505);
     setMinimumSize(new Dimension(320, 150));
 
     Image image = null;
@@ -70,11 +71,13 @@ public final class MtermUI extends JFrame {
     Menu m =
         new Menu().addMenu("File").addMenu("Edit").addMenu("View").addMenu("Search")
             .addMenu("Terminal").addMenu("Help").addSubMenu(0, "New").addSubMenu(0, "Exit")
-            .addSubMenu(1, "Copy").addSubMenu(1, "Paste").addSubMenu(2, "Full Screen");
+            .addSubMenu(1, "Copy").addSubMenu(1, "Paste").addSubMenu(2, "Full Screen")
+            .addSubMenu(5, "Contents").addSubMenu(5, "About");
 
     setJMenuBar(m.create());
 
-    textArea = new JTextArea(80, 20);
+    textArea = new JTextArea(21, 80);
+    textArea.setFont(new Font("Monospaced", Font.PLAIN, 15));
     textArea.setLineWrap(true);
     textArea.setWrapStyleWord(true);
     textArea.setBackground(new Color(0, 43, 54));
@@ -86,7 +89,7 @@ public final class MtermUI extends JFrame {
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.gridx = 0;
     gbc.gridy = 0;
-    gbc.insets = new Insets(10, 10, 10, 10);
+    gbc.insets = new Insets(1, 1, 1, 1);
     gbc.anchor = GridBagConstraints.WEST;
     gbc.gridx = 1;
     gbc.gridx = 0;
