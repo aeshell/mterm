@@ -30,6 +30,8 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
+import javax.swing.text.NavigationFilter;
+import javax.swing.text.Position;
 
 import org.esmerilprogramming.mterm.Mterm;
 import org.esmerilprogramming.mterm.event.MtermDocListener;
@@ -119,28 +121,46 @@ public final class MtermUI extends JFrame {
     scrollPane.getActionMap().put("unitScrollDown", new AbstractAction() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        
+
       }
     });
     scrollPane.getActionMap().put("unitScrollUp", new AbstractAction() {
       @Override
       public void actionPerformed(ActionEvent arg0) {
-        
+
       }
     });
-    
+
     textArea.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "run");
     textArea.getActionMap().put("run", new RunAction(textArea, aesh));
     textArea.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "tab");
     textArea.getActionMap().put("tab", new TabAction(textArea, aesh));
     textArea.getInputMap().put(KeyStroke.getKeyStroke("UP"), "none");
     textArea.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "none");
-    
-    //textArea.getActionMap().put("tab", new TabAction(textArea, aesh));
-    
     textArea.getDocument().addDocumentListener(new MtermDocListener());
+
+    final int promptStringLenght = Mterm.buildPS1().length();
+    NavigationFilter filter = new NavigationFilter() {
+      public void setDot(NavigationFilter.FilterBypass filter, int dot, Position.Bias bias) {
+        if (dot < promptStringLenght) {
+          filter.setDot(promptStringLenght, bias);
+        } else {
+          filter.setDot(dot, bias);
+        }
+      }
+
+      public void moveDot(NavigationFilter.FilterBypass filter, int dot, Position.Bias bias) {
+        if (dot < promptStringLenght) {
+          filter.setDot(promptStringLenght, bias);
+        } else {
+          filter.setDot(dot, bias);
+        }
+      }
+    };
+
+    textArea.setNavigationFilter(filter);
   }
-  
+
   public JTextArea getTextArea() {
     return textArea;
   }
@@ -152,5 +172,5 @@ public final class MtermUI extends JFrame {
   public void setFullScreen(boolean fullScreen) {
     this.fullScreen = fullScreen;
   }
-  
+
 }
