@@ -20,10 +20,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.PrintStream;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -45,6 +47,7 @@ public final class MtermUI extends JFrame {
 
   private AeshHandler aesh;
   private JTextArea textArea;
+  private JScrollPane scrollPane;
   private boolean fullScreen;
 
   public MtermUI() {
@@ -98,7 +101,8 @@ public final class MtermUI extends JFrame {
     gbc.fill = GridBagConstraints.BOTH;
     gbc.weightx = 1.0;
     gbc.weighty = 1.0;
-    add(new JScrollPane(textArea), gbc);
+    scrollPane = new JScrollPane(textArea);
+    add(scrollPane, gbc);
 
     setLocationRelativeTo(null);
     setFullScreen(false);
@@ -112,10 +116,28 @@ public final class MtermUI extends JFrame {
 
     aesh = new AeshHandler();
 
+    scrollPane.getActionMap().put("unitScrollDown", new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent arg0) {
+        
+      }
+    });
+    scrollPane.getActionMap().put("unitScrollUp", new AbstractAction() {
+      @Override
+      public void actionPerformed(ActionEvent arg0) {
+        
+      }
+    });
+    
     textArea.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "run");
     textArea.getActionMap().put("run", new RunAction(textArea, aesh));
     textArea.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "tab");
     textArea.getActionMap().put("tab", new TabAction(textArea, aesh));
+    textArea.getInputMap().put(KeyStroke.getKeyStroke("UP"), "none");
+    textArea.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "none");
+    
+    //textArea.getActionMap().put("tab", new TabAction(textArea, aesh));
+    
     textArea.getDocument().addDocumentListener(new MtermDocListener());
   }
   
