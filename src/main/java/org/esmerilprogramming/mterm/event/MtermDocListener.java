@@ -31,8 +31,6 @@ public class MtermDocListener implements DocumentListener {
   @Override
   public void insertUpdate(DocumentEvent e) {
     
-    //SwingUtilities.invokeLater(new TabCompletion("cd ls cat", pos + 1));
-    
   }
 
   @Override
