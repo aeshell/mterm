@@ -32,7 +32,7 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 import org.esmerilprogramming.mterm.Mterm;
-import org.esmerilprogramming.mterm.event.MtermDocListener;
+import org.esmerilprogramming.mterm.event.MtermNavigationFilter;
 import org.esmerilprogramming.mterm.event.RunAction;
 import org.esmerilprogramming.mterm.event.TabAction;
 import org.esmerilprogramming.mterm.handler.AeshHandler;
@@ -53,7 +53,6 @@ public final class MtermUI extends JFrame {
   public MtermUI() {
     initGraphComponents();
     applyEventsAndStreams();
-    System.out.print(Mterm.buildPS1());
   }
 
   private void initGraphComponents() {
@@ -79,7 +78,7 @@ public final class MtermUI extends JFrame {
 
     setJMenuBar(m.create());
 
-    textArea = new JTextArea(21, 80);
+    textArea = new JTextArea(Mterm.buildPS1(), 21, 80);
     textArea.setFont(new Font("Monospaced", Font.PLAIN, 15));
     textArea.setLineWrap(true);
     textArea.setWrapStyleWord(true);
@@ -135,9 +134,7 @@ public final class MtermUI extends JFrame {
     textArea.getActionMap().put("tab", new TabAction(textArea, aesh));
     textArea.getInputMap().put(KeyStroke.getKeyStroke("UP"), "none");
     textArea.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "none");
-    textArea.getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), "none");
-    
-    textArea.getDocument().addDocumentListener(new MtermDocListener());
+    textArea.setNavigationFilter(new MtermNavigationFilter(Mterm.buildPS1().length(), textArea));
   }
 
   public JTextArea getTextArea() {
