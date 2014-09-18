@@ -21,6 +21,8 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.io.PrintStream;
 
@@ -137,7 +139,33 @@ public final class MtermUI extends JFrame {
     textArea.getActionMap().put("tab", new TabAction(textArea, aesh));
     textArea.getInputMap().put(KeyStroke.getKeyStroke("UP"), "none");
     textArea.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "none");
-    textArea.getDocument().addDocumentListener(new MtermDocListener());
+    
+    textArea.getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), "none");
+    
+    MtermDocListener mtermDocListener = new MtermDocListener();
+    textArea.getDocument().addDocumentListener(mtermDocListener);
+    textArea.addKeyListener(new KeyListener() {
+
+      private boolean back = false;
+
+      @Override
+      public void keyTyped(KeyEvent ke) {
+        if (back && 1 == 2) {
+          new MessageDialog().info("aaa");
+          ke.consume();
+        }
+      }
+
+      @Override
+      public void keyReleased(KeyEvent ke) {
+
+      }
+
+      @Override
+      public void keyPressed(KeyEvent ke) {
+        back = (ke.getKeyCode() == KeyEvent.VK_BACK_SPACE);
+      }
+    });
 
     final int promptStringLenght = Mterm.buildPS1().length();
     NavigationFilter filter = new NavigationFilter() {
