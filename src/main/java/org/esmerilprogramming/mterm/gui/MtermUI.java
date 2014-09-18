@@ -30,8 +30,6 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
-import javax.swing.text.NavigationFilter;
-import javax.swing.text.Position;
 
 import org.esmerilprogramming.mterm.Mterm;
 import org.esmerilprogramming.mterm.event.MtermDocListener;
@@ -140,27 +138,6 @@ public final class MtermUI extends JFrame {
     textArea.getInputMap().put(KeyStroke.getKeyStroke("BACK_SPACE"), "none");
     
     textArea.getDocument().addDocumentListener(new MtermDocListener());
-    
-    final int promptStringLenght = Mterm.buildPS1().length();
-    NavigationFilter filter = new NavigationFilter() {
-      public void setDot(NavigationFilter.FilterBypass filter, int dot, Position.Bias bias) {
-        if (dot < promptStringLenght) {
-          filter.setDot(promptStringLenght, bias);
-        } else {
-          filter.setDot(dot, bias);
-        }
-      }
-
-      public void moveDot(NavigationFilter.FilterBypass filter, int dot, Position.Bias bias) {
-        if (dot < promptStringLenght) {
-          filter.setDot(promptStringLenght, bias);
-        } else {
-          filter.setDot(dot, bias);
-        }
-      }
-    };
-
-    textArea.setNavigationFilter(filter);
   }
 
   public JTextArea getTextArea() {
