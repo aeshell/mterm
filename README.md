@@ -25,7 +25,7 @@ Your own build:
 ---------------
 
 ```shell
-$ https://github.com/EsmerilProgramming/mterm.git 
+$ git clone https://github.com/EsmerilProgramming/mterm.git 
 ```
 
 ```shell
