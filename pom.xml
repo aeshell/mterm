@@ -22,7 +22,7 @@
 
   <groupId>org.esmerilprogramming</groupId>
   <artifactId>mterm</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.56</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -46,6 +46,7 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+      <!-- this enable to run from command line with mvn exec:java -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -62,6 +63,46 @@
           <mainClass>org.esmerilprogramming.mterm.Mterm</mainClass>
         </configuration>
       </plugin>
+
+     <!-- this put all dependencies on lib directory to distribution -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/lib</outputDirectory>
+              <overWriteReleases>true</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- this makes the executable jar ( java -jar mterm.jar ) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <addMavenDescriptor>false</addMavenDescriptor>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+              <mainClass>org.esmerilprogramming.mterm.Mterm</mainClass>
+            </manifest>
+            <manifestEntries>
+              <Class-Path>.</Class-Path>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 
@@ -75,12 +116,6 @@
       <groupId>org.jboss.aesh</groupId>
       <artifactId>aesh-extensions</artifactId>
       <version>0.56</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 
