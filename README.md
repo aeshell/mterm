@@ -21,5 +21,18 @@ $ unzip mterm-0.56.zip
 $ java -jar mterm-0.56.jar 
 ```
 
+Your own build:
+---------------
 
+```shell
+$ https://github.com/EsmerilProgramming/mterm.git 
+```
+
+```shell
+$ cd mterm 
+```
+
+```shell
+$ mvn clean package
+```
 
