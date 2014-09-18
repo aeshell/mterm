@@ -16,29 +16,30 @@ package org.esmerilprogramming.mterm.event;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JTextArea;
 
-import org.esmerilprogramming.mterm.handler.AeshHandler;
-
 /**
- * BlockAction class.
- *
+ * BlockPromptStringDeletionAction class.
+ * This class block the deletion of the PS1.
+ * 
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 @SuppressWarnings("serial")
-public class BlockAction extends AbstractAction {
-
-  private AeshHandler aesh;
-  private JTextArea textArea;
-
-  public BlockAction(JTextArea textArea, AeshHandler aesh) {
-    this.textArea = textArea;
-    this.aesh = aesh;
+public class BlockPromptStringDeletionAction extends AbstractAction {
+  
+  private int promptStringLength;
+  private Action blockPromptStringDeletion;
+  
+  public BlockPromptStringDeletionAction(int promptStringLength, Action blockPromptStringDeletion) {
+    this.promptStringLength = promptStringLength;
+    this.blockPromptStringDeletion = blockPromptStringDeletion;
   }
-
-  public void actionPerformed(ActionEvent ev) {
-
+  
+  public void actionPerformed(ActionEvent e) {
+    JTextArea textarea = (JTextArea) e.getSource();
+    if (textarea.getCaretPosition() > promptStringLength) {
+      blockPromptStringDeletion.actionPerformed(null);
+    }
   }
-
-
 }
