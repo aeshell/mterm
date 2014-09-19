@@ -74,6 +74,9 @@ public class Menu {
 
     this.menuBar.getMenu(0).getItem(1).addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
+        
+        ((MtermUI) menuBar.getParent().getParent().getParent()).getAesh().stop();
+        
         System.exit(0);
       }
     });

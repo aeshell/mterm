@@ -149,4 +149,8 @@ public final class MtermUI extends JFrame {
     this.fullScreen = fullScreen;
   }
 
+  public AeshHandler getAesh() {
+    return aesh;
+  }
+  
 }
