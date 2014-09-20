@@ -14,12 +14,15 @@
 package org.esmerilprogramming.mterm.event;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
+import org.esmerilprogramming.mterm.action.ClearAction;
 import org.esmerilprogramming.mterm.action.RunAction;
 import org.esmerilprogramming.mterm.action.TabAction;
 import org.esmerilprogramming.mterm.filter.MtermNavigationFilter;
@@ -65,6 +68,10 @@ public class EventConfig {
     textArea.getActionMap().put("tab", new TabAction(textArea, aesh));
     textArea.getInputMap().put(KeyStroke.getKeyStroke("UP"), "none");
     textArea.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "none");
+    textArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_DOWN_MASK),
+        "clear");
+    textArea.getActionMap().put("clear", new ClearAction(textArea));
+    
     textArea.setNavigationFilter(new MtermNavigationFilter(MtermUtil.createPromptString().length(),
         textArea));
   }
