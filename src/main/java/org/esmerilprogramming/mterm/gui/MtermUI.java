@@ -107,11 +107,21 @@ public final class MtermUI extends JFrame {
   }
 
   private JMenuBar createMenuBar() {
-    Menu m =
-        new Menu().addMenu("File").addMenu("Edit").addMenu("View").addMenu("Search")
-            .addMenu("Terminal").addMenu("Help").addSubMenu(0, "New").addSubMenu(0, "Exit")
-            .addSubMenu(1, "Copy").addSubMenu(1, "Paste").addSubMenu(2, "Full Screen")
-            .addSubMenu(5, "Contents").addSubMenu(5, "About");
+    Menu m = new Menu();
+    m.addMenu("File");
+    m.addMenu("Edit");
+    m.addMenu("View");
+    m.addMenu("Search");
+    m.addMenu("Terminal");
+    m.addMenu("Help");
+    m.addSubMenu(0, "New");
+    m.addSubMenu(0, "Exit");
+    m.addSubMenu(1, "Copy");
+    m.addSubMenu(1, "Paste");
+    m.addSubMenu(2, "Full Screen");
+    m.addSubMenu(4, "Clear");
+    m.addSubMenu(5, "Contents");
+    m.addSubMenu(5, "About");
     return m.create();
   }
 
