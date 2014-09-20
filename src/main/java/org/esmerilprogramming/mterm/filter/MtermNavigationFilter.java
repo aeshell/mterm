@@ -19,6 +19,7 @@ import javax.swing.text.NavigationFilter;
 import javax.swing.text.Position;
 
 import org.esmerilprogramming.mterm.action.BlockAction;
+import org.esmerilprogramming.mterm.util.MtermUtil;
 
 /**
  * MtermNavigationFilter takes care of the caret position.
@@ -27,11 +28,10 @@ import org.esmerilprogramming.mterm.action.BlockAction;
  */
 public class MtermNavigationFilter extends NavigationFilter {
 
-  private int promptStringLength;
+  private int promptStringLength = MtermUtil.INSTANCE.getPs1().length();
   private static final String EVENT_KEY = "delete-previous";
 
-  public MtermNavigationFilter(int promptStringLength, JTextArea textarea) {
-    this.promptStringLength = promptStringLength;
+  public MtermNavigationFilter(JTextArea textarea) {
     filter(textarea);
   }
 
