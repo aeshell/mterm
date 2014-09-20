@@ -31,6 +31,8 @@ import org.esmerilprogramming.mterm.util.MtermUtil;
 @SuppressWarnings("serial")
 public class TabAction extends BaseAction {
 
+  private static final String NEW_LINE = "\n";
+  
   public TabAction(JTextArea textArea, AeshHandler aesh) {
     this.textArea = textArea;
     this.aesh = aesh;
@@ -60,14 +62,14 @@ public class TabAction extends BaseAction {
       for (String s : filteredCommands) {
         commands += s + "\u0009";
         if (count % 6 == 0) {
-          commands += "\n";
+          commands += NEW_LINE;
         }
         count++;
       }
-      System.out.print("\n");
+      System.out.print(NEW_LINE);
       System.out.print(commands);
-      System.out.print("\n");
-      System.out.print(MtermUtil.createPromptString());
+      System.out.print(NEW_LINE);
+      System.out.print(MtermUtil.INSTANCE.getPs1());
     } catch (Exception e) {
       new MessageDialog().error(e.getMessage());
     }

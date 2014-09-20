@@ -46,7 +46,7 @@ public class ClearAction extends BaseAction {
     } catch (BadLocationException e) {
       new MessageDialog().error(e.getMessage());
     }
-    System.out.print(MtermUtil.createPromptString());
+    System.out.print(MtermUtil.INSTANCE.getPs1());
     
   }
 }

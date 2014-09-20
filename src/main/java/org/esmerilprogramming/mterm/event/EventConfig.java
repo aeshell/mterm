@@ -72,7 +72,7 @@ public class EventConfig {
         "clear");
     textArea.getActionMap().put("clear", new ClearAction(textArea));
     
-    textArea.setNavigationFilter(new MtermNavigationFilter(MtermUtil.createPromptString().length(),
+    textArea.setNavigationFilter(new MtermNavigationFilter(MtermUtil.INSTANCE.getPs1().length(),
         textArea));
   }
 

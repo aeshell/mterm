@@ -38,7 +38,7 @@ public abstract class BaseAction extends AbstractAction {
       int lineStart = textArea.getLineStartOffset(lineOffset);
       int lineEnd = textArea.getLineEndOffset(lineOffset);
       command = textArea.getText(lineStart, (lineEnd - lineStart));
-      command = command.substring(MtermUtil.createPromptString().length());
+      command = command.substring(MtermUtil.INSTANCE.getPs1().length());
     } catch (Exception e) {
       new MessageDialog().error(e.getMessage());
     }
