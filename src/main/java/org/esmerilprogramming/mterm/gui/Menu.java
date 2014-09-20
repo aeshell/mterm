@@ -18,7 +18,6 @@ import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
@@ -32,10 +31,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 
-import org.esmerilprogramming.mterm.util.AeshUtil;
+import org.esmerilprogramming.mterm.action.menu.MenuBaseAction;
 import org.esmerilprogramming.mterm.util.MtermUtil;
 
 /**
@@ -61,8 +59,14 @@ public class Menu {
     return this;
   }
   
-  public Menu addSubMenu(int index, String sm, String imagePath) {
-    menuBar.getMenu(index).add(new JMenuItem(sm, new ImageIcon(getClass().getResource(imagePath))));
+  public Menu addSubMenu(int index, String sm, ImageIcon icon) {
+    menuBar.getMenu(index)
+    .add(new JMenuItem(new MenuBaseAction(sm, icon)));
+    return this;
+  }
+  
+  public Menu addSubMenu(int index, MenuBaseAction menuAction) {
+    menuBar.getMenu(index).add(new JMenuItem(menuAction));
     return this;
   }
 
@@ -72,36 +76,7 @@ public class Menu {
   }
 
   private void registerActions() {
-    this.menuBar.getMenu(0).getItem(0).addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-        SwingUtilities.invokeLater(new Runnable() {
-          @Override
-          public void run() {
-            new MtermUI();
-          }
-        });
-      }
-    });
-
-    this.menuBar.getMenu(0).getItem(1).addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-
-        AeshUtil.INSTANCE.stop();
-        System.exit(0);
-      }
-    });
-
-    this.menuBar.getMenu(1).getItem(0).addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        StringSelection string =
-            new StringSelection(((MtermUI) menuBar.getParent().getParent().getParent())
-                .getTextArea().getSelectedText());
-        clipboard.setContents(string, string);
-
-      }
-    });
-
+   
     this.menuBar.getMenu(1).getItem(1).addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
