@@ -39,7 +39,6 @@ public enum MtermUtil {
    * @return String
    */
   public String createPs1() {
-    new MessageDialog().info("criou");
     String ps1 = START + System.getProperty("user.name") + AT;
     try {
       ps1 += InetAddress.getLocalHost().getHostName().split("\\.")[0] + END;
