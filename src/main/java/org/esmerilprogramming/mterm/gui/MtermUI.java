@@ -31,11 +31,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
-import org.esmerilprogramming.mterm.Mterm;
-import org.esmerilprogramming.mterm.event.MtermNavigationFilter;
-import org.esmerilprogramming.mterm.event.RunAction;
-import org.esmerilprogramming.mterm.event.TabAction;
+import org.esmerilprogramming.mterm.action.RunAction;
+import org.esmerilprogramming.mterm.action.TabAction;
+import org.esmerilprogramming.mterm.filter.MtermNavigationFilter;
 import org.esmerilprogramming.mterm.handler.AeshHandler;
+import org.esmerilprogramming.mterm.util.MtermUtil;
 
 /**
  * Main gui class.
@@ -78,7 +78,7 @@ public final class MtermUI extends JFrame {
 
     setJMenuBar(m.create());
 
-    textArea = new JTextArea(Mterm.buildPS1(), 21, 80);
+    textArea = new JTextArea(MtermUtil.createPromptString(), 21, 80);
     textArea.setFont(new Font("Monospaced", Font.PLAIN, 15));
     textArea.setLineWrap(true);
     textArea.setWrapStyleWord(true);
@@ -134,7 +134,7 @@ public final class MtermUI extends JFrame {
     textArea.getActionMap().put("tab", new TabAction(textArea, aesh));
     textArea.getInputMap().put(KeyStroke.getKeyStroke("UP"), "none");
     textArea.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "none");
-    textArea.setNavigationFilter(new MtermNavigationFilter(Mterm.buildPS1().length(), textArea));
+    textArea.setNavigationFilter(new MtermNavigationFilter(MtermUtil.createPromptString().length(), textArea));
   }
 
   public JTextArea getTextArea() {

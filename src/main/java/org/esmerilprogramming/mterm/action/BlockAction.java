@@ -11,7 +11,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.esmerilprogramming.mterm.event;
+package org.esmerilprogramming.mterm.action;
 
 import java.awt.event.ActionEvent;
 
@@ -20,26 +20,35 @@ import javax.swing.Action;
 import javax.swing.JTextArea;
 
 /**
- * BlockPromptStringDeletionAction class.
- * This class block the deletion of the PS1.
+ * BlockAction class.
+ *
+ * This action blocks the deletion of the prompt string.
  * 
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 @SuppressWarnings("serial")
-public class BlockPromptStringDeletionAction extends AbstractAction {
-  
+public class BlockAction extends AbstractAction {
+
   private int promptStringLength;
-  private Action blockPromptStringDeletion;
-  
-  public BlockPromptStringDeletionAction(int promptStringLength, Action blockPromptStringDeletion) {
+
+  private Action action;
+
+  /**
+   * Parametric constructor initializes this action with prompt string length and <br> 
+   * a java swing Action.
+   * 
+   * @param promptStringLength int
+   * @param action Action
+   */
+  public BlockAction(int promptStringLength, Action action) {
     this.promptStringLength = promptStringLength;
-    this.blockPromptStringDeletion = blockPromptStringDeletion;
+    this.action = action;
   }
-  
-  public void actionPerformed(ActionEvent e) {
-    JTextArea textarea = (JTextArea) e.getSource();
+
+  public void actionPerformed(ActionEvent ae) {
+    JTextArea textarea = (JTextArea) ae.getSource();
     if (textarea.getCaretPosition() > promptStringLength) {
-      blockPromptStringDeletion.actionPerformed(null);
+      action.actionPerformed(null);
     }
   }
 }

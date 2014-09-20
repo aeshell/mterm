@@ -11,70 +11,65 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.esmerilprogramming.mterm.event;
+package org.esmerilprogramming.mterm.action;
 
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
+import javax.swing.text.BadLocationException;
 
 import org.esmerilprogramming.mterm.Mterm;
 import org.esmerilprogramming.mterm.gui.MessageDialog;
 import org.esmerilprogramming.mterm.handler.AeshHandler;
+import org.esmerilprogramming.mterm.util.MtermUtil;
 
 /**
- * TabAction class.
- *
+ * RunAction class.
+ * 
+ * This action delegates commands to aesh.
+ * 
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 @SuppressWarnings("serial")
-public class TabAction extends AbstractAction {
+public class RunAction extends AbstractAction {
 
   private AeshHandler aesh;
   private JTextArea textArea;
 
-  public TabAction(JTextArea textArea, AeshHandler aesh) {
+  /**
+   * Parametric constructor initializes this action with target textarea and <br>
+   * aesh handler.
+   * 
+   * @param textArea AeshHandler
+   * @param aesh JTextArea
+   */
+  public RunAction(JTextArea textArea, AeshHandler aesh) {
     this.textArea = textArea;
     this.aesh = aesh;
   }
 
-  public void actionPerformed(ActionEvent ev) {
+  public void actionPerformed(ActionEvent ae) {
     try {
+      
+      String result = "";
 
       String command = getCommand();
-      String commands = "";
-      Object[] registeredCommands = aesh.getRegisteredCommands().toArray();
-
-      List<String> filteredCommands = new ArrayList<>();
-      if (!command.trim().isEmpty()) {
-        for (Object o : registeredCommands) {
-          if (o.toString().startsWith(command)) {
-            filteredCommands.add(o.toString());
-          }
-        }
+      if (!command.contains("clear")) {
+        aesh.run(command);
+        result = aesh.getResult();
+        result = result.substring(command.length());
+        aesh.reset();
       } else {
-        for (Object o : registeredCommands) {
-          filteredCommands.add(o.toString());
-        }
+        clear();
       }
 
-      int count = 1;
-      for (String s : filteredCommands) {
-        commands += s + "\u0009";
-        if (count % 6 == 0) {
-          commands += "\n";
-        }
-        count++;
-      }
-      System.out.print("\n");
-      System.out.print(commands);
-      System.out.print("\n");
-      System.out.print(Mterm.buildPS1());
+      System.out.print(result + MtermUtil.createPromptString());
+
     } catch (Exception e) {
       new MessageDialog().error(e.getMessage());
     }
+
   }
 
   private String getCommand() {
@@ -84,11 +79,19 @@ public class TabAction extends AbstractAction {
       int lineStart = textArea.getLineStartOffset(lineOffset);
       int lineEnd = textArea.getLineEndOffset(lineOffset);
       command = textArea.getText(lineStart, (lineEnd - lineStart));
-      command = command.substring(Mterm.buildPS1().length());
+      command = command.substring(MtermUtil.createPromptString().length());
     } catch (Exception e) {
       new MessageDialog().error(e.getMessage());
     }
     return command;
+  }
+
+  private void clear() {
+    try {
+      textArea.getDocument().remove(0, textArea.getDocument().getLength());
+    } catch (BadLocationException e) {
+      new MessageDialog().error(e.getMessage());
+    }
   }
 
 }

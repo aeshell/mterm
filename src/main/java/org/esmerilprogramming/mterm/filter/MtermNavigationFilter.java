@@ -11,12 +11,14 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.esmerilprogramming.mterm.event;
+package org.esmerilprogramming.mterm.filter;
 
 import javax.swing.Action;
 import javax.swing.JTextArea;
 import javax.swing.text.NavigationFilter;
 import javax.swing.text.Position;
+
+import org.esmerilprogramming.mterm.action.BlockAction;
 
 /**
  * MtermNavigationFilter class.
@@ -32,7 +34,7 @@ public class MtermNavigationFilter extends NavigationFilter {
     this.promptStringLength = promptStringLength;
     blockPromptStringDeletionAction = textarea.getActionMap().get("delete-previous");
     textarea.getActionMap().put("delete-previous",
-        new BlockPromptStringDeletionAction(promptStringLength, blockPromptStringDeletionAction));
+        new BlockAction(promptStringLength, blockPromptStringDeletionAction));
     textarea.setCaretPosition(promptStringLength);
   }
 
