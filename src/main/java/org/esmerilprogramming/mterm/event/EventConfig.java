@@ -26,7 +26,7 @@ import org.esmerilprogramming.mterm.action.ClearAction;
 import org.esmerilprogramming.mterm.action.RunAction;
 import org.esmerilprogramming.mterm.action.TabAction;
 import org.esmerilprogramming.mterm.filter.MtermNavigationFilter;
-import org.esmerilprogramming.mterm.handler.AeshHandler;
+import org.esmerilprogramming.mterm.util.AeshUtil;
 
 /**
  * EventConfig configures terminal events.
@@ -37,9 +37,9 @@ public class EventConfig {
 
   private JScrollPane scrollPane;
   private JTextArea textArea;
-  private AeshHandler aesh;
+  private AeshUtil aesh;
 
-  public EventConfig(JScrollPane scrollPane, JTextArea textArea, AeshHandler aesh) {
+  public EventConfig(JScrollPane scrollPane, JTextArea textArea, AeshUtil aesh) {
     this.scrollPane = scrollPane;
     this.textArea = textArea;
     this.aesh = aesh;

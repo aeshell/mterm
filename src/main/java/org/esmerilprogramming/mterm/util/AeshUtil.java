@@ -11,7 +11,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.esmerilprogramming.mterm.handler;
+package org.esmerilprogramming.mterm.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -43,8 +43,10 @@ import org.jboss.aesh.parser.Parser;
 /**
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
-public class AeshHandler {
+public enum AeshUtil {
 
+  INSTANCE;
+  
   private PipedOutputStream pos;
   private PipedInputStream pis;
   private ByteArrayOutputStream stream;
@@ -53,7 +55,7 @@ public class AeshHandler {
   private CommandRegistry registry;
   
   @SuppressWarnings("unchecked")
-  public AeshHandler(PrintStream ps) {
+  public void start(PrintStream ps) {
     
     pos = new PipedOutputStream();
     try {
@@ -76,10 +78,6 @@ public class AeshHandler {
 
   }
   
-  public AeshHandler() {
-    this(null);
-  }
-
   /**
    * Resets the stream.
    */

@@ -35,6 +35,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 
+import org.esmerilprogramming.mterm.util.AeshUtil;
 import org.esmerilprogramming.mterm.util.MtermUtil;
 
 /**
@@ -85,8 +86,7 @@ public class Menu {
     this.menuBar.getMenu(0).getItem(1).addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
 
-        ((MtermUI) menuBar.getParent().getParent().getParent()).getAesh().stop();
-
+        AeshUtil.INSTANCE.stop();
         System.exit(0);
       }
     });
