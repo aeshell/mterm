@@ -15,7 +15,6 @@ package org.esmerilprogramming.mterm.action;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 
@@ -31,10 +30,7 @@ import org.esmerilprogramming.mterm.util.MtermUtil;
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 @SuppressWarnings("serial")
-public class RunAction extends AbstractAction {
-
-  private AeshHandler aesh;
-  private JTextArea textArea;
+public class RunAction extends BaseAction {
 
   /**
    * Parametric constructor initializes this action with target textarea and <br>
@@ -69,20 +65,6 @@ public class RunAction extends AbstractAction {
       new MessageDialog().error(e.getMessage());
     }
 
-  }
-
-  private String getCommand() {
-    String command = "";
-    try {
-      int lineOffset = textArea.getLineOfOffset(textArea.getCaretPosition());
-      int lineStart = textArea.getLineStartOffset(lineOffset);
-      int lineEnd = textArea.getLineEndOffset(lineOffset);
-      command = textArea.getText(lineStart, (lineEnd - lineStart));
-      command = command.substring(MtermUtil.createPromptString().length());
-    } catch (Exception e) {
-      new MessageDialog().error(e.getMessage());
-    }
-    return command;
   }
 
   private void clear() {

@@ -13,41 +13,36 @@
  */
 package org.esmerilprogramming.mterm.action;
 
-import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JTextArea;
 
+import org.esmerilprogramming.mterm.gui.MessageDialog;
+import org.esmerilprogramming.mterm.handler.AeshHandler;
+import org.esmerilprogramming.mterm.util.MtermUtil;
+
 /**
- * BlockAction class.
- *
- * This action blocks the deletion of the prompt string.
+ * BaseAction class.
  * 
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 @SuppressWarnings("serial")
-public class BlockAction extends AbstractAction {
+public abstract class BaseAction extends AbstractAction {
 
-  private int promptStringLength;
-
-  private Action action;
-
-  /**
-   * Parametric constructor initializes this action with prompt string length and <br> 
-   * a java swing Action.
-   * 
-   * @param promptStringLength int
-   * @param action Action
-   */
-  public BlockAction(int promptStringLength, Action action) {
-    this.promptStringLength = promptStringLength;
-    this.action = action;
-  }
-
-  public void actionPerformed(ActionEvent ae) {
-    if (((JTextArea) ae.getSource()).getCaretPosition() > promptStringLength) {
-      action.actionPerformed(null);
+  protected AeshHandler aesh;
+  protected JTextArea textArea;
+  
+  protected String getCommand() {
+    String command = "";
+    try {
+      int lineOffset = textArea.getLineOfOffset(textArea.getCaretPosition());
+      int lineStart = textArea.getLineStartOffset(lineOffset);
+      int lineEnd = textArea.getLineEndOffset(lineOffset);
+      command = textArea.getText(lineStart, (lineEnd - lineStart));
+      command = command.substring(MtermUtil.createPromptString().length());
+    } catch (Exception e) {
+      new MessageDialog().error(e.getMessage());
     }
+    return command;
   }
+  
 }
