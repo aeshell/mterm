@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -56,6 +57,11 @@ public class Menu {
 
   public Menu addSubMenu(int index, String sm) {
     menuBar.getMenu(index).add(new JMenuItem(sm));
+    return this;
+  }
+  
+  public Menu addSubMenu(int index, String sm, String imagePath) {
+    menuBar.getMenu(index).add(new JMenuItem(sm, new ImageIcon(getClass().getResource(imagePath))));
     return this;
   }
 

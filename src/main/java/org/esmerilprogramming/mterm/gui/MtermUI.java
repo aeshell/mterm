@@ -114,15 +114,15 @@ public final class MtermUI extends JFrame {
     m.addMenu("Search");
     m.addMenu("Terminal");
     m.addMenu("Help");
-    m.addSubMenu(0, "New");
-    m.addSubMenu(0, "Exit");
-    m.addSubMenu(1, "Copy");
-    m.addSubMenu(1, "Paste");
-    m.addSubMenu(2, "Full Screen");
-    m.addSubMenu(4, "Clear");
-    m.addSubMenu(4, "Set Title...");
-    m.addSubMenu(5, "Contents");
-    m.addSubMenu(5, "About");
+    m.addSubMenu(0, "New","/org/esmerilprogramming/mterm/gui/icons/new.png");
+    m.addSubMenu(0, "Exit","/org/esmerilprogramming/mterm/gui/icons/exit.png");
+    m.addSubMenu(1, "Copy","/org/esmerilprogramming/mterm/gui/icons/copy.png");
+    m.addSubMenu(1, "Paste","/org/esmerilprogramming/mterm/gui/icons/paste.png");
+    m.addSubMenu(2, "Full Screen","/org/esmerilprogramming/mterm/gui/icons/full_screen.png");
+    m.addSubMenu(4, "Clear","/org/esmerilprogramming/mterm/gui/icons/clear.png");
+    m.addSubMenu(4, "Set Title...","/org/esmerilprogramming/mterm/gui/icons/set-title.png");
+    m.addSubMenu(5, "Contents","/org/esmerilprogramming/mterm/gui/icons/content.png");
+    m.addSubMenu(5, "About","/org/esmerilprogramming/mterm/gui/icons/about.png");
     return m.create();
   }
 
