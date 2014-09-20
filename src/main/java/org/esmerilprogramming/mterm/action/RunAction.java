@@ -19,7 +19,6 @@ import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 
-import org.esmerilprogramming.mterm.Mterm;
 import org.esmerilprogramming.mterm.gui.MessageDialog;
 import org.esmerilprogramming.mterm.handler.AeshHandler;
 import org.esmerilprogramming.mterm.util.MtermUtil;
