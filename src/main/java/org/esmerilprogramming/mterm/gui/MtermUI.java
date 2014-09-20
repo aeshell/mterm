@@ -85,7 +85,7 @@ public final class MtermUI extends JFrame {
   }
 
   private void configureTextArea() {
-    textArea = new JTextArea(MtermUtil.createPromptString(), 21, 80);
+    textArea = new JTextArea(MtermUtil.INSTANCE.getPs1(), 21, 80);
     textArea.setFont(new Font("Monospaced", Font.PLAIN, 15));
     textArea.setLineWrap(true);
     textArea.setWrapStyleWord(true);

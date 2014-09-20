@@ -138,7 +138,7 @@ public class Menu {
                   0,
                   ((MtermUI) menuBar.getParent().getParent().getParent()).getTextArea()
                       .getDocument().getLength());
-          System.out.print(MtermUtil.createPromptString());
+          System.out.print(MtermUtil.INSTANCE.getPs1());
         } catch (BadLocationException e) {
           new MessageDialog().error(e.getMessage());
         }

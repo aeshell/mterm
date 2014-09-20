@@ -59,7 +59,7 @@ public class RunAction extends BaseAction {
         clear();
       }
 
-      System.out.print(result + MtermUtil.createPromptString());
+      System.out.print(result + MtermUtil.INSTANCE.getPs1());
 
     } catch (Exception e) {
       new MessageDialog().error(e.getMessage());
