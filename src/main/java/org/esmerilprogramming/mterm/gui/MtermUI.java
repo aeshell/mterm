@@ -24,11 +24,16 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import org.esmerilprogramming.mterm.action.menu.MenuCopyAction;
+import org.esmerilprogramming.mterm.action.menu.MenuExitAction;
+import org.esmerilprogramming.mterm.action.menu.MenuNewAction;
+import org.esmerilprogramming.mterm.action.menu.MenuPasteAction;
 import org.esmerilprogramming.mterm.event.EventConfig;
 import org.esmerilprogramming.mterm.util.AeshUtil;
 import org.esmerilprogramming.mterm.util.MtermUtil;
@@ -44,6 +49,7 @@ public final class MtermUI extends JFrame {
   private JTextArea textArea;
   private JScrollPane scrollPane;
   private boolean fullScreen;
+  private static final String ICON_PATH = "/org/esmerilprogramming/mterm/gui/icons/";
 
   public MtermUI() {
     configureGraphics();
@@ -57,8 +63,8 @@ public final class MtermUI extends JFrame {
     setSize(730, 505);
     setMinimumSize(new Dimension(320, 150));
     setIconImage(loadImageIcon());
-    setJMenuBar(createMenuBar());
     configureTextArea();
+    setJMenuBar(createMenuBar());
     scrollPane = new JScrollPane(textArea);
     setLayout(new GridBagLayout());
     add(scrollPane, configureGridBag());
@@ -106,6 +112,13 @@ public final class MtermUI extends JFrame {
   }
 
   private JMenuBar createMenuBar() {
+
+    ImageIcon iconNew = new ImageIcon(getClass().getResource(ICON_PATH + "new.png"));
+    ImageIcon iconExit = new ImageIcon(getClass().getResource(ICON_PATH + "exit.png"));
+    ImageIcon iconCopy = new ImageIcon(getClass().getResource(ICON_PATH + "copy.png"));
+    ImageIcon iconPaste = new ImageIcon(getClass().getResource(ICON_PATH + "paste.png"));
+    ImageIcon iconFullScreen = new ImageIcon(getClass().getResource(ICON_PATH + "full_screen.png"));
+
     Menu m = new Menu();
     m.addMenu("File");
     m.addMenu("Edit");
@@ -113,15 +126,18 @@ public final class MtermUI extends JFrame {
     m.addMenu("Search");
     m.addMenu("Terminal");
     m.addMenu("Help");
-    m.addSubMenu(0, "New","/org/esmerilprogramming/mterm/gui/icons/new.png");
-    m.addSubMenu(0, "Exit","/org/esmerilprogramming/mterm/gui/icons/exit.png");
-    m.addSubMenu(1, "Copy","/org/esmerilprogramming/mterm/gui/icons/copy.png");
-    m.addSubMenu(1, "Paste","/org/esmerilprogramming/mterm/gui/icons/paste.png");
-    m.addSubMenu(2, "Full Screen","/org/esmerilprogramming/mterm/gui/icons/full_screen.png");
-    m.addSubMenu(4, "Clear","/org/esmerilprogramming/mterm/gui/icons/clear.png");
-    m.addSubMenu(4, "Set Title...","/org/esmerilprogramming/mterm/gui/icons/set-title.png");
-    m.addSubMenu(5, "Contents","/org/esmerilprogramming/mterm/gui/icons/content.png");
-    m.addSubMenu(5, "About","/org/esmerilprogramming/mterm/gui/icons/about.png");
+    m.addSubMenu(0, new MenuNewAction("New", iconNew));
+    m.addSubMenu(0, new MenuExitAction("Exit", iconExit));
+    m.addSubMenu(1, new MenuCopyAction("Copy", iconCopy, textArea));
+    m.addSubMenu(1, new MenuPasteAction("Paste", iconPaste, textArea));
+
+    m.addSubMenu(2, "Full Screen",
+        new ImageIcon(getClass().getResource(ICON_PATH + "full_screen.png")));
+    m.addSubMenu(4, "Clear", new ImageIcon(getClass().getResource(ICON_PATH + "clear.png")));
+    m.addSubMenu(4, "Set Title...",
+        new ImageIcon(getClass().getResource(ICON_PATH + "set-title.png")));
+    m.addSubMenu(5, "Contents", new ImageIcon(getClass().getResource(ICON_PATH + "content.png")));
+    m.addSubMenu(5, "About", new ImageIcon(getClass().getResource(ICON_PATH + "about.png")));
     return m.create();
   }
 
