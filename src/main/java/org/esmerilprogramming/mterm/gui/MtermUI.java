@@ -126,7 +126,7 @@ public final class MtermUI extends JFrame {
   }
 
   private void configureEvents() {
-    new EventConfig(scrollPane, textArea, AeshUtil.INSTANCE).configure();
+    new EventConfig(scrollPane, textArea).configure();
   }
 
   private void configureStreams() {

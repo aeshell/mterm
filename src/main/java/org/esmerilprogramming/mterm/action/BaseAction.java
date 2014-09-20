@@ -28,7 +28,7 @@ import org.esmerilprogramming.mterm.util.MtermUtil;
 @SuppressWarnings("serial")
 public abstract class BaseAction extends AbstractAction {
 
-  protected AeshUtil aesh;
+  protected AeshUtil aesh = AeshUtil.INSTANCE;
   protected JTextArea textArea;
   
   protected String getCommand() {

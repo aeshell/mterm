@@ -26,7 +26,6 @@ import org.esmerilprogramming.mterm.action.ClearAction;
 import org.esmerilprogramming.mterm.action.RunAction;
 import org.esmerilprogramming.mterm.action.TabAction;
 import org.esmerilprogramming.mterm.filter.MtermNavigationFilter;
-import org.esmerilprogramming.mterm.util.AeshUtil;
 
 /**
  * EventConfig configures terminal events.
@@ -37,12 +36,10 @@ public class EventConfig {
 
   private JScrollPane scrollPane;
   private JTextArea textArea;
-  private AeshUtil aesh;
 
-  public EventConfig(JScrollPane scrollPane, JTextArea textArea, AeshUtil aesh) {
+  public EventConfig(JScrollPane scrollPane, JTextArea textArea) {
     this.scrollPane = scrollPane;
     this.textArea = textArea;
-    this.aesh = aesh;
   }
 
   @SuppressWarnings("serial")
@@ -62,9 +59,9 @@ public class EventConfig {
     });
 
     textArea.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "run");
-    textArea.getActionMap().put("run", new RunAction(textArea, aesh));
+    textArea.getActionMap().put("run", new RunAction(textArea));
     textArea.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "tab");
-    textArea.getActionMap().put("tab", new TabAction(textArea, aesh));
+    textArea.getActionMap().put("tab", new TabAction(textArea));
     textArea.getInputMap().put(KeyStroke.getKeyStroke("UP"), "none");
     textArea.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "none");
     textArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_DOWN_MASK),
