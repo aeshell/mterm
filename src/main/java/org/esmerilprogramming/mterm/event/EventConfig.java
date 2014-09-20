@@ -27,7 +27,6 @@ import org.esmerilprogramming.mterm.action.RunAction;
 import org.esmerilprogramming.mterm.action.TabAction;
 import org.esmerilprogramming.mterm.filter.MtermNavigationFilter;
 import org.esmerilprogramming.mterm.handler.AeshHandler;
-import org.esmerilprogramming.mterm.util.MtermUtil;
 
 /**
  * EventConfig configures terminal events.
@@ -71,9 +70,8 @@ public class EventConfig {
     textArea.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_DOWN_MASK),
         "clear");
     textArea.getActionMap().put("clear", new ClearAction(textArea));
-    
-    textArea.setNavigationFilter(new MtermNavigationFilter(MtermUtil.INSTANCE.getPs1().length(),
-        textArea));
+
+    textArea.setNavigationFilter(new MtermNavigationFilter(textArea));
   }
 
 }
