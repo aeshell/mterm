@@ -20,20 +20,15 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.PrintStream;
 
 import javax.imageio.ImageIO;
-import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
 
-import org.esmerilprogramming.mterm.action.RunAction;
-import org.esmerilprogramming.mterm.action.TabAction;
-import org.esmerilprogramming.mterm.filter.MtermNavigationFilter;
+import org.esmerilprogramming.mterm.event.EventConfig;
 import org.esmerilprogramming.mterm.handler.AeshHandler;
 import org.esmerilprogramming.mterm.util.MtermUtil;
 
@@ -51,11 +46,12 @@ public final class MtermUI extends JFrame {
   private boolean fullScreen;
 
   public MtermUI() {
-    initGraphComponents();
-    applyEventsAndStreams();
+    configureGraphics();
+    configureStreams();
+    configureEvents();
   }
 
-  private void initGraphComponents() {
+  private void configureGraphics() {
     setTitle("$mterm");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(730, 505);
@@ -108,33 +104,15 @@ public final class MtermUI extends JFrame {
     setVisible(true);
   }
 
-  private void applyEventsAndStreams() {
+  private void configureEvents() {
+    new EventConfig(scrollPane, textArea, aesh).configure();
+  }
+  
+  private void configureStreams() {
     PrintStream printStream = new PrintStream(new MtermOutputStream(textArea));
     System.setErr(printStream);
     System.setOut(printStream);
-
     aesh = new AeshHandler();
-
-    scrollPane.getActionMap().put("unitScrollDown", new AbstractAction() {
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-
-      }
-    });
-    scrollPane.getActionMap().put("unitScrollUp", new AbstractAction() {
-      @Override
-      public void actionPerformed(ActionEvent arg0) {
-
-      }
-    });
-
-    textArea.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "run");
-    textArea.getActionMap().put("run", new RunAction(textArea, aesh));
-    textArea.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "tab");
-    textArea.getActionMap().put("tab", new TabAction(textArea, aesh));
-    textArea.getInputMap().put(KeyStroke.getKeyStroke("UP"), "none");
-    textArea.getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "none");
-    textArea.setNavigationFilter(new MtermNavigationFilter(MtermUtil.createPromptString().length(), textArea));
   }
 
   public JTextArea getTextArea() {
