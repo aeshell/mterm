@@ -13,9 +13,6 @@
  */
 package org.esmerilprogramming.mterm;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -29,16 +26,6 @@ import org.esmerilprogramming.mterm.gui.MtermUI;
  */
 public class Mterm {
   
-  public static String buildPS1() {
-    String ps1 = "[" + System.getProperty("user.name") + "@";
-    try {
-      ps1 += InetAddress.getLocalHost().getHostName().split("\\.")[0] + " ~]$ ";
-    } catch (UnknownHostException e) {
-      new MessageDialog().error(e.getMessage());
-    }
-    return ps1;
-  }
-
   public static void main(String... args) {
     SwingUtilities.invokeLater(new Runnable() {
       @Override

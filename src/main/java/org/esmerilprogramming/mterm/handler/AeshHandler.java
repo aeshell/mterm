@@ -143,7 +143,6 @@ public class AeshHandler {
   public Set<String> getRegisteredCommands() {
     return registry.getAllCommandNames();
   }
-
   
   /**
    * Gets the current working directory.
@@ -151,6 +150,13 @@ public class AeshHandler {
    */
   public String getCurrentDirectory() {
     return aeshConsole.getAeshContext().getCurrentWorkingDirectory().getName();
+  }
+
+  /**
+   * Stops the aesh console.
+   */
+  public void stop() {
+    aeshConsole.stop();
   }
   
 }
