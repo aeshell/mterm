@@ -120,6 +120,7 @@ public final class MtermUI extends JFrame {
     m.addSubMenu(1, "Paste");
     m.addSubMenu(2, "Full Screen");
     m.addSubMenu(4, "Clear");
+    m.addSubMenu(4, "Set Title...");
     m.addSubMenu(5, "Contents");
     m.addSubMenu(5, "About");
     return m.create();
