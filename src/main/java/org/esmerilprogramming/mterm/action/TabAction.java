@@ -17,7 +17,6 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
 
 import org.esmerilprogramming.mterm.gui.MessageDialog;
@@ -30,10 +29,7 @@ import org.esmerilprogramming.mterm.util.MtermUtil;
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 @SuppressWarnings("serial")
-public class TabAction extends AbstractAction {
-
-  private AeshHandler aesh;
-  private JTextArea textArea;
+public class TabAction extends BaseAction {
 
   public TabAction(JTextArea textArea, AeshHandler aesh) {
     this.textArea = textArea;
@@ -75,20 +71,6 @@ public class TabAction extends AbstractAction {
     } catch (Exception e) {
       new MessageDialog().error(e.getMessage());
     }
-  }
-
-  private String getCommand() {
-    String command = "";
-    try {
-      int lineOffset = textArea.getLineOfOffset(textArea.getCaretPosition());
-      int lineStart = textArea.getLineStartOffset(lineOffset);
-      int lineEnd = textArea.getLineEndOffset(lineOffset);
-      command = textArea.getText(lineStart, (lineEnd - lineStart));
-      command = command.substring(MtermUtil.createPromptString().length());
-    } catch (Exception e) {
-      new MessageDialog().error(e.getMessage());
-    }
-    return command;
   }
 
 }
