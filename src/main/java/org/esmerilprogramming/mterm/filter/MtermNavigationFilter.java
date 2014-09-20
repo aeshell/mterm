@@ -21,20 +21,27 @@ import javax.swing.text.Position;
 import org.esmerilprogramming.mterm.action.BlockAction;
 
 /**
- * MtermNavigationFilter class.
- * This class take care of the caret position.
+ * MtermNavigationFilter takes care of the caret position.
  * 
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 public class MtermNavigationFilter extends NavigationFilter {
+
   private int promptStringLength;
-  private Action blockPromptStringDeletionAction;
+  private static final String EVENT_KEY = "delete-previous";
 
   public MtermNavigationFilter(int promptStringLength, JTextArea textarea) {
     this.promptStringLength = promptStringLength;
-    blockPromptStringDeletionAction = textarea.getActionMap().get("delete-previous");
-    textarea.getActionMap().put("delete-previous",
-        new BlockAction(promptStringLength, blockPromptStringDeletionAction));
+    filter(textarea);
+  }
+
+  /**
+   * Apply filter on textarea. 
+   * @param textarea JTextArea
+   */
+  public void filter(JTextArea textarea) {
+    Action action = textarea.getActionMap().get(EVENT_KEY);
+    textarea.getActionMap().put(EVENT_KEY, new BlockAction(promptStringLength, action));
     textarea.setCaretPosition(promptStringLength);
   }
 
@@ -45,6 +52,9 @@ public class MtermNavigationFilter extends NavigationFilter {
   public void moveDot(NavigationFilter.FilterBypass filter, int dot, Position.Bias bias) {
     filter.moveDot(Math.max(dot, promptStringLength), bias);
   }
-
+  
+  public void setPromptStringLength(int promptStringLength) {
+    this.promptStringLength = promptStringLength;
+  }
 
 }
