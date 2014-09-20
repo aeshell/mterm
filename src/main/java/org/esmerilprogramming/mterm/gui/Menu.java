@@ -30,6 +30,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 
@@ -140,6 +141,22 @@ public class Menu {
           System.out.print(MtermUtil.createPromptString());
         } catch (BadLocationException e) {
           new MessageDialog().error(e.getMessage());
+        }
+
+      }
+    });
+
+    this.menuBar.getMenu(4).getItem(1).addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent actionEvent) {
+
+
+        String newTitle =
+            (String) JOptionPane.showInputDialog(null, "Title:", "Set Title",
+                JOptionPane.PLAIN_MESSAGE, null, null, ((JFrame) menuBar.getParent().getParent().getParent()).getTitle());
+
+        if ((newTitle != null) && (!newTitle.isEmpty())) {
+          ((JFrame) menuBar.getParent().getParent().getParent()).setTitle(newTitle);
+          return;
         }
 
       }
