@@ -31,6 +31,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
+import javax.swing.text.BadLocationException;
+
+import org.esmerilprogramming.mterm.util.MtermUtil;
 
 /**
  * The menu class.
@@ -74,9 +77,9 @@ public class Menu {
 
     this.menuBar.getMenu(0).getItem(1).addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
-        
+
         ((MtermUI) menuBar.getParent().getParent().getParent()).getAesh().stop();
-        
+
         System.exit(0);
       }
     });
@@ -123,6 +126,25 @@ public class Menu {
       }
     });
 
+    this.menuBar.getMenu(4).getItem(0).addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent actionEvent) {
+
+        try {
+          ((MtermUI) menuBar.getParent().getParent().getParent())
+              .getTextArea()
+              .getDocument()
+              .remove(
+                  0,
+                  ((MtermUI) menuBar.getParent().getParent().getParent()).getTextArea()
+                      .getDocument().getLength());
+          System.out.print(MtermUtil.createPromptString());
+        } catch (BadLocationException e) {
+          new MessageDialog().error(e.getMessage());
+        }
+
+      }
+    });
+
     this.menuBar.getMenu(5).getItem(0).addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
         String url = "https://github.com/EsmerilProgramming/mterm";
@@ -143,15 +165,15 @@ public class Menu {
       public void actionPerformed(ActionEvent actionEvent) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 20; i++) {
-          sb.append(" ");  
+          sb.append(" ");
         }
         sb.append("\n-=-=-=-= Mterm =-=-=-=-");
         sb.append("\n\n\nA simple java terminal emulator");
         for (int i = 0; i < 10; i++) {
-          sb.append(" ");  
+          sb.append(" ");
         }
         for (int i = 0; i < 5; i++) {
-          sb.append("\n");  
+          sb.append("\n");
         }
         sb.append("Created by Helio Frota");
         new MessageDialog().info(sb.toString());
