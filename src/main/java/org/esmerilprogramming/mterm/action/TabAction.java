@@ -20,7 +20,7 @@ import java.util.List;
 import javax.swing.JTextArea;
 
 import org.esmerilprogramming.mterm.gui.MessageDialog;
-import org.esmerilprogramming.mterm.handler.AeshHandler;
+import org.esmerilprogramming.mterm.util.AeshUtil;
 import org.esmerilprogramming.mterm.util.MtermUtil;
 
 /**
@@ -33,7 +33,7 @@ public class TabAction extends BaseAction {
 
   private static final String NEW_LINE = "\n";
   
-  public TabAction(JTextArea textArea, AeshHandler aesh) {
+  public TabAction(JTextArea textArea, AeshUtil aesh) {
     this.textArea = textArea;
     this.aesh = aesh;
   }

@@ -30,7 +30,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import org.esmerilprogramming.mterm.event.EventConfig;
-import org.esmerilprogramming.mterm.handler.AeshHandler;
+import org.esmerilprogramming.mterm.util.AeshUtil;
 import org.esmerilprogramming.mterm.util.MtermUtil;
 
 /**
@@ -41,7 +41,6 @@ import org.esmerilprogramming.mterm.util.MtermUtil;
 @SuppressWarnings("serial")
 public final class MtermUI extends JFrame {
 
-  private AeshHandler aesh;
   private JTextArea textArea;
   private JScrollPane scrollPane;
   private boolean fullScreen;
@@ -127,14 +126,14 @@ public final class MtermUI extends JFrame {
   }
 
   private void configureEvents() {
-    new EventConfig(scrollPane, textArea, aesh).configure();
+    new EventConfig(scrollPane, textArea, AeshUtil.INSTANCE).configure();
   }
 
   private void configureStreams() {
     PrintStream printStream = new PrintStream(new MtermOutputStream(textArea));
     System.setErr(printStream);
     System.setOut(printStream);
-    aesh = new AeshHandler();
+    AeshUtil.INSTANCE.start(printStream);
   }
 
   public JTextArea getTextArea() {
@@ -147,10 +146,6 @@ public final class MtermUI extends JFrame {
 
   public void setFullScreen(boolean fullScreen) {
     this.fullScreen = fullScreen;
-  }
-
-  public AeshHandler getAesh() {
-    return aesh;
   }
 
 }

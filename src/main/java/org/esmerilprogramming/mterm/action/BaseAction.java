@@ -17,7 +17,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
 
 import org.esmerilprogramming.mterm.gui.MessageDialog;
-import org.esmerilprogramming.mterm.handler.AeshHandler;
+import org.esmerilprogramming.mterm.util.AeshUtil;
 import org.esmerilprogramming.mterm.util.MtermUtil;
 
 /**
@@ -28,7 +28,7 @@ import org.esmerilprogramming.mterm.util.MtermUtil;
 @SuppressWarnings("serial")
 public abstract class BaseAction extends AbstractAction {
 
-  protected AeshHandler aesh;
+  protected AeshUtil aesh;
   protected JTextArea textArea;
   
   protected String getCommand() {

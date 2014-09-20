@@ -19,7 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 
 import org.esmerilprogramming.mterm.gui.MessageDialog;
-import org.esmerilprogramming.mterm.handler.AeshHandler;
+import org.esmerilprogramming.mterm.util.AeshUtil;
 import org.esmerilprogramming.mterm.util.MtermUtil;
 
 /**
@@ -39,7 +39,7 @@ public class RunAction extends BaseAction {
    * @param textArea AeshHandler
    * @param aesh JTextArea
    */
-  public RunAction(JTextArea textArea, AeshHandler aesh) {
+  public RunAction(JTextArea textArea, AeshUtil aesh) {
     this.textArea = textArea;
     this.aesh = aesh;
   }
