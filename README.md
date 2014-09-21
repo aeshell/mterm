@@ -1,16 +1,16 @@
 mterm
 =====
 
-A simple java terminal emulator
+A simple java terminal emulator running on top of [aesh](https://github.com/aeshell/aesh).
 
 
-![Alt mterm](https://raw.githubusercontent.com/EsmerilProgramming/mterm/master/mterm.png)
+![Alt mterm](https://raw.githubusercontent.com/aeshell/mterm/master/mterm.png)
 
 
 Download:
 ---------
 
-[mterm-0.56.zip](https://github.com/EsmerilProgramming/mterm/releases/download/0.56/mterm-0.56.zip)
+[mterm-0.56.zip](https://github.com/aeshell/mterm/releases/download/0.56/mterm-0.56.zip)
 
 
 ```shell
@@ -25,7 +25,7 @@ Your own build:
 ---------------
 
 ```shell
-$ git clone https://github.com/EsmerilProgramming/mterm.git 
+$ git clone https://github.com/aeshell/mterm.git 
 ```
 
 ```shell
