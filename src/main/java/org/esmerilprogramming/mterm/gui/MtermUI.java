@@ -32,6 +32,7 @@ import javax.swing.JTextArea;
 
 import org.esmerilprogramming.mterm.action.menu.MenuCopyAction;
 import org.esmerilprogramming.mterm.action.menu.MenuExitAction;
+import org.esmerilprogramming.mterm.action.menu.MenuFullScreenAction;
 import org.esmerilprogramming.mterm.action.menu.MenuNewAction;
 import org.esmerilprogramming.mterm.action.menu.MenuPasteAction;
 import org.esmerilprogramming.mterm.event.EventConfig;
@@ -130,9 +131,8 @@ public final class MtermUI extends JFrame {
     m.addSubMenu(0, new MenuExitAction("Exit", iconExit));
     m.addSubMenu(1, new MenuCopyAction("Copy", iconCopy, textArea));
     m.addSubMenu(1, new MenuPasteAction("Paste", iconPaste, textArea));
+    m.addSubMenu(2, new MenuFullScreenAction("Full Screen", iconFullScreen, this));
 
-    m.addSubMenu(2, "Full Screen",
-        new ImageIcon(getClass().getResource(ICON_PATH + "full_screen.png")));
     m.addSubMenu(4, "Clear", new ImageIcon(getClass().getResource(ICON_PATH + "clear.png")));
     m.addSubMenu(4, "Set Title...",
         new ImageIcon(getClass().getResource(ICON_PATH + "set-title.png")));

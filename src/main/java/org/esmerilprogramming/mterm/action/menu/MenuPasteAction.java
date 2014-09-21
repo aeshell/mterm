@@ -13,10 +13,18 @@
  */
 package org.esmerilprogramming.mterm.action.menu;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
+
+import org.esmerilprogramming.mterm.gui.MessageDialog;
 
 /**
  * Menu MenuPasteAction class.
@@ -27,13 +35,20 @@ import javax.swing.JTextArea;
 public class MenuPasteAction extends MenuBaseAction {
 
   private JTextArea textArea;
-  
+
   public MenuPasteAction(String text, ImageIcon icon, JTextArea textArea) {
     super(text, icon);
     this.textArea = textArea;
   }
-  
+
   public void actionPerformed(ActionEvent e) {
-    
+    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+    Transferable transferable = clipboard.getContents(null);
+    try {
+      String clip = transferable.getTransferData(DataFlavor.stringFlavor).toString();
+      textArea.replaceRange(clip, textArea.getSelectionStart(), textArea.getSelectionEnd());
+    } catch (UnsupportedFlavorException | IOException ex) {
+      new MessageDialog().error(ex.getMessage());
+    }
   }
 }

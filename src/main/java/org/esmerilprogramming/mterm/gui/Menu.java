@@ -14,15 +14,8 @@
 package org.esmerilprogramming.mterm.gui;
 
 import java.awt.Desktop;
-import java.awt.Frame;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.net.URI;
 
 import javax.swing.ImageIcon;
@@ -77,37 +70,6 @@ public class Menu {
 
   private void registerActions() {
    
-    this.menuBar.getMenu(1).getItem(1).addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        Transferable transferable = clipboard.getContents(Menu.this);
-        try {
-          String clip = transferable.getTransferData(DataFlavor.stringFlavor).toString();
-          ((MtermUI) menuBar.getParent().getParent().getParent()).getTextArea().replaceRange(
-              clip,
-              ((MtermUI) menuBar.getParent().getParent().getParent()).getTextArea()
-                  .getSelectionStart(),
-              ((MtermUI) menuBar.getParent().getParent().getParent()).getTextArea()
-                  .getSelectionEnd());
-        } catch (UnsupportedFlavorException | IOException e) {
-          new MessageDialog().error(e.getMessage());
-        }
-      }
-    });
-
-    this.menuBar.getMenu(2).getItem(0).addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent actionEvent) {
-        if (!((MtermUI) menuBar.getParent().getParent().getParent()).isFullScreen()) {
-          ((JFrame) menuBar.getParent().getParent().getParent())
-              .setExtendedState(Frame.MAXIMIZED_BOTH);
-          ((MtermUI) menuBar.getParent().getParent().getParent()).setFullScreen(true);
-        } else {
-          ((JFrame) menuBar.getParent().getParent().getParent()).setExtendedState(Frame.NORMAL);
-          ((MtermUI) menuBar.getParent().getParent().getParent()).setFullScreen(false);
-        }
-      }
-    });
-
     this.menuBar.getMenu(4).getItem(0).addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent actionEvent) {
 
