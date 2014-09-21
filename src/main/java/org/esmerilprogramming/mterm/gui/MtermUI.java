@@ -30,10 +30,15 @@ import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import org.esmerilprogramming.mterm.action.menu.MenuAboutAction;
+import org.esmerilprogramming.mterm.action.menu.MenuClearAction;
+import org.esmerilprogramming.mterm.action.menu.MenuContentsAction;
 import org.esmerilprogramming.mterm.action.menu.MenuCopyAction;
 import org.esmerilprogramming.mterm.action.menu.MenuExitAction;
+import org.esmerilprogramming.mterm.action.menu.MenuFullScreenAction;
 import org.esmerilprogramming.mterm.action.menu.MenuNewAction;
 import org.esmerilprogramming.mterm.action.menu.MenuPasteAction;
+import org.esmerilprogramming.mterm.action.menu.MenuTitleAction;
 import org.esmerilprogramming.mterm.event.EventConfig;
 import org.esmerilprogramming.mterm.util.AeshUtil;
 import org.esmerilprogramming.mterm.util.MtermUtil;
@@ -118,6 +123,10 @@ public final class MtermUI extends JFrame {
     ImageIcon iconCopy = new ImageIcon(getClass().getResource(ICON_PATH + "copy.png"));
     ImageIcon iconPaste = new ImageIcon(getClass().getResource(ICON_PATH + "paste.png"));
     ImageIcon iconFullScreen = new ImageIcon(getClass().getResource(ICON_PATH + "full_screen.png"));
+    ImageIcon iconClear = new ImageIcon(getClass().getResource(ICON_PATH + "clear.png"));
+    ImageIcon iconSetTitle = new ImageIcon(getClass().getResource(ICON_PATH + "set-title.png"));
+    ImageIcon iconContent = new ImageIcon(getClass().getResource(ICON_PATH + "content.png"));
+    ImageIcon iconAbout = new ImageIcon(getClass().getResource(ICON_PATH + "about.png"));
 
     Menu m = new Menu();
     m.addMenu("File");
@@ -130,14 +139,11 @@ public final class MtermUI extends JFrame {
     m.addSubMenu(0, new MenuExitAction("Exit", iconExit));
     m.addSubMenu(1, new MenuCopyAction("Copy", iconCopy, textArea));
     m.addSubMenu(1, new MenuPasteAction("Paste", iconPaste, textArea));
-
-    m.addSubMenu(2, "Full Screen",
-        new ImageIcon(getClass().getResource(ICON_PATH + "full_screen.png")));
-    m.addSubMenu(4, "Clear", new ImageIcon(getClass().getResource(ICON_PATH + "clear.png")));
-    m.addSubMenu(4, "Set Title...",
-        new ImageIcon(getClass().getResource(ICON_PATH + "set-title.png")));
-    m.addSubMenu(5, "Contents", new ImageIcon(getClass().getResource(ICON_PATH + "content.png")));
-    m.addSubMenu(5, "About", new ImageIcon(getClass().getResource(ICON_PATH + "about.png")));
+    m.addSubMenu(2, new MenuFullScreenAction("Full Screen", iconFullScreen, this));
+    m.addSubMenu(4, new MenuClearAction("Clear", iconClear, textArea));
+    m.addSubMenu(4, new MenuTitleAction("Set Title", iconSetTitle, this));
+    m.addSubMenu(5, new MenuContentsAction("Contents", iconContent));
+    m.addSubMenu(5, new MenuAboutAction("About", iconAbout));
     return m.create();
   }
 

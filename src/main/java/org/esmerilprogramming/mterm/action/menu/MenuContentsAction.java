@@ -13,41 +13,36 @@
  */
 package org.esmerilprogramming.mterm.action.menu;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
+import java.net.URI;
 
 import javax.swing.ImageIcon;
-import javax.swing.JTextArea;
 
 import org.esmerilprogramming.mterm.gui.MessageDialog;
 
 /**
- * Menu MenuPasteAction class.
+ * Menu MenuContentsAction class.
  *
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 @SuppressWarnings("serial")
-public class MenuPasteAction extends MenuBaseAction {
+public class MenuContentsAction extends MenuBaseAction {
 
-  private JTextArea textArea;
-
-  public MenuPasteAction(String text, ImageIcon icon, JTextArea textArea) {
+  public MenuContentsAction(String text, ImageIcon icon) {
     super(text, icon);
-    this.textArea = textArea;
   }
 
   public void actionPerformed(ActionEvent e) {
-    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-    Transferable transferable = clipboard.getContents(null);
+    String url = "https://github.com/EsmerilProgramming/mterm";
     try {
-      String clip = transferable.getTransferData(DataFlavor.stringFlavor).toString();
-      textArea.replaceRange(clip, textArea.getSelectionStart(), textArea.getSelectionEnd());
-    } catch (UnsupportedFlavorException | IOException ex) {
+      if (Desktop.isDesktopSupported()) {
+        Desktop.getDesktop().browse(new URI(url));
+      } else {
+        Runtime runtime = Runtime.getRuntime();
+        runtime.exec("firefox -new-window " + url);
+      }
+    } catch (Exception ex) {
       new MessageDialog().error(ex.getMessage());
     }
   }

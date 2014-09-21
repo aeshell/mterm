@@ -13,42 +13,38 @@
  */
 package org.esmerilprogramming.mterm.action.menu;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 import javax.swing.ImageIcon;
-import javax.swing.JTextArea;
 
 import org.esmerilprogramming.mterm.gui.MessageDialog;
 
 /**
- * Menu MenuPasteAction class.
+ * Menu MenuAboutAction class.
  *
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 @SuppressWarnings("serial")
-public class MenuPasteAction extends MenuBaseAction {
+public class MenuAboutAction extends MenuBaseAction {
 
-  private JTextArea textArea;
-
-  public MenuPasteAction(String text, ImageIcon icon, JTextArea textArea) {
+  public MenuAboutAction(String text, ImageIcon icon) {
     super(text, icon);
-    this.textArea = textArea;
   }
 
   public void actionPerformed(ActionEvent e) {
-    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-    Transferable transferable = clipboard.getContents(null);
-    try {
-      String clip = transferable.getTransferData(DataFlavor.stringFlavor).toString();
-      textArea.replaceRange(clip, textArea.getSelectionStart(), textArea.getSelectionEnd());
-    } catch (UnsupportedFlavorException | IOException ex) {
-      new MessageDialog().error(ex.getMessage());
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < 20; i++) {
+      sb.append(" ");
     }
+    sb.append("\n-=-=-=-= Mterm =-=-=-=-");
+    sb.append("\n\n\nA simple java terminal emulator");
+    for (int i = 0; i < 10; i++) {
+      sb.append(" ");
+    }
+    for (int i = 0; i < 5; i++) {
+      sb.append("\n");
+    }
+    sb.append("Created by Helio Frota");
+    new MessageDialog().info(sb.toString());
   }
 }

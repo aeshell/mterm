@@ -13,41 +13,35 @@
  */
 package org.esmerilprogramming.mterm.action.menu;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
+import javax.swing.text.BadLocationException;
 
 import org.esmerilprogramming.mterm.gui.MessageDialog;
+import org.esmerilprogramming.mterm.util.MtermUtil;
 
 /**
- * Menu MenuPasteAction class.
+ * Menu MenuClearAction class.
  *
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 @SuppressWarnings("serial")
-public class MenuPasteAction extends MenuBaseAction {
+public class MenuClearAction extends MenuBaseAction {
 
   private JTextArea textArea;
 
-  public MenuPasteAction(String text, ImageIcon icon, JTextArea textArea) {
+  public MenuClearAction(String text, ImageIcon icon, JTextArea textArea) {
     super(text, icon);
     this.textArea = textArea;
   }
 
   public void actionPerformed(ActionEvent e) {
-    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-    Transferable transferable = clipboard.getContents(null);
     try {
-      String clip = transferable.getTransferData(DataFlavor.stringFlavor).toString();
-      textArea.replaceRange(clip, textArea.getSelectionStart(), textArea.getSelectionEnd());
-    } catch (UnsupportedFlavorException | IOException ex) {
+      textArea.getDocument().remove(0, textArea.getDocument().getLength());
+      System.out.print(MtermUtil.INSTANCE.getPs1());
+    } catch (BadLocationException ex) {
       new MessageDialog().error(ex.getMessage());
     }
   }
