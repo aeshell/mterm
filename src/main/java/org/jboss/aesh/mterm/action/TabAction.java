@@ -33,46 +33,49 @@ public class TabAction extends BaseAction {
     private static final String TAB = "\u0009";
 
     public TabAction(JTextArea textArea) {
-        this.textArea = textArea;
+        super(textArea);
     }
 
     public void actionPerformed(ActionEvent ev) {
         try {
-
-            String command = getCommand();
-            String commands = "";
-            Object[] registeredCommands = aesh.getRegisteredCommands().toArray();
-
-            List<String> filteredCommands = new ArrayList<>();
-            if (!command.trim().isEmpty()) {
-                for (Object o : registeredCommands) {
-                    if (o.toString().startsWith(command)) {
-                        filteredCommands.add(o.toString());
-                    }
-                }
-            }
-            else {
-                for (Object o : registeredCommands) {
-                    filteredCommands.add(o.toString());
-                }
-            }
-
-            int count = 1;
-            for (String s : filteredCommands) {
-                commands += s + TAB;
-                if (count % 6 == 0) {
-                    commands += NEW_LINE;
-                }
-                count++;
-            }
-            System.out.print(NEW_LINE);
-            System.out.print(commands);
-            System.out.print(NEW_LINE);
-            System.out.print(MtermUtil.INSTANCE.getPs1());
+            perform();
         }
         catch (Exception e) {
             new MessageDialog().error(e.getMessage());
         }
+    }
+    
+    protected void perform() {
+        String command = getCommand();
+        String commands = "";
+        Object[] registeredCommands = aesh.getRegisteredCommands().toArray();
+
+        List<String> filteredCommands = new ArrayList<>();
+        if (!command.trim().isEmpty()) {
+            for (Object o : registeredCommands) {
+                if (o.toString().startsWith(command)) {
+                    filteredCommands.add(o.toString());
+                }
+            }
+        }
+        else {
+            for (Object o : registeredCommands) {
+                filteredCommands.add(o.toString());
+            }
+        }
+
+        int count = 1;
+        for (String s : filteredCommands) {
+            commands += s + TAB;
+            if (count % 6 == 0) {
+                commands += NEW_LINE;
+            }
+            count++;
+        }
+        System.out.print(NEW_LINE);
+        System.out.print(commands);
+        System.out.print(NEW_LINE);
+        System.out.print(MtermUtil.INSTANCE.getPs1());
     }
 
 }

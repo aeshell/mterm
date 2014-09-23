@@ -38,26 +38,21 @@ public class RunAction extends BaseAction {
      * @param aesh JTextArea
      */
     public RunAction(JTextArea textArea) {
-        this.textArea = textArea;
+        super(textArea);
     }
 
     public void actionPerformed(ActionEvent ae) {
         try {
-
-            String result = "";
-
             String command = getCommand();
             if (!command.contains("clear")) {
                 aesh.run(command);
-                result = aesh.getResult();
-                result = result.substring(command.length());
-                aesh.reset();
             }
             else {
                 clear();
             }
 
-            System.out.print(result + MtermUtil.INSTANCE.getPs1());
+            System.out.print(aesh.getResult() + MtermUtil.INSTANCE.getPs1());
+            aesh.reset();
 
         }
         catch (Exception e) {
@@ -73,6 +68,10 @@ public class RunAction extends BaseAction {
         catch (BadLocationException e) {
             new MessageDialog().error(e.getMessage());
         }
+    }
+
+    protected void perform() {
+
     }
 
 }
