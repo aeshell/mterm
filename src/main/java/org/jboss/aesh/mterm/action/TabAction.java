@@ -13,8 +13,7 @@
 package org.jboss.aesh.mterm.action;
 
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 import javax.swing.JTextArea;
 
@@ -29,53 +28,23 @@ import org.jboss.aesh.mterm.util.MtermUtil;
 @SuppressWarnings("serial")
 public class TabAction extends BaseAction {
 
-    private static final String NEW_LINE = "\n";
-    private static final String TAB = "\u0009";
-
     public TabAction(JTextArea textArea) {
         super(textArea);
     }
 
     public void actionPerformed(ActionEvent ev) {
+        perform();
+    }
+
+    protected void perform() {
         try {
-            perform();
+            aesh.run("\t");
         }
-        catch (Exception e) {
+        catch (IOException e) {
             new MessageDialog().error(e.getMessage());
         }
-    }
-    
-    protected void perform() {
-        String command = getCommand();
-        String commands = "";
-        Object[] registeredCommands = aesh.getRegisteredCommands().toArray();
-
-        List<String> filteredCommands = new ArrayList<>();
-        if (!command.trim().isEmpty()) {
-            for (Object o : registeredCommands) {
-                if (o.toString().startsWith(command)) {
-                    filteredCommands.add(o.toString());
-                }
-            }
-        }
-        else {
-            for (Object o : registeredCommands) {
-                filteredCommands.add(o.toString());
-            }
-        }
-
-        int count = 1;
-        for (String s : filteredCommands) {
-            commands += s + TAB;
-            if (count % 6 == 0) {
-                commands += NEW_LINE;
-            }
-            count++;
-        }
-        System.out.print(NEW_LINE);
-        System.out.print(commands);
-        System.out.print(NEW_LINE);
-        System.out.print(MtermUtil.INSTANCE.getPs1());
+        System.out.print(aesh.getResult() + MtermUtil.INSTANCE.getPs1());
+        aesh.reset();
     }
 
 }

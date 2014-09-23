@@ -68,9 +68,9 @@ public class AeshUtilTest {
     public void testGetResult() throws IOException {
         aesh.run("echo abc");
         Assert.assertEquals("\nabc\n", aesh.getResult());
-        aesh.reset();
-        aesh.run("echo ok");
-        Assert.assertEquals("\nok\n", aesh.getResult());
+        aesh.run("\t"); // same as TabAction
+        Assert.assertTrue(aesh.getResult().contains("echo"));
+        
     }
     
     @After
