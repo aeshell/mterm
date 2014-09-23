@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   JBoss, Home of Professional Open Source Copyright 2014 Red Hat Inc. and/or
-  its affiliates and other contributors as indicated by the @authors tag. 
+  its affiliates and other contributors as indicated by the @authors tag.
   All rights reserved.
   See the copyright.txt
   in the distribution for a full listing of individual contributors.
@@ -47,28 +47,10 @@
           <target>1.7</target>
         </configuration>
       </plugin>
-      <!-- this enable to run from command line with mvn exec:java -->
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.1.1</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <executable>java</executable>
-          <mainClass>org.jboss.aesh.mterm.Mterm</mainClass>
-        </configuration>
-      </plugin>
-
-      <!-- this put all dependencies on lib directory to distribution -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.8</version>
         <executions>
           <execution>
             <id>copy-dependencies</id>
@@ -81,15 +63,15 @@
               <overWriteReleases>true</overWriteReleases>
               <overWriteSnapshots>true</overWriteSnapshots>
               <overWriteIfNewer>true</overWriteIfNewer>
+              <includeScope>runtime</includeScope>
             </configuration>
           </execution>
         </executions>
       </plugin>
-
-      <!-- this makes the executable jar ( java -jar mterm.jar ) -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
+        <version>2.5</version>
         <configuration>
           <archive>
             <addMavenDescriptor>false</addMavenDescriptor>
@@ -122,6 +104,7 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.8.2</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
