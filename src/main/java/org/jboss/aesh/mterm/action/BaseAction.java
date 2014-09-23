@@ -14,8 +14,8 @@ package org.jboss.aesh.mterm.action;
 
 import javax.swing.AbstractAction;
 import javax.swing.JTextArea;
+import javax.swing.text.BadLocationException;
 
-import org.jboss.aesh.mterm.gui.MessageDialog;
 import org.jboss.aesh.mterm.util.AeshUtil;
 import org.jboss.aesh.mterm.util.MtermUtil;
 
@@ -30,19 +30,31 @@ public abstract class BaseAction extends AbstractAction {
     protected AeshUtil aesh = AeshUtil.INSTANCE;
     protected JTextArea textArea;
 
+    public BaseAction(JTextArea textArea) {
+        this.textArea = textArea;
+    }
+
+    protected abstract void perform();
+
     protected String getCommand() {
-        String command = "";
+        String command = readLine();
+        int promptStringLength = MtermUtil.INSTANCE.getPs1().length(); 
+        if (command.length() >= promptStringLength) {
+            command = command.substring(promptStringLength);
+        }
+        return command.trim();
+    }
+
+    protected String readLine() {
         try {
             int lineOffset = textArea.getLineOfOffset(textArea.getCaretPosition());
             int lineStart = textArea.getLineStartOffset(lineOffset);
             int lineEnd = textArea.getLineEndOffset(lineOffset);
-            command = textArea.getText(lineStart, (lineEnd - lineStart));
-            command = command.substring(MtermUtil.INSTANCE.getPs1().length());
+            return textArea.getText(lineStart, (lineEnd - lineStart));
         }
-        catch (Exception e) {
-            new MessageDialog().error(e.getMessage());
+        catch (BadLocationException e) {
+            e.printStackTrace();
         }
-        return command;
+        return null;
     }
-
 }

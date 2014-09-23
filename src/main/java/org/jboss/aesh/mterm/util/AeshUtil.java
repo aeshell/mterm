@@ -92,7 +92,9 @@ public enum AeshUtil {
      * @return String
      */
     public String getResult() {
-        return Parser.stripAwayAnsiCodes(getStream().toString());
+        String result = Parser.stripAwayAnsiCodes(getStream().toString());
+        result = result.replaceAll(result.split("\n")[0], "");
+        return result;
     }
 
     /**

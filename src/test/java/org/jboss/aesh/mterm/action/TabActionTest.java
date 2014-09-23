@@ -12,45 +12,42 @@
  */
 package org.jboss.aesh.mterm.action;
 
-import java.awt.event.ActionEvent;
+import java.io.PrintStream;
 
 import javax.swing.JTextArea;
-import javax.swing.text.BadLocationException;
 
-import org.jboss.aesh.mterm.gui.MessageDialog;
-import org.jboss.aesh.mterm.util.MtermUtil;
+import org.jboss.aesh.mterm.gui.MtermOutputStream;
+import org.jboss.aesh.mterm.util.AeshUtil;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
- * ClearAction class.
- *
- * This action clears the terminal and is fired when user types control + l.
- * 
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
-@SuppressWarnings("serial")
-public class ClearAction extends BaseAction {
+public class TabActionTest {
 
-    /**
-     * Parametric constructor initializes this action with JTextArea.
-     * 
-     * @param textArea JTextArea
-     */
-    public ClearAction(JTextArea textArea) {
-        super(textArea);
+    private JTextArea textArea;
+    private TabAction action;
+
+    @Before
+    public void setUp() {
+        textArea = new JTextArea();
+        PrintStream printStream = new PrintStream(new MtermOutputStream(textArea));
+        System.setErr(printStream);
+        System.setOut(printStream);
+        AeshUtil.INSTANCE.start(printStream);
+        action = new TabAction(textArea);
     }
 
-    public void actionPerformed(ActionEvent ae) {
-        try {
-            textArea.getDocument().remove(0, textArea.getDocument().getLength());
-        }
-        catch (BadLocationException e) {
-            new MessageDialog().error(e.getMessage());
-        }
-        System.out.print(MtermUtil.INSTANCE.getPs1());
+    @Test
+    public void testPerform() {
+        action.perform();
+    }
 
+    @After
+    public void tearDown() {
+        AeshUtil.INSTANCE.stop();
     }
-    
-    protected void perform() {
-        
-    }
+
 }
