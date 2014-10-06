@@ -32,9 +32,10 @@ public class Menu {
         menuBar = new JMenuBar();
     }
 
-    public Menu addMenu(String m) {
-        menuBar.add(new JMenu(m));
-        return this;
+    public void addMenu(String... labels) {
+        for (String m : labels) {
+            menuBar.add(new JMenu(m));
+        }
     }
 
     public Menu addSubMenu(int index, String sm) {

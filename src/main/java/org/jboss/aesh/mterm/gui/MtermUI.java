@@ -102,36 +102,24 @@ public final class MtermUI extends JFrame {
     }
 
     private JMenuBar createMenuBar() {
-
-        ImageIcon iconNew = new ImageIcon(getClass().getResource(ICON_PATH + "new.png"));
-        ImageIcon iconExit = new ImageIcon(getClass().getResource(ICON_PATH + "exit.png"));
-        ImageIcon iconCopy = new ImageIcon(getClass().getResource(ICON_PATH + "copy.png"));
-        ImageIcon iconPaste = new ImageIcon(getClass().getResource(ICON_PATH + "paste.png"));
-        ImageIcon iconFullScreen = new ImageIcon(getClass().getResource(ICON_PATH + "full_screen.png"));
-        ImageIcon iconClear = new ImageIcon(getClass().getResource(ICON_PATH + "clear.png"));
-        ImageIcon iconSetTitle = new ImageIcon(getClass().getResource(ICON_PATH + "set-title.png"));
-        ImageIcon iconContent = new ImageIcon(getClass().getResource(ICON_PATH + "content.png"));
-        ImageIcon iconAbout = new ImageIcon(getClass().getResource(ICON_PATH + "about.png"));
-
         Menu m = new Menu();
-        m.addMenu("File");
-        m.addMenu("Edit");
-        m.addMenu("View");
-        m.addMenu("Search");
-        m.addMenu("Terminal");
-        m.addMenu("Help");
-        m.addSubMenu(0, new MenuNewAction("New", iconNew));
-        m.addSubMenu(0, new MenuExitAction("Exit", iconExit));
-        m.addSubMenu(1, new MenuCopyAction("Copy", iconCopy, textArea));
-        m.addSubMenu(1, new MenuPasteAction("Paste", iconPaste, textArea));
-        m.addSubMenu(2, new MenuFullScreenAction("Full Screen", iconFullScreen, this));
-        m.addSubMenu(4, new MenuClearAction("Clear", iconClear, textArea));
-        m.addSubMenu(4, new MenuTitleAction("Set Title", iconSetTitle, this));
-        m.addSubMenu(5, new MenuContentsAction("Contents", iconContent));
-        m.addSubMenu(5, new MenuAboutAction("About", iconAbout));
+        m.addMenu("File","Edit","View","Search","Terminal","Help");
+        m.addSubMenu(0, new MenuNewAction("New", addIcon("new.png")));
+        m.addSubMenu(0, new MenuExitAction("Exit", addIcon("exit.png")));
+        m.addSubMenu(1, new MenuCopyAction("Copy", addIcon("copy.png"), textArea));
+        m.addSubMenu(1, new MenuPasteAction("Paste", addIcon("paste.png"), textArea));
+        m.addSubMenu(2, new MenuFullScreenAction("Full Screen", addIcon("full_screen.png"), this));
+        m.addSubMenu(4, new MenuClearAction("Clear", addIcon("clear.png"), textArea));
+        m.addSubMenu(4, new MenuTitleAction("Set Title", addIcon("set-title.png"), this));
+        m.addSubMenu(5, new MenuContentsAction("Contents", addIcon("content.png")));
+        m.addSubMenu(5, new MenuAboutAction("About", addIcon("about.png")));
         return m.create();
     }
 
+    private ImageIcon addIcon(String icon) {
+        return new ImageIcon(getClass().getResource(ICON_PATH + icon));
+    }
+    
     private void configureEvents() {
         new EventConfig(scrollPane, textArea).configure();
     }
