@@ -27,21 +27,22 @@ import org.jboss.aesh.mterm.gui.MtermUI;
 @SuppressWarnings("serial")
 public class MenuTitleAction extends MenuBaseAction {
 
-    private MtermUI mterrUi;
+    private MtermUI mtermUI;
 
     public MenuTitleAction(String text, ImageIcon icon, MtermUI mterrUi) {
         super(text, icon);
-        this.mterrUi = mterrUi;
+        this.mtermUI = mterrUi;
     }
 
     public void actionPerformed(ActionEvent e) {
+        
         String newTitle =
             (String) JOptionPane.showInputDialog(null, "Title:", "Set Title",
-                JOptionPane.PLAIN_MESSAGE, null, null, mterrUi.getTitle());
+                JOptionPane.PLAIN_MESSAGE, null, null, mtermUI.getTitle());
 
-        if ((newTitle != null) && (!newTitle.isEmpty())) {
-            mterrUi.setTitle(newTitle);
-            return;
-        }
+        mtermUI.setTitle(newTitle);
+
+        return;
+
     }
 }

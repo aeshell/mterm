@@ -36,7 +36,6 @@ public class AeshUtilTest {
     public void setUp() {
         textArea = new JTextArea();
         PrintStream printStream = new PrintStream(new MtermOutputStream(textArea));
-        System.setErr(printStream);
         System.setOut(printStream);
         aesh = AeshUtil.INSTANCE;
         aesh.start(printStream);
@@ -51,17 +50,11 @@ public class AeshUtilTest {
     
     @Test
     public void testGetRegisteredCommands() {
-        Set<String> registeredCommands = aesh.getRegisteredCommands();
-        Assert.assertTrue(registeredCommands.contains("cd"));
-        Assert.assertTrue(registeredCommands.contains("ls"));
-        Assert.assertTrue(registeredCommands.contains("touch"));
-        Assert.assertTrue(registeredCommands.contains("mkdir"));
-        Assert.assertTrue(registeredCommands.contains("pwd"));
-        Assert.assertTrue(registeredCommands.contains("rm"));
-        Assert.assertTrue(registeredCommands.contains("touch"));
-        Assert.assertTrue(registeredCommands.contains("cat"));
-        Assert.assertTrue(registeredCommands.contains("clear"));
-        Assert.assertTrue(registeredCommands.contains("echo"));
+        Set<String> registered = aesh.getRegisteredCommands();
+        String[] commands = {"cd","ls","touch","mkdir","pwd","rm","touch","cat","clear","echo"};
+        for (String c : commands) {
+            Assert.assertTrue(registered.contains(c));    
+        }
     }
     
     @Test
@@ -70,7 +63,6 @@ public class AeshUtilTest {
         Assert.assertEquals("\nabc\n", aesh.getResult());
         aesh.run("\t"); // same as TabAction
         Assert.assertTrue(aesh.getResult().contains("echo"));
-        
     }
     
     @After

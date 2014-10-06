@@ -32,18 +32,12 @@ public class MenuAboutAction extends MenuBaseAction {
 
     public void actionPerformed(ActionEvent e) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 20; i++) {
-            sb.append(" ");
-        }
+        sb.append("          ");
+        sb.append("          ");
         sb.append("\n-=-=-=-= Mterm =-=-=-=-");
         sb.append("\n\n\nA simple java terminal emulator");
-        for (int i = 0; i < 10; i++) {
-            sb.append(" ");
-        }
-        for (int i = 0; i < 5; i++) {
-            sb.append("\n");
-        }
-        sb.append("Created by Aesh Team");
+        sb.append("          ");
+        sb.append("\n\n\n\n\nCreated by Aesh Team");
         new MessageDialog().info(sb.toString());
     }
 }
