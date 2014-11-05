@@ -28,7 +28,7 @@ import javax.swing.JTextArea;
 @SuppressWarnings("serial")
 public class BlockAction extends AbstractAction {
 
-    private int promptStringLength;
+    private String promptString;
 
     private Action action;
 
@@ -39,14 +39,17 @@ public class BlockAction extends AbstractAction {
      * @param promptStringLength int
      * @param action Action
      */
-    public BlockAction(int promptStringLength, Action action) {
-        this.promptStringLength = promptStringLength;
+    public BlockAction(String promptString, Action action) {
+        this.promptString = promptString;
         this.action = action;
     }
 
     public void actionPerformed(ActionEvent ae) {
-        if (((JTextArea) ae.getSource()).getCaretPosition() > promptStringLength) {
+
+        JTextArea t = (JTextArea) ae.getSource();
+        if (t.getCaretPosition() > t.getText().lastIndexOf(promptString) + promptString.length()) {
             action.actionPerformed(null);
         }
+
     }
 }
