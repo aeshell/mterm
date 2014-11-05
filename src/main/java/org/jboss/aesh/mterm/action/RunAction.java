@@ -45,17 +45,25 @@ public class RunAction extends BaseAction {
         try {
             String command = getCommand();
             if (!command.contains("clear")) {
-                aesh.run(command);
+                if (!command.isEmpty()) {
+                    aesh.run(command);
+                }
             }
             else {
                 clear();
             }
 
-            System.out.print(aesh.getResult() + MtermUtil.INSTANCE.getPs1());
+            if (!command.isEmpty()) {
+                System.out.print(aesh.getResult() + MtermUtil.INSTANCE.getPs1());
+            }
+            else {
+                System.out.print("\n" + MtermUtil.INSTANCE.getPs1());
+            }
             aesh.reset();
 
         }
         catch (Exception e) {
+            e.printStackTrace();
             new MessageDialog().error(e.getMessage());
         }
 
