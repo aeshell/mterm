@@ -26,7 +26,7 @@ public enum MtermUtil {
 
     INSTANCE;
 
-    private String ps1 = createPs1();
+    private String ps1;
     private String currentDirectory;
 
     private static final String START = "[";
@@ -38,8 +38,8 @@ public enum MtermUtil {
      * 
      * @return String
      */
-    public String createPs1() {
-        String ps1 = START + System.getProperty("user.name") + AT;
+    public String createPs1(String currentDir) {
+        ps1 = START + System.getProperty("user.name") + currentDir + AT;
         try {
             ps1 += InetAddress.getLocalHost().getHostName().split("\\.")[0] + END;
         }
@@ -61,4 +61,10 @@ public enum MtermUtil {
         this.currentDirectory = currentDirectory;
     }
 
+    public void checkUpdatePS1(String executedCommand) {
+        if (executedCommand.contains("cd")) {
+            executedCommand = executedCommand.replaceAll("cd", "");
+            createPs1("/" + executedCommand.trim());
+        }
+    }
 }

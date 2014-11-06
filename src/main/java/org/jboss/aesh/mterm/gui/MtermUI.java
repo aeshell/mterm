@@ -93,6 +93,7 @@ public final class MtermUI extends JFrame {
     }
 
     private void configureTextArea() {
+        MtermUtil.INSTANCE.createPs1("");
         textArea = new JTextArea(MtermUtil.INSTANCE.getPs1(), 21, 80);
         textArea.setFont(new Font("Monospaced", Font.PLAIN, 15));
         textArea.setLineWrap(true);
@@ -105,19 +106,18 @@ public final class MtermUI extends JFrame {
 
     private JMenuBar createMenuBar() {
         Menu m = new Menu();
-        m.addMenu("File","Edit","View","Search","Terminal","Help");
+        m.addMenu("File","Edit","View","Terminal","Help");
         m.addSubMenu(0, new MenuNewAction("New", addIcon("new.png")));
         m.addSubMenu(0, new MenuExitAction("Exit", addIcon("exit.png")));
         m.addSubMenu(1, new MenuCopyAction("Copy", addIcon("copy.png"), textArea));
         m.addSubMenu(1, new MenuPasteAction("Paste", addIcon("paste.png"), textArea));
         m.addSubMenu(1, new MenuFontAction("Font", textArea));
         m.addSubMenu(1, new MenuColorAction("Color", textArea));
-        
         m.addSubMenu(2, new MenuFullScreenAction("Full Screen", addIcon("full_screen.png"), this));
-        m.addSubMenu(4, new MenuClearAction("Clear", addIcon("clear.png"), textArea));
-        m.addSubMenu(4, new MenuTitleAction("Set Title", addIcon("set-title.png"), this));
-        m.addSubMenu(5, new MenuContentsAction("Contents", addIcon("content.png")));
-        m.addSubMenu(5, new MenuAboutAction("About", addIcon("about.png")));
+        m.addSubMenu(3, new MenuClearAction("Clear", addIcon("clear.png"), textArea));
+        m.addSubMenu(3, new MenuTitleAction("Set Title", addIcon("set-title.png"), this));
+        m.addSubMenu(4, new MenuContentsAction("Contents", addIcon("content.png")));
+        m.addSubMenu(4, new MenuAboutAction("About", addIcon("about.png")));
         return m.create();
     }
 

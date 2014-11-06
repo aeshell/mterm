@@ -41,7 +41,7 @@ public class MtermNavigationFilter extends NavigationFilter {
      */
     public void filter(JTextArea textarea) {
         Action action = textarea.getActionMap().get(EVENT_KEY);
-        textarea.getActionMap().put(EVENT_KEY, new BlockAction(MtermUtil.INSTANCE.getPs1(), action));
+        textarea.getActionMap().put(EVENT_KEY, new BlockAction(action));
         textarea.setCaretPosition(promptStringLength);
     }
 

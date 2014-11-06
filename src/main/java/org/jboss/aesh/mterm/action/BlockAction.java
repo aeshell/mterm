@@ -18,6 +18,8 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JTextArea;
 
+import org.jboss.aesh.mterm.util.MtermUtil;
+
 /**
  * BlockAction class.
  *
@@ -28,26 +30,16 @@ import javax.swing.JTextArea;
 @SuppressWarnings("serial")
 public class BlockAction extends AbstractAction {
 
-    private String promptString;
-
     private Action action;
 
-    /**
-     * Parametric constructor initializes this action with prompt string length and <br>
-     * a java swing Action.
-     * 
-     * @param promptStringLength int
-     * @param action Action
-     */
-    public BlockAction(String promptString, Action action) {
-        this.promptString = promptString;
+    public BlockAction(Action action) {
         this.action = action;
     }
 
     public void actionPerformed(ActionEvent ae) {
 
         JTextArea t = (JTextArea) ae.getSource();
-        if (t.getCaretPosition() > t.getText().lastIndexOf(promptString) + promptString.length()) {
+        if (t.getCaretPosition() > t.getText().lastIndexOf(MtermUtil.INSTANCE.getPs1()) + MtermUtil.INSTANCE.getPs1().length()) {
             action.actionPerformed(null);
         }
 

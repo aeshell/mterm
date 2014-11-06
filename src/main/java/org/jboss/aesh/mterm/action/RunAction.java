@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 
 import org.jboss.aesh.mterm.gui.MessageDialog;
+import org.jboss.aesh.mterm.util.AeshUtil;
 import org.jboss.aesh.mterm.util.MtermUtil;
 
 /**
@@ -54,7 +55,10 @@ public class RunAction extends BaseAction {
             }
 
             if (!command.isEmpty()) {
-                System.out.print(aesh.getResult() + MtermUtil.INSTANCE.getPs1());
+                
+                String result = aesh.getResult();
+                MtermUtil.INSTANCE.checkUpdatePS1(AeshUtil.INSTANCE.getExecutedCommand());
+                System.out.print(result + MtermUtil.INSTANCE.getPs1());
             }
             else {
                 System.out.print("\n" + MtermUtil.INSTANCE.getPs1());
