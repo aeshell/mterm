@@ -111,8 +111,8 @@ public final class MtermUI extends JFrame {
         m.addSubMenu(0, new MenuExitAction("Exit", addIcon("exit.png")));
         m.addSubMenu(1, new MenuCopyAction("Copy", addIcon("copy.png"), textArea));
         m.addSubMenu(1, new MenuPasteAction("Paste", addIcon("paste.png"), textArea));
-        m.addSubMenu(1, new MenuFontAction("Font", textArea));
-        m.addSubMenu(1, new MenuColorAction("Color", textArea));
+        m.addSubMenu(1, new MenuFontAction("Font", addIcon("font-chooser.png"), textArea));
+        m.addSubMenu(1, new MenuColorAction("Color", addIcon("bg-fg-chooser.png"), textArea));
         m.addSubMenu(2, new MenuFullScreenAction("Full Screen", addIcon("full_screen.png"), this));
         m.addSubMenu(3, new MenuClearAction("Clear", addIcon("clear.png"), textArea));
         m.addSubMenu(3, new MenuTitleAction("Set Title", addIcon("set-title.png"), this));
