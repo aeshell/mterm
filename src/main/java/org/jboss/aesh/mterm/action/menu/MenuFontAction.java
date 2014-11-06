@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
@@ -29,8 +30,8 @@ public class MenuFontAction extends MenuBaseAction {
 
     private JTextArea textArea;
 
-    public MenuFontAction(String text, JTextArea textArea) {
-        super(text);
+    public MenuFontAction(String text, ImageIcon icon, JTextArea textArea) {
+        super(text, icon);
         this.textArea = textArea;
     }
 

@@ -15,6 +15,7 @@ package org.jboss.aesh.mterm.action.menu;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -32,8 +33,8 @@ public class MenuColorAction extends MenuBaseAction {
     private static final int BG = 0;
     private static final int FG = 1;
 
-    public MenuColorAction(String text, JTextArea textArea) {
-        super(text);
+    public MenuColorAction(String text, ImageIcon icon, JTextArea textArea) {
+        super(text, icon);
         this.textArea = textArea;
     }
 
