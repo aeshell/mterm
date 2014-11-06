@@ -22,7 +22,7 @@ public class MtermUtilTest {
 
     @Test
     public void testCreatePs1() {
-        String ps1 = MtermUtil.INSTANCE.createPs1();
+        String ps1 = MtermUtil.INSTANCE.createPs1("");
         Assert.assertTrue(ps1.contains("@"));
         Assert.assertTrue(ps1.contains("["));
         Assert.assertTrue(ps1.contains("~]$"));

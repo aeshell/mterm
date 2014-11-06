@@ -53,6 +53,8 @@ public enum AeshUtil {
     private AeshConsole aeshConsole;
     private CommandRegistry registry;
 
+    private String executedCommand;
+    
     @SuppressWarnings("unchecked")
     public void start(PrintStream ps) {
 
@@ -93,7 +95,8 @@ public enum AeshUtil {
      */
     public String getResult() {
         String result = Parser.stripAwayAnsiCodes(getStream().toString());
-        result = result.replaceAll(result.split("\n")[0], "");
+        executedCommand = result.split("\n")[0];
+        result = result.replaceAll(executedCommand, "");
         return result;
     }
 
@@ -163,6 +166,13 @@ public enum AeshUtil {
      */
     public void stop() {
         aeshConsole.stop();
+    }
+    
+    /**
+     * Gets the last executed command.
+     */
+    public String getExecutedCommand() {
+        return executedCommand;
     }
 
 }
