@@ -12,10 +12,10 @@
  */
 package org.jboss.aesh.mterm.action.menu;
 
+import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
@@ -29,13 +29,24 @@ public class MenuFontAction extends MenuBaseAction {
 
     private JTextArea textArea;
 
-    public MenuFontAction(String text, ImageIcon icon, JTextArea textArea) {
-        super(text, icon);
+    public MenuFontAction(String text, JTextArea textArea) {
+        super(text);
         this.textArea = textArea;
     }
 
     public void actionPerformed(ActionEvent e) {
+
+        String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        String selectedFont = (String) JOptionPane.showInputDialog(null,
+            "Font:",
+            "Set Font",
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            fonts,
+            fonts[0]);
         
-        JOptionPane.showMessageDialog(null, GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames(), "Font:", JOptionPane.INFORMATION_MESSAGE);
+        Font currentFont = textArea.getFont();
+        textArea.setFont(new Font(selectedFont, currentFont.getStyle(), currentFont.getSize()));
+
     }
 }
