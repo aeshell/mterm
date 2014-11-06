@@ -28,6 +28,10 @@ public class MenuBaseAction extends AbstractAction {
     public MenuBaseAction(String text, ImageIcon icon) {
         super(text, icon);
     }
+    
+    public MenuBaseAction(String text) {
+        super(text);
+    }
 
     public void actionPerformed(ActionEvent e) {
         this.actionPerformed(e);
