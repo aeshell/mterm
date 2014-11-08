@@ -31,7 +31,7 @@ public enum MtermUtil {
 
     private static final String START = "[";
     private static final String AT = "@";
-    private static final String END = " ~]$ ";
+    private static final String END = "]$ ";
 
     /**
      * Creates the terminal prompt string.
@@ -39,9 +39,9 @@ public enum MtermUtil {
      * @return String
      */
     public String createPs1(String currentDir) {
-        ps1 = START + System.getProperty("user.name") + currentDir + AT;
+        ps1 = START + System.getProperty("user.name") + AT;
         try {
-            ps1 += InetAddress.getLocalHost().getHostName().split("\\.")[0] + END;
+            ps1 += InetAddress.getLocalHost().getHostName().split("\\.")[0] + currentDir + END;
         }
         catch (UnknownHostException e) {
             new MessageDialog().error(e.getMessage());
@@ -64,7 +64,7 @@ public enum MtermUtil {
     public void checkUpdatePS1(String executedCommand) {
         if (executedCommand.contains("cd")) {
             executedCommand = executedCommand.replaceAll("cd", "");
-            createPs1("/" + executedCommand.trim());
+            createPs1(" " + executedCommand.trim());
         }
     }
 }

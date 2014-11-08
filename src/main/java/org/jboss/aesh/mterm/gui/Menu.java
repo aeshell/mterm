@@ -12,7 +12,6 @@
  */
 package org.jboss.aesh.mterm.gui;
 
-import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -24,7 +23,7 @@ import org.jboss.aesh.mterm.action.menu.MenuBaseAction;
  *
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
-public class Menu {
+class Menu {
 
     private JMenuBar menuBar;
 
@@ -32,28 +31,18 @@ public class Menu {
         menuBar = new JMenuBar();
     }
 
-    public void addMenu(String... labels) {
+    void addMenu(String... labels) {
         for (String m : labels) {
             menuBar.add(new JMenu(m));
         }
     }
 
-    public Menu addSubMenu(int index, String sm) {
-        menuBar.getMenu(index).add(new JMenuItem(sm));
-        return this;
-    }
-
-    public Menu addSubMenu(int index, String sm, ImageIcon icon) {
-        menuBar.getMenu(index).add(new JMenuItem(new MenuBaseAction(sm, icon)));
-        return this;
-    }
-
-    public Menu addSubMenu(int index, MenuBaseAction menuAction) {
+    Menu addSubMenu(int index, MenuBaseAction menuAction) {
         menuBar.getMenu(index).add(new JMenuItem(menuAction));
         return this;
     }
 
-    public JMenuBar create() {
+    JMenuBar create() {
         return this.menuBar;
     }
 

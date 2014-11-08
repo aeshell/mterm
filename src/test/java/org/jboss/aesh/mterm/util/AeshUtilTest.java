@@ -18,7 +18,6 @@ import java.util.Set;
 
 import javax.swing.JTextArea;
 
-import org.jboss.aesh.mterm.gui.MtermOutputStream;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
