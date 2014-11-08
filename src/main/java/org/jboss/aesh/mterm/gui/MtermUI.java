@@ -39,6 +39,7 @@ import org.jboss.aesh.mterm.action.menu.MenuPasteAction;
 import org.jboss.aesh.mterm.action.menu.MenuTitleAction;
 import org.jboss.aesh.mterm.event.EventConfig;
 import org.jboss.aesh.mterm.util.AeshUtil;
+import org.jboss.aesh.mterm.util.MtermOutputStream;
 import org.jboss.aesh.mterm.util.MtermUtil;
 
 /**

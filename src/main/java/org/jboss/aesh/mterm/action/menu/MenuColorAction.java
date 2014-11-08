@@ -57,15 +57,17 @@ public class MenuColorAction extends MenuBaseAction {
 
         Object[] drops = { "BG:", bgColor, "FG:", fgColor };
 
-        JOptionPane.showConfirmDialog(null,
+        int option = JOptionPane.showConfirmDialog(null,
             drops,
             "Set Color",
             JOptionPane.OK_CANCEL_OPTION);
 
-        textArea.setBackground(getColor(((JComboBox<String>) drops[1]).getSelectedItem().toString(), BG));
-        Color fg = getColor(((JComboBox<String>) drops[3]).getSelectedItem().toString(), FG);
-        textArea.setForeground(fg);
-        textArea.setCaretColor(fg);
+        if (option == 0) {
+            textArea.setBackground(getColor(((JComboBox<String>) drops[1]).getSelectedItem().toString(), BG));
+            Color fg = getColor(((JComboBox<String>) drops[3]).getSelectedItem().toString(), FG);
+            textArea.setForeground(fg);
+            textArea.setCaretColor(fg);
+        }
     }
 
     private Color getColor(String selectedColor, int type) {

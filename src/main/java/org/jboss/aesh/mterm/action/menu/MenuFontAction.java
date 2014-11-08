@@ -44,10 +44,21 @@ public class MenuFontAction extends MenuBaseAction {
             JOptionPane.INFORMATION_MESSAGE,
             null,
             fonts,
-            fonts[0]);
-        
-        Font currentFont = textArea.getFont();
-        textArea.setFont(new Font(selectedFont, currentFont.getStyle(), currentFont.getSize()));
+            fonts[getCurrentFontIndex(fonts)]);
 
+        if (selectedFont != null) {
+            Font currentFont = textArea.getFont();
+            textArea.setFont(new Font(selectedFont, currentFont.getStyle(), currentFont.getSize()));
+        }
+
+    }
+
+    private int getCurrentFontIndex(String[] fonts) {
+        for (int i = 0; i < fonts.length; i++) {
+            if (fonts[i].equals(textArea.getFont().getName())) {
+                return i;
+            }
+        }
+        return 0;
     }
 }

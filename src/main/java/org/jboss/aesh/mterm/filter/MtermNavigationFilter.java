@@ -30,31 +30,24 @@ public class MtermNavigationFilter extends NavigationFilter {
     private int promptStringLength = MtermUtil.INSTANCE.getPs1().length();
     private static final String EVENT_KEY = "delete-previous";
 
+    private JTextArea textarea;
     public MtermNavigationFilter(JTextArea textarea) {
-        filter(textarea);
+        this.textarea = textarea;
+        filter(this.textarea);
     }
 
-    /**
-     * Apply filter on textarea.
-     * 
-     * @param textarea JTextArea
-     */
-    public void filter(JTextArea textarea) {
+    private void filter(JTextArea textarea) {
         Action action = textarea.getActionMap().get(EVENT_KEY);
         textarea.getActionMap().put(EVENT_KEY, new BlockAction(action));
         textarea.setCaretPosition(promptStringLength);
     }
 
     public void setDot(NavigationFilter.FilterBypass filter, int dot, Position.Bias bias) {
-        filter.setDot(Math.max(dot, promptStringLength), bias);
+        filter.setDot(Math.max(dot, this.textarea.getText().lastIndexOf(MtermUtil.INSTANCE.getPs1()) + MtermUtil.INSTANCE.getPs1().length()), bias);
     }
 
     public void moveDot(NavigationFilter.FilterBypass filter, int dot, Position.Bias bias) {
-        filter.moveDot(Math.max(dot, promptStringLength), bias);
-    }
-
-    public void setPromptStringLength(int promptStringLength) {
-        this.promptStringLength = promptStringLength;
+        filter.moveDot(Math.max(dot, this.textarea.getText().lastIndexOf(MtermUtil.INSTANCE.getPs1()) + MtermUtil.INSTANCE.getPs1().length()), bias);
     }
 
 }

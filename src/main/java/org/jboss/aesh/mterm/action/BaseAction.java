@@ -25,12 +25,12 @@ import org.jboss.aesh.mterm.util.MtermUtil;
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
 @SuppressWarnings("serial")
-public abstract class BaseAction extends AbstractAction {
+abstract class BaseAction extends AbstractAction {
 
     protected AeshUtil aesh = AeshUtil.INSTANCE;
     protected JTextArea textArea;
 
-    public BaseAction(JTextArea textArea) {
+    BaseAction(JTextArea textArea) {
         this.textArea = textArea;
     }
 
