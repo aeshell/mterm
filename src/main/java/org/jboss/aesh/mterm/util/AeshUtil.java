@@ -54,7 +54,7 @@ public enum AeshUtil {
     private CommandRegistry registry;
 
     private String executedCommand;
-    
+
     @SuppressWarnings("unchecked")
     public void start(PrintStream ps) {
 
@@ -69,6 +69,7 @@ public enum AeshUtil {
 
         settings =
             new SettingsBuilder().inputStream(pis)
+                .outputStreamError(new PrintStream(stream))
                 .outputStream(new PrintStream(stream)).create();
 
         try {
@@ -167,7 +168,7 @@ public enum AeshUtil {
     public void stop() {
         aeshConsole.stop();
     }
-    
+
     /**
      * Gets the last executed command.
      */
