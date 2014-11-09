@@ -10,15 +10,15 @@ A simple java terminal emulator running on top of [aesh](https://github.com/aesh
 Download:
 ---------
 
-[mterm-0.56.zip](https://github.com/aeshell/mterm/releases/download/0.56/mterm-0.56.zip)
+[mterm-0.56.1.zip](https://github.com/aeshell/mterm/releases/download/0.56.1/mterm-0.56.1.zip)
 
 
 ```shell
-$ unzip mterm-0.56.zip 
+$ unzip mterm-0.56.1.zip 
 ```
 
 ```shell
-$ java -jar mterm-0.56.jar 
+$ java -jar mterm-0.56.1.jar 
 ```
 
 Your own build:
