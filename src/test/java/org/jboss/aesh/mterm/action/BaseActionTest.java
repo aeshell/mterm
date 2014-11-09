@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JTextArea;
 
+import org.jboss.aesh.mterm.util.MtermUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,7 @@ public class BaseActionTest {
     @Before
     public void setUp() {
         textArea = new JTextArea();
+        MtermUtil.INSTANCE.createPs1("");
         action = new BaseAction(textArea) {
             @Override
             public void actionPerformed(ActionEvent e) {

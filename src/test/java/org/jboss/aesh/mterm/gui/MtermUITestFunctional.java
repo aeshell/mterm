@@ -28,7 +28,7 @@ import org.junit.Test;
  *
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
-public class MtermUITest {
+public class MtermUITestFunctional {
 
     FrameFixture frame;
 

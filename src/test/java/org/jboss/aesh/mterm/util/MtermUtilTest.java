@@ -25,7 +25,7 @@ public class MtermUtilTest {
         String ps1 = MtermUtil.INSTANCE.createPs1("");
         Assert.assertTrue(ps1.contains("@"));
         Assert.assertTrue(ps1.contains("["));
-        Assert.assertTrue(ps1.contains("~]$"));
+        Assert.assertTrue(ps1.contains("]$"));
         Assert.assertEquals(ps1, MtermUtil.INSTANCE.getPs1());
     }
 
