@@ -33,12 +33,16 @@ class Menu {
 
     void addMenu(String... labels) {
         for (String m : labels) {
-            menuBar.add(new JMenu(m));
+            JMenu jm = new JMenu(m);
+            jm.setName(m);
+            menuBar.add(jm);
         }
     }
 
     Menu addSubMenu(int index, MenuBaseAction menuAction) {
-        menuBar.getMenu(index).add(new JMenuItem(menuAction));
+        JMenuItem jmi = new JMenuItem(menuAction);
+        jmi.setName(menuAction.getMenuName());
+        menuBar.getMenu(index).add(jmi);
         return this;
     }
 

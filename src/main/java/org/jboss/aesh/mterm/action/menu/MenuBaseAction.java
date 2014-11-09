@@ -25,12 +25,19 @@ import javax.swing.ImageIcon;
 @SuppressWarnings("serial")
 public class MenuBaseAction extends AbstractAction {
 
+    private String menuName;
+    
     MenuBaseAction(String text, ImageIcon icon) {
         super(text, icon);
+        this.menuName = text;
     }
     
     public void actionPerformed(ActionEvent e) {
         this.actionPerformed(e);
+    }
+    
+    public String getMenuName() {
+        return menuName;
     }
 
 }
