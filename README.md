@@ -36,3 +36,6 @@ $ cd mterm
 $ mvn clean package
 ```
 
+```shell
+$ mvn exec:java
+```
