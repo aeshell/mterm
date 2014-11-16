@@ -44,7 +44,11 @@ public class MenuPasteAction extends MenuBaseAction {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         Transferable transferable = clipboard.getContents(null);
         try {
-            String clip = transferable.getTransferData(DataFlavor.stringFlavor).toString();
+            String clip = "";
+            if (transferable.getTransferData(DataFlavor.stringFlavor) != null) {
+                clip = transferable.getTransferData(DataFlavor.stringFlavor).toString();    
+            }
+            
             textArea.replaceRange(clip, textArea.getSelectionStart(), textArea.getSelectionEnd());
         }
         catch (UnsupportedFlavorException | IOException ex) {
