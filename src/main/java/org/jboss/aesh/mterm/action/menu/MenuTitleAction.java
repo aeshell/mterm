@@ -19,11 +19,6 @@ import javax.swing.JOptionPane;
 
 import org.jboss.aesh.mterm.gui.MtermUI;
 
-/**
- * Menu MenuTitleAction class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class MenuTitleAction extends MenuBaseAction {
 

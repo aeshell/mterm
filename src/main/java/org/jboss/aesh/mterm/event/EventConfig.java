@@ -26,11 +26,6 @@ import org.jboss.aesh.mterm.action.RunAction;
 import org.jboss.aesh.mterm.action.TabAction;
 import org.jboss.aesh.mterm.filter.MtermNavigationFilter;
 
-/**
- * EventConfig configures terminal events.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 public class EventConfig {
 
     private JScrollPane scrollPane;

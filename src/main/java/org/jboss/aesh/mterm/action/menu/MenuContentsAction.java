@@ -18,13 +18,6 @@ import java.net.URI;
 
 import javax.swing.ImageIcon;
 
-import org.jboss.aesh.mterm.gui.MessageDialog;
-
-/**
- * Menu MenuContentsAction class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class MenuContentsAction extends MenuBaseAction {
 
@@ -44,7 +37,7 @@ public class MenuContentsAction extends MenuBaseAction {
             }
         }
         catch (Exception ex) {
-            new MessageDialog().error(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 }

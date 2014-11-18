@@ -19,11 +19,6 @@ import javax.swing.text.BadLocationException;
 import org.jboss.aesh.mterm.util.AeshUtil;
 import org.jboss.aesh.mterm.util.MtermUtil;
 
-/**
- * BaseAction class.
- * 
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 abstract class BaseAction extends AbstractAction {
 

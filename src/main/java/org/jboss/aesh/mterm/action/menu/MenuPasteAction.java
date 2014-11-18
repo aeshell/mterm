@@ -23,13 +23,6 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 
-import org.jboss.aesh.mterm.gui.MessageDialog;
-
-/**
- * Menu MenuPasteAction class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class MenuPasteAction extends MenuBaseAction {
 
@@ -52,7 +45,7 @@ public class MenuPasteAction extends MenuBaseAction {
             textArea.replaceRange(clip, textArea.getSelectionStart(), textArea.getSelectionEnd());
         }
         catch (UnsupportedFlavorException | IOException ex) {
-            new MessageDialog().error(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 }

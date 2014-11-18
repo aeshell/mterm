@@ -19,11 +19,6 @@ import javax.swing.SwingUtilities;
 
 import org.jboss.aesh.mterm.gui.MtermUI;
 
-/**
- * Menu MenuNewAction class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class MenuNewAction extends MenuBaseAction {
 

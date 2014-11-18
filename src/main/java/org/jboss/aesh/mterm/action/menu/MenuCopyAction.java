@@ -20,11 +20,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 
-/**
- * Menu MenuCopyAction class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class MenuCopyAction extends MenuBaseAction {
 

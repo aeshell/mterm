@@ -18,11 +18,6 @@ import javax.swing.ImageIcon;
 
 import org.jboss.aesh.mterm.util.AeshUtil;
 
-/**
- * Menu MenuExitAction class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class MenuExitAction extends MenuBaseAction {
 

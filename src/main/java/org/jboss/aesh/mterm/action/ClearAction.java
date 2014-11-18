@@ -17,24 +17,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 
-import org.jboss.aesh.mterm.gui.MessageDialog;
 import org.jboss.aesh.mterm.util.MtermUtil;
 
-/**
- * ClearAction class.
- *
- * This action clears the terminal and is fired when user types control + l.
- * 
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class ClearAction extends BaseAction {
 
-    /**
-     * Parametric constructor initializes this action with JTextArea.
-     * 
-     * @param textArea JTextArea
-     */
     public ClearAction(JTextArea textArea) {
         super(textArea);
     }
@@ -44,7 +31,7 @@ public class ClearAction extends BaseAction {
             textArea.getDocument().remove(0, textArea.getDocument().getLength());
         }
         catch (BadLocationException e) {
-            new MessageDialog().error(e.getMessage());
+            e.printStackTrace();
         }
         System.out.print(MtermUtil.INSTANCE.getPs1());
 

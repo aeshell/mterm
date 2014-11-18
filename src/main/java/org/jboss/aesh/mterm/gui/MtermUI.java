@@ -42,11 +42,6 @@ import org.jboss.aesh.mterm.util.AeshUtil;
 import org.jboss.aesh.mterm.util.MtermOutputStream;
 import org.jboss.aesh.mterm.util.MtermUtil;
 
-/**
- * Main gui class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public final class MtermUI extends JFrame {
 

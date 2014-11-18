@@ -17,27 +17,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 
-import org.jboss.aesh.mterm.gui.MessageDialog;
 import org.jboss.aesh.mterm.util.AeshUtil;
 import org.jboss.aesh.mterm.util.MtermUtil;
 
-/**
- * RunAction class.
- * 
- * This action delegates commands to aesh.
- * 
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class RunAction extends BaseAction {
 
-    /**
-     * Parametric constructor initializes this action with target textarea and <br>
-     * aesh handler.
-     * 
-     * @param textArea AeshHandler
-     * @param aesh JTextArea
-     */
     public RunAction(JTextArea textArea) {
         super(textArea);
     }
@@ -68,7 +53,6 @@ public class RunAction extends BaseAction {
         }
         catch (Exception e) {
             e.printStackTrace();
-            new MessageDialog().error(e.getMessage());
         }
 
     }
@@ -78,7 +62,7 @@ public class RunAction extends BaseAction {
             textArea.getDocument().remove(0, textArea.getDocument().getLength());
         }
         catch (BadLocationException e) {
-            new MessageDialog().error(e.getMessage());
+            e.printStackTrace();
         }
     }
 

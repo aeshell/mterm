@@ -15,11 +15,6 @@ package org.jboss.aesh.mterm.util;
 import java.io.*;
 import javax.swing.*;
 
-/**
- * To write bytes on textArea.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 public class MtermOutputStream extends OutputStream {
 
     private JTextArea textArea;
