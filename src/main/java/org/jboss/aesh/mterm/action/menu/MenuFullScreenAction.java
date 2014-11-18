@@ -19,11 +19,6 @@ import javax.swing.ImageIcon;
 
 import org.jboss.aesh.mterm.gui.MtermUI;
 
-/**
- * Menu MenuFullScreenAction class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class MenuFullScreenAction extends MenuBaseAction {
 

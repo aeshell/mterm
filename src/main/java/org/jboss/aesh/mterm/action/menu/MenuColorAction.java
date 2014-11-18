@@ -20,11 +20,6 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
-/**
- * Menu MenuColorAction class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class MenuColorAction extends MenuBaseAction {
 

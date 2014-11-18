@@ -18,14 +18,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 import javax.swing.text.BadLocationException;
 
-import org.jboss.aesh.mterm.gui.MessageDialog;
 import org.jboss.aesh.mterm.util.MtermUtil;
 
-/**
- * Menu MenuClearAction class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class MenuClearAction extends MenuBaseAction {
 
@@ -42,7 +36,7 @@ public class MenuClearAction extends MenuBaseAction {
             System.out.print(MtermUtil.INSTANCE.getPs1());
         }
         catch (BadLocationException ex) {
-            new MessageDialog().error(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 }

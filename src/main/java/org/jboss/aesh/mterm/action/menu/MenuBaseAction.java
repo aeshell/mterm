@@ -17,11 +17,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 
-/**
- * General class MenuBaseAction class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class MenuBaseAction extends AbstractAction {
 

@@ -20,13 +20,6 @@ import javax.swing.JTextArea;
 
 import org.jboss.aesh.mterm.util.MtermUtil;
 
-/**
- * BlockAction class.
- *
- * This action blocks the deletion of the prompt string.
- * 
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class BlockAction extends AbstractAction {
 

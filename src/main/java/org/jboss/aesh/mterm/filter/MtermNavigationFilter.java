@@ -20,11 +20,6 @@ import javax.swing.text.Position;
 import org.jboss.aesh.mterm.action.BlockAction;
 import org.jboss.aesh.mterm.util.MtermUtil;
 
-/**
- * MtermNavigationFilter takes care of the caret position.
- * 
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 public class MtermNavigationFilter extends NavigationFilter {
 
     private int promptStringLength = MtermUtil.INSTANCE.getPs1().length();

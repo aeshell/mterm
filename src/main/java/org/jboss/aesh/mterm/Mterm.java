@@ -15,14 +15,8 @@ package org.jboss.aesh.mterm;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import org.jboss.aesh.mterm.gui.MessageDialog;
 import org.jboss.aesh.mterm.gui.MtermUI;
 
-/**
- * The main class.
- * 
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 public class Mterm {
 
     public static void main(String... args) {
@@ -33,7 +27,7 @@ public class Mterm {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 }
                 catch (Exception e) {
-                    new MessageDialog().error(e.getMessage());
+                    e.printStackTrace();
                 }
                 new MtermUI();
             }

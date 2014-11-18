@@ -18,11 +18,6 @@ import javax.swing.JMenuItem;
 
 import org.jboss.aesh.mterm.action.menu.MenuBaseAction;
 
-/**
- * The menu class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 class Menu {
 
     private JMenuBar menuBar;

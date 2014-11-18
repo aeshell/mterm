@@ -17,14 +17,8 @@ import java.io.IOException;
 
 import javax.swing.JTextArea;
 
-import org.jboss.aesh.mterm.gui.MessageDialog;
 import org.jboss.aesh.mterm.util.MtermUtil;
 
-/**
- * TabAction class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class TabAction extends BaseAction {
 
@@ -41,7 +35,7 @@ public class TabAction extends BaseAction {
             aesh.run("\t");
         }
         catch (IOException e) {
-            new MessageDialog().error(e.getMessage());
+            e.printStackTrace();
         }
         System.out.print(aesh.getResult() + MtermUtil.INSTANCE.getPs1());
         aesh.reset();

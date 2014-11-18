@@ -36,12 +36,8 @@ import org.jboss.aesh.extensions.mkdir.Mkdir;
 import org.jboss.aesh.extensions.pwd.Pwd;
 import org.jboss.aesh.extensions.rm.Rm;
 import org.jboss.aesh.extensions.touch.Touch;
-import org.jboss.aesh.mterm.gui.MessageDialog;
 import org.jboss.aesh.parser.Parser;
 
-/**
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 public enum AeshUtil {
 
     INSTANCE;
@@ -63,7 +59,7 @@ public enum AeshUtil {
             pis = new PipedInputStream(pos);
         }
         catch (IOException e) {
-            new MessageDialog().error(e.getMessage());
+            e.printStackTrace();
         }
         stream = new ByteArrayOutputStream();
 
@@ -77,7 +73,7 @@ public enum AeshUtil {
                 Clear.class, Echo.class);
         }
         catch (IOException e) {
-            new MessageDialog().error(e.getMessage());
+            e.printStackTrace();
         }
 
     }
@@ -119,7 +115,7 @@ public enum AeshUtil {
             Thread.sleep(100);
         }
         catch (InterruptedException e) {
-            new MessageDialog().error(e.getMessage());
+            e.printStackTrace();
         }
     }
 

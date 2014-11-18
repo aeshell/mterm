@@ -15,14 +15,8 @@ package org.jboss.aesh.mterm.action.menu;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
-import org.jboss.aesh.mterm.gui.MessageDialog;
-
-/**
- * Menu MenuAboutAction class.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 @SuppressWarnings("serial")
 public class MenuAboutAction extends MenuBaseAction {
 
@@ -38,6 +32,6 @@ public class MenuAboutAction extends MenuBaseAction {
         sb.append("\n\n\nA simple java terminal emulator");
         sb.append("          ");
         sb.append("\n\n\n\n\nCreated by Aesh Team");
-        new MessageDialog().info(sb.toString());
+        JOptionPane.showMessageDialog(null, sb.toString());
     }
 }

@@ -15,13 +15,6 @@ package org.jboss.aesh.mterm.util;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import org.jboss.aesh.mterm.gui.MessageDialog;
-
-/**
- * This class has util methods to improve the app.
- *
- * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
- */
 public enum MtermUtil {
 
     INSTANCE;
@@ -33,18 +26,13 @@ public enum MtermUtil {
     private static final String AT = "@";
     private static final String END = "]$ ";
 
-    /**
-     * Creates the terminal prompt string.
-     * 
-     * @return String
-     */
     public String createPs1(String currentDir) {
         ps1 = START + System.getProperty("user.name") + AT;
         try {
             ps1 += InetAddress.getLocalHost().getHostName().split("\\.")[0] + currentDir + END;
         }
         catch (UnknownHostException e) {
-            new MessageDialog().error(e.getMessage());
+            e.printStackTrace();
         }
         return ps1;
     }
