@@ -25,6 +25,30 @@ Your own build:
 ---------------
 
 ```shell
+$ git clone https://github.com/aeshell/aesh.git
+```
+
+```shell
+$ cd aesh 
+```
+
+```shell
+$ ./gradlew install 
+```
+
+```shell
+$ git clone https://github.com/aeshell/aesh-extensions.git
+```
+
+```shell
+$ cd aesh-extensions 
+```
+
+```shell
+$ ./gradlew install 
+```
+
+```shell
 $ git clone https://github.com/aeshell/mterm.git 
 ```
 
@@ -33,9 +57,9 @@ $ cd mterm
 ```
 
 ```shell
-$ mvn clean package
+$ ./gradlew build
 ```
 
 ```shell
-$ mvn exec:java
+$ ./gradlew run
 ```

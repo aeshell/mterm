@@ -31,6 +31,7 @@ import org.jboss.aesh.extensions.cat.Cat;
 import org.jboss.aesh.extensions.cd.Cd;
 import org.jboss.aesh.extensions.clear.Clear;
 import org.jboss.aesh.extensions.echo.Echo;
+import org.jboss.aesh.extensions.exit.Exit;
 import org.jboss.aesh.extensions.ls.Ls;
 import org.jboss.aesh.extensions.mkdir.Mkdir;
 import org.jboss.aesh.extensions.pwd.Pwd;
@@ -70,7 +71,7 @@ public enum AeshUtil {
 
         try {
             add(Cd.class, Ls.class, Mkdir.class, Pwd.class, Rm.class, Touch.class, Cat.class,
-                Clear.class, Echo.class);
+                Clear.class, Echo.class, Exit.class);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -158,6 +159,14 @@ public enum AeshUtil {
         return aeshConsole.getAeshContext().getCurrentWorkingDirectory().getName();
     }
 
+    /**
+     * Checks if aesh is running.
+     * @return
+     */
+    public boolean isRunning() {
+    	return aeshConsole.isRunning();
+    }
+    
     /**
      * Stops the aesh console.
      */

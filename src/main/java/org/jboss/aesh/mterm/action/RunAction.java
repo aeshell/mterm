@@ -33,6 +33,9 @@ public class RunAction extends BaseAction {
             if (!command.contains("clear")) {
                 if (!command.isEmpty()) {
                     aesh.run(command);
+                    if (!aesh.isRunning()) {
+                    	System.exit(0);
+                    }
                 }
             }
             else {
