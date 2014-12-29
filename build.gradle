@@ -34,7 +34,7 @@ targetCompatibility = JavaVersion.VERSION_1_7
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'Mterm', 'Implementation-Version': version, 'Main-Class': 'Mterm'
+        attributes 'Implementation-Title': 'Mterm', 'Implementation-Version': version, 'Main-Class': 'org.jboss.aesh.mterm.Mterm'
     }
 }
 
