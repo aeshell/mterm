@@ -36,8 +36,5 @@ public class MenuTitleAction extends MenuBaseAction {
                 JOptionPane.PLAIN_MESSAGE, null, null, mtermUI.getTitle());
 
         mtermUI.setTitle(newTitle);
-
-        return;
-
     }
 }

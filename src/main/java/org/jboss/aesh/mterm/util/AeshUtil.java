@@ -105,7 +105,7 @@ public enum AeshUtil {
      * @throws IOException exception
      */
     public void run(String command) throws IOException {
-        getPos().write((command).getBytes());
+        getPos().write(command.getBytes());
         getPos().write(Config.getLineSeparator().getBytes());
         getPos().flush();
         pause();
