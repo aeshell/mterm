@@ -45,7 +45,7 @@ abstract class BaseAction extends AbstractAction {
             int lineOffset = textArea.getLineOfOffset(textArea.getCaretPosition());
             int lineStart = textArea.getLineStartOffset(lineOffset);
             int lineEnd = textArea.getLineEndOffset(lineOffset);
-            return textArea.getText(lineStart, (lineEnd - lineStart));
+            return textArea.getText(lineStart, lineEnd - lineStart);
         }
         catch (BadLocationException e) {
             e.printStackTrace();
