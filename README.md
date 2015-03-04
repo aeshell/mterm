@@ -10,56 +10,21 @@ A simple java terminal emulator running on top of [aesh](https://github.com/aesh
 Download:
 ---------
 
-[mterm-0.56.1.zip](https://github.com/aeshell/mterm/releases/download/0.56.1/mterm-0.56.1.zip)
+[mterm-0.57.zip](https://github.com/aeshell/mterm/releases/download/0.57/mterm-0.57.zip)
 
 
 ```shell
-$ unzip mterm-0.56.1.zip 
-```
-
-```shell
-$ java -jar mterm-0.56.1.jar 
+$ unzip mterm-0.57.zip
+$ cd mterm-0.57/bin
+$ ./mterm
 ```
 
 Your own build:
 ---------------
 
 ```shell
-$ git clone https://github.com/aeshell/aesh.git
+$ git clone https://github.com/aeshell/mterm.git
+$ cd mterm
+$ ./gradlew clean run
 ```
 
-```shell
-$ cd aesh 
-```
-
-```shell
-$ ./gradlew install 
-```
-
-```shell
-$ git clone https://github.com/aeshell/aesh-extensions.git
-```
-
-```shell
-$ cd aesh-extensions 
-```
-
-```shell
-$ ./gradlew install 
-```
-
-```shell
-$ git clone https://github.com/aeshell/mterm.git 
-```
-
-```shell
-$ cd mterm 
-```
-
-```shell
-$ ./gradlew build
-```
-
-```shell
-$ ./gradlew run
-```

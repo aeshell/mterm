@@ -17,8 +17,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
@@ -34,28 +32,28 @@ sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
 jar {
-    manifest {
-        attributes 'Implementation-Title': 'Mterm', 'Implementation-Version': version, 'Main-Class': 'org.jboss.aesh.mterm.Mterm'
-    }
+  manifest {
+    attributes 'Implementation-Title': 'Mterm', 'Implementation-Version': version, 'Main-Class': 'org.jboss.aesh.mterm.Mterm'
+  }
 }
 
 repositories {
-    mavenCentral()
-    mavenLocal()
+  mavenCentral()
+  mavenLocal()
 }
 
 test {
-    exclude '**/gui/**'
+  exclude '**/gui/**'
 }
 
 dependencies {
-    compile group: 'org.jboss.aesh', name: 'aesh', version: version
-    compile group: 'org.jboss.aesh', name: 'aesh-extensions', version: '0.57-SNAPSHOT'
-    compile group: 'org.codehaus.groovy', name: 'groovy', version: '2.1.6'
-    testCompile group: 'junit', name: 'junit', version: '4.+'
-    testCompile group: 'org.easytesting', name: 'fest-swing', version: '1.2.1'
+  compile group: 'org.jboss.aesh', name: 'aesh', version: version
+  compile group: 'org.jboss.aesh', name: 'aesh-extensions', version: version
+  compile group: 'org.codehaus.groovy', name: 'groovy', version: '2.1.6'
+  testCompile group: 'junit', name: 'junit', version: '4.+'
+  testCompile group: 'org.easytesting', name: 'fest-swing', version: '1.2.1'
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.2.1'
+  gradleVersion = '2.2.1'
 }
