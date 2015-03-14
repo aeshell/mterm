@@ -2,7 +2,7 @@
  * JBoss, Home of Professional Open Source Copyright 2014 Red Hat Inc. and/or its affiliates and
  * other contributors as indicated by the @authors tag. All rights reserved. See the copyright.txt
  * in the distribution for a full listing of individual contributors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in
@@ -46,16 +46,16 @@ public class AeshUtilTest {
         aesh.run("cd src");
         Assert.assertEquals("src", aesh.getCurrentDirectory());
     }
-    
+
     @Test
     public void testGetRegisteredCommands() {
         Set<String> registered = aesh.getRegisteredCommands();
         String[] commands = {"cd","ls","touch","mkdir","pwd","rm","touch","cat","clear","echo"};
         for (String c : commands) {
-            Assert.assertTrue(registered.contains(c));    
+            Assert.assertTrue(registered.contains(c));
         }
     }
-    
+
     @Test
     public void testGetResult() throws IOException {
         aesh.run("echo abc");
@@ -63,7 +63,7 @@ public class AeshUtilTest {
         aesh.run("\t"); // same as TabAction
         Assert.assertTrue(aesh.getResult().contains("echo"));
     }
-    
+
     @After
     public void tearDown() {
         aesh.stop();
