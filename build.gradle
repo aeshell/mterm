@@ -24,7 +24,7 @@ apply plugin: 'application'
 apply plugin: 'pmd'
 
 group = 'org.jboss.aesh'
-version = '0.57'
+version = '0.58-SNAPSHOT'
 
 mainClassName = 'org.jboss.aesh.mterm.Mterm'
 
