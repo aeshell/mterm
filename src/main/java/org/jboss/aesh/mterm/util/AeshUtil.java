@@ -171,11 +171,11 @@ public enum AeshUtil {
      * Stops the aesh console.
      */
     public void stop() {
-        try {
+        /*try {
           run("exit");
         } catch (Exception e) {
           e.printStackTrace();
-        }
+        }*/
         aeshConsole.stop();
     }
 
