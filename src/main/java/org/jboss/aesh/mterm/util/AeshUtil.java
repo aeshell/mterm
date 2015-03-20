@@ -164,13 +164,18 @@ public enum AeshUtil {
      * @return
      */
     public boolean isRunning() {
-    	return aeshConsole.isRunning();
+        return aeshConsole.isRunning();
     }
 
     /**
      * Stops the aesh console.
      */
     public void stop() {
+        try {
+          run("exit");
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
         aeshConsole.stop();
     }
 
