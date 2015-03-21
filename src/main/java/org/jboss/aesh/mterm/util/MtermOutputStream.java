@@ -2,7 +2,7 @@
  * JBoss, Home of Professional Open Source Copyright 2014 Red Hat Inc. and/or its affiliates and
  * other contributors as indicated by the @authors tag. All rights reserved. See the copyright.txt
  * in the distribution for a full listing of individual contributors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in
@@ -25,8 +25,9 @@ public class MtermOutputStream extends OutputStream {
 
     @Override
     public void write(int b) throws IOException {
-        this.textArea.append(String.valueOf((char) b));
-        this.textArea.setCaretPosition(this.textArea.getDocument().getLength());
+        // this causes poor performance on JTextArea... char by char...
+        textArea.append(String.valueOf((char) b));
+        textArea.setCaretPosition(textArea.getDocument().getLength());
     }
 
 }

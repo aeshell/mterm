@@ -49,12 +49,10 @@ public enum AeshUtil {
     private Settings settings;
     private AeshConsole aeshConsole;
     private CommandRegistry registry;
-
     private String executedCommand;
 
     @SuppressWarnings("unchecked")
     public void start(PrintStream ps) {
-
         pos = new PipedOutputStream();
         try {
             pis = new PipedInputStream(pos);
@@ -76,7 +74,6 @@ public enum AeshUtil {
         catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -171,11 +168,6 @@ public enum AeshUtil {
      * Stops the aesh console.
      */
     public void stop() {
-        /*try {
-          run("exit");
-        } catch (Exception e) {
-          e.printStackTrace();
-        }*/
         aeshConsole.stop();
     }
 
