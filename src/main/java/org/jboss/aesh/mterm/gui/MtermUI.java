@@ -2,7 +2,7 @@
  * JBoss, Home of Professional Open Source Copyright 2014 Red Hat Inc. and/or its affiliates and
  * other contributors as indicated by the @authors tag. All rights reserved. See the copyright.txt
  * in the distribution for a full listing of individual contributors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in
@@ -108,7 +108,7 @@ public final class MtermUI extends JFrame {
         m.addSubMenu(1, new MenuCopyAction("Copy", addIcon("copy.png"), textArea));
         m.addSubMenu(1, new MenuPasteAction("Paste", addIcon("paste.png"), textArea));
         m.addSubMenu(1, new MenuFontAction("Font", addIcon("font-chooser.png"), textArea));
-        m.addSubMenu(1, new MenuColorAction("Color", addIcon("bg-fg-chooser.png"), textArea));       
+        m.addSubMenu(1, new MenuColorAction("Color", addIcon("bg-fg-chooser.png"), textArea));
         m.addSubMenu(2, new MenuFullScreenAction("Full Screen", addIcon("full_screen.png"), this));
         m.addSubMenu(3, new MenuClearAction("Clear", addIcon("clear.png"), textArea));
         m.addSubMenu(3, new MenuTitleAction("Set Title", addIcon("set-title.png"), this));
@@ -120,7 +120,7 @@ public final class MtermUI extends JFrame {
     private ImageIcon addIcon(String icon) {
         return new ImageIcon(getClass().getResource(ICON_PATH + icon));
     }
-    
+
     private void configureEvents() {
         new EventConfig(scrollPane, textArea).configure();
     }
