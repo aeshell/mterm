@@ -36,6 +36,7 @@ import org.jboss.aesh.extensions.ls.Ls;
 import org.jboss.aesh.extensions.mkdir.Mkdir;
 import org.jboss.aesh.extensions.pwd.Pwd;
 import org.jboss.aesh.extensions.rm.Rm;
+import org.jboss.aesh.extensions.mv.Mv;
 import org.jboss.aesh.extensions.touch.Touch;
 import org.jboss.aesh.parser.Parser;
 
@@ -68,7 +69,7 @@ public enum AeshUtil {
                 .outputStream(new PrintStream(stream)).create();
 
         try {
-            add(Cd.class, Ls.class, Mkdir.class, Pwd.class, Rm.class, Touch.class, Cat.class,
+            add(Cd.class, Ls.class, Mkdir.class, Pwd.class, Rm.class, Mv.class, Touch.class, Cat.class,
                 Clear.class, Echo.class, Exit.class);
         }
         catch (IOException e) {
