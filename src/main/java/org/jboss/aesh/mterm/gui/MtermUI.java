@@ -42,6 +42,9 @@ import org.jboss.aesh.mterm.util.AeshUtil;
 import org.jboss.aesh.mterm.util.MtermOutputStream;
 import org.jboss.aesh.mterm.util.MtermUtil;
 
+/**
+ * @author Helio Frota  00hf11 at gmail.com
+ */
 @SuppressWarnings("serial")
 public final class MtermUI extends JFrame {
 
@@ -126,7 +129,7 @@ public final class MtermUI extends JFrame {
     }
 
     private void configureStreams() {
-        PrintStream printStream = new PrintStream(new MtermOutputStream(textArea));
+        MtermOutputStream printStream = new MtermOutputStream(textArea, System.out);
         System.setErr(printStream);
         System.setOut(printStream);
         AeshUtil.INSTANCE.start(printStream);

@@ -20,6 +20,9 @@ import javax.swing.text.Position;
 import org.jboss.aesh.mterm.action.BlockAction;
 import org.jboss.aesh.mterm.util.MtermUtil;
 
+/**
+ * @author Helio Frota  00hf11 at gmail.com
+ */
 public class MtermNavigationFilter extends NavigationFilter {
 
     private int promptStringLength = MtermUtil.INSTANCE.getPs1().length();

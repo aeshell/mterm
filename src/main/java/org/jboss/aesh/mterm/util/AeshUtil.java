@@ -40,6 +40,9 @@ import org.jboss.aesh.extensions.mv.Mv;
 import org.jboss.aesh.extensions.touch.Touch;
 import org.jboss.aesh.parser.Parser;
 
+/**
+ * @author Helio Frota  00hf11 at gmail.com
+ */
 public enum AeshUtil {
 
     INSTANCE;

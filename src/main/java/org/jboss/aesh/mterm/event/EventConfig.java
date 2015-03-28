@@ -26,6 +26,9 @@ import org.jboss.aesh.mterm.action.RunAction;
 import org.jboss.aesh.mterm.action.TabAction;
 import org.jboss.aesh.mterm.filter.MtermNavigationFilter;
 
+/**
+ * @author Helio Frota  00hf11 at gmail.com
+ */
 public class EventConfig {
 
     private JScrollPane scrollPane;

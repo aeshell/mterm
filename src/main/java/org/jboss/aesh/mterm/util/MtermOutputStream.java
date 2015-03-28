@@ -15,19 +15,23 @@ package org.jboss.aesh.mterm.util;
 import java.io.*;
 import javax.swing.*;
 
-public class MtermOutputStream extends OutputStream {
+/**
+ * @author Helio Frota  00hf11 at gmail.com
+ */
+public class MtermOutputStream extends PrintStream {
 
     private JTextArea textArea;
 
-    public MtermOutputStream(JTextArea textArea) {
-        this.textArea = textArea;
+    public MtermOutputStream(JTextArea textarea, OutputStream os) {
+        super(os);
+        textArea = textarea;
     }
 
-    @Override
-    public void write(int b) throws IOException {
-        // this causes poor performance on JTextArea... char by char...
-        textArea.append(String.valueOf((char) b));
-        textArea.setCaretPosition(textArea.getDocument().getLength());
+    public void println(String content) {
+        textArea.append(content + "\n");
     }
 
+    public void print(String content) {
+        textArea.append(content);
+    }
 }
