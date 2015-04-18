@@ -10,36 +10,35 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package org.jboss.aesh.mterm.action.menu;
+package org.jboss.aesh.mterm.action.menu
 
-import java.awt.Frame;
-import java.awt.event.ActionEvent;
+import java.awt.Frame
+import java.awt.event.ActionEvent
 
-import javax.swing.ImageIcon;
+import javax.swing.ImageIcon
 
-import org.jboss.aesh.mterm.gui.MtermUI;
+import org.jboss.aesh.mterm.gui.MtermUI
 
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
 @SuppressWarnings("serial")
-public class MenuFullScreenAction extends MenuBaseAction {
+class MenuFullScreenAction extends MenuBaseAction {
 
-    private MtermUI mterrUi;
+  private MtermUI mterrUi
 
-    public MenuFullScreenAction(String text, ImageIcon icon, MtermUI mterrUi) {
-        super(text, icon);
-        this.mterrUi = mterrUi;
+  MenuFullScreenAction(String text, ImageIcon icon, MtermUI mterrUi) {
+    super(text, icon)
+    this.mterrUi = mterrUi
+  }
+
+  void actionPerformed(ActionEvent e) {
+    if (!mterrUi.isFullScreen()) {
+      mterrUi.setExtendedState(Frame.MAXIMIZED_BOTH)
+      mterrUi.setFullScreen(true)
+    } else {
+      mterrUi.setExtendedState(Frame.NORMAL)
+      mterrUi.setFullScreen(false)
     }
-
-    public void actionPerformed(ActionEvent e) {
-        if (!mterrUi.isFullScreen()) {
-            mterrUi.setExtendedState(Frame.MAXIMIZED_BOTH);
-            mterrUi.setFullScreen(true);
-        }
-        else {
-            mterrUi.setExtendedState(Frame.NORMAL);
-            mterrUi.setFullScreen(false);
-        }
-    }
+  }
 }

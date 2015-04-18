@@ -10,33 +10,33 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package org.jboss.aesh.mterm.action.menu;
+package org.jboss.aesh.mterm.action.menu
 
-import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent
 
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.ImageIcon
+import javax.swing.JOptionPane
 
-import org.jboss.aesh.mterm.gui.MtermUI;
+import org.jboss.aesh.mterm.gui.MtermUI
 
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
 @SuppressWarnings("serial")
-public class MenuTitleAction extends MenuBaseAction {
+class MenuTitleAction extends MenuBaseAction {
 
-    private MtermUI mtermUI;
+  private MtermUI mtermUI
 
-    public MenuTitleAction(String text, ImageIcon icon, MtermUI mterrUi) {
-        super(text, icon);
-        this.mtermUI = mterrUi;
-    }
+  MenuTitleAction(String text, ImageIcon icon, MtermUI mterrUi) {
+    super(text, icon)
+    this.mtermUI = mterrUi
+  }
 
-    public void actionPerformed(ActionEvent e) {
-        String newTitle =
-            (String) JOptionPane.showInputDialog(null, "Title:", "Set Title",
-                JOptionPane.PLAIN_MESSAGE, null, null, mtermUI.getTitle());
+  void actionPerformed(ActionEvent e) {
+    String newTitle =
+      (String) JOptionPane.showInputDialog(null, 'Title:', 'Set Title',
+          JOptionPane.PLAIN_MESSAGE, null, null, mtermUI.getTitle())
 
-        mtermUI.setTitle(newTitle);
-    }
+    mtermUI.setTitle(newTitle)
+  }
 }

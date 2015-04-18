@@ -10,31 +10,31 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package org.jboss.aesh.mterm.action.menu;
+package org.jboss.aesh.mterm.action.menu
 
-import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent
 
-import javax.swing.ImageIcon;
-import javax.swing.SwingUtilities;
+import javax.swing.ImageIcon
+import javax.swing.SwingUtilities
 
-import org.jboss.aesh.mterm.gui.MtermUI;
+import org.jboss.aesh.mterm.gui.MtermUI
 
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
 @SuppressWarnings("serial")
-public class MenuNewAction extends MenuBaseAction {
+class MenuNewAction extends MenuBaseAction {
 
-    public MenuNewAction(String text, ImageIcon icon) {
-        super(text, icon);
-    }
+  MenuNewAction(String text, ImageIcon icon) {
+    super(text, icon)
+  }
 
-    public void actionPerformed(ActionEvent e) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new MtermUI();
-            }
-        });
-    }
+  void actionPerformed(ActionEvent e) {
+    SwingUtilities.invokeLater(new Runnable() {
+      @Override
+      void run() {
+        new MtermUI()
+      }
+    })
+  }
 }
