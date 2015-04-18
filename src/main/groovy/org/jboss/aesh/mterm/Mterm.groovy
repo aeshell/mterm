@@ -10,30 +10,30 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package org.jboss.aesh.mterm;
+package org.jboss.aesh.mterm
 
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import javax.swing.SwingUtilities
+import javax.swing.UIManager
 
-import org.jboss.aesh.mterm.gui.MtermUI;
+import org.jboss.aesh.mterm.gui.MtermUI
 
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-public class Mterm {
+class Mterm {
 
-    public static void main(String... args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-                new MtermUI();
-            }
-        });
-    }
+  static main(args) {
+    SwingUtilities.invokeLater(new Runnable() {
+      @Override
+      void run() {
+        try {
+          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+        }
+        catch (e) {
+          e.printStackTrace()
+        }
+        new MtermUI()
+      }
+    })
+  }
 }

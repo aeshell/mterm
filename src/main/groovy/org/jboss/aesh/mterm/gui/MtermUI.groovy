@@ -46,7 +46,7 @@ import org.jboss.aesh.mterm.util.MtermUtil;
  * @author Helio Frota  00hf11 at gmail.com
  */
 @SuppressWarnings("serial")
-public final class MtermUI extends JFrame {
+public class MtermUI extends JFrame {
 
     private JTextArea textArea;
     private JScrollPane scrollPane;
@@ -60,7 +60,7 @@ public final class MtermUI extends JFrame {
     }
 
     private void configureGraphics() {
-        setTitle("$mterm");
+        this.setTitle('$mterm');
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(730, 505);
         setMinimumSize(new Dimension(320, 150));
