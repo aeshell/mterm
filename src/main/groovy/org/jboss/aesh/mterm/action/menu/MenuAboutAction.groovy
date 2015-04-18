@@ -10,31 +10,30 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package org.jboss.aesh.mterm.action.menu;
+package org.jboss.aesh.mterm.action.menu
 
-import java.awt.event.ActionEvent;
-
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent
+import javax.swing.ImageIcon
+import javax.swing.JOptionPane
 
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
 @SuppressWarnings("serial")
-public class MenuAboutAction extends MenuBaseAction {
+class MenuAboutAction extends MenuBaseAction {
 
-    public MenuAboutAction(String text, ImageIcon icon) {
-        super(text, icon);
-    }
+  MenuAboutAction(String text, ImageIcon icon) {
+    super(text, icon)
+  }
 
-    public void actionPerformed(ActionEvent e) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("          ");
-        sb.append("          ");
-        sb.append("\n-=-=-=-= Mterm =-=-=-=-");
-        sb.append("\n\n\nA simple java terminal emulator");
-        sb.append("          ");
-        sb.append("\n\n\n\n\nCreated by Aesh Team");
-        JOptionPane.showMessageDialog(null, sb.toString());
-    }
+  void actionPerformed(ActionEvent e) {
+    def about = '''
+
+
+    -=-=-=-= Mterm =-=-=-=-
+    A simple java terminal emulator
+
+    Created by Aesh Team'''
+    JOptionPane.showMessageDialog(null, about)
+  }
 }
