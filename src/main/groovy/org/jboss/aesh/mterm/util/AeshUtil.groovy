@@ -121,7 +121,6 @@ public enum AeshUtil {
         }
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     private void add(Class<? extends Command>... commands) throws IOException {
 
         registry = new AeshCommandRegistryBuilder().commands(commands).create();
