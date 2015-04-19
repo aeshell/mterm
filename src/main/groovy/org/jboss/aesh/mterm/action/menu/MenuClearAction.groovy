@@ -10,32 +10,35 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package org.jboss.aesh.mterm.action.menu;
+package org.jboss.aesh.mterm.action.menu
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent
 
-import javax.swing.ImageIcon;
-import javax.swing.JTextArea;
+import javax.swing.ImageIcon
+import javax.swing.JTextArea
+import javax.swing.text.BadLocationException
+
+import org.jboss.aesh.mterm.util.MtermUtil
 
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
 @SuppressWarnings("serial")
-public class MenuCopyAction extends MenuBaseAction {
+class MenuClearAction extends MenuBaseAction {
 
-    private JTextArea textArea;
+  JTextArea textArea
 
-    public MenuCopyAction(String text, ImageIcon icon, JTextArea textArea) {
-        super(text, icon);
-        this.textArea = textArea;
+  MenuClearAction(String text, ImageIcon icon, JTextArea textArea) {
+    super(text, icon)
+    this.textArea = textArea
+  }
+
+  void actionPerformed(ActionEvent e) {
+    try {
+      textArea.getDocument().remove(0, textArea.getDocument().getLength())
+      println MtermUtil.INSTANCE.getPs1()
+    } catch (BadLocationException ex) {
+      ex.printStackTrace()
     }
-
-    public void actionPerformed(ActionEvent e) {
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        StringSelection string = new StringSelection(textArea.getSelectedText());
-        clipboard.setContents(string, string);
-    }
+  }
 }

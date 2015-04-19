@@ -10,37 +10,42 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package org.jboss.aesh.mterm.action.menu;
+package org.jboss.aesh.mterm.gui
 
-import java.awt.Desktop;
-import java.awt.event.ActionEvent;
-import java.net.URI;
+import javax.swing.JMenu
+import javax.swing.JMenuBar
+import javax.swing.JMenuItem
 
-import javax.swing.ImageIcon;
+import org.jboss.aesh.mterm.action.menu.MenuBaseAction
 
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-@SuppressWarnings("serial")
-public class MenuContentsAction extends MenuBaseAction {
+class Menu {
 
-    public MenuContentsAction(String text, ImageIcon icon) {
-        super(text, icon);
-    }
+  private JMenuBar menuBar
 
-    public void actionPerformed(ActionEvent e) {
-        String url = "https://github.com/aeshell/mterm";
-        try {
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().browse(new URI(url));
-            }
-            else {
-                Runtime runtime = Runtime.getRuntime();
-                runtime.exec("firefox -new-window " + url);
-            }
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-        }
+  Menu() {
+    menuBar = new JMenuBar()
+  }
+
+  void addMenu(String... labels) {
+    for (String m : labels) {
+      JMenu jm = new JMenu(m)
+      jm.name = m
+      menuBar.add(jm)
     }
+  }
+
+  Menu addSubMenu(int index, MenuBaseAction menuAction) {
+    JMenuItem jmi = new JMenuItem(menuAction)
+    jmi.setName(menuAction.getMenuName())
+    menuBar.getMenu(index).add(jmi)
+    this
+  }
+
+  JMenuBar create() {
+    this.menuBar
+  }
+
 }
