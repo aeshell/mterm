@@ -24,6 +24,7 @@ apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'pmd'
+apply plugin: 'codenarc'
 
 group = 'org.jboss.aesh'
 version = '0.60-SNAPSHOT'
@@ -32,6 +33,8 @@ mainClassName = 'org.jboss.aesh.mterm.Mterm'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+project.codenarc.ignoreFailures = true
 
 jar {
   manifest {
