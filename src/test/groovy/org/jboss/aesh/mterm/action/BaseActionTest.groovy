@@ -33,16 +33,7 @@ public class BaseActionTest {
   public void setUp() {
     textArea = new JTextArea()
     MtermUtil.instance.createPs1('')
-    action = new BaseAction(textArea) {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-
-      }
-
-      protected void perform() {
-
-      }
-    }
+    action = new ClearAction(textArea)
   }
 
   @Test
