@@ -35,7 +35,7 @@ public class BlockAction extends AbstractAction {
     public void actionPerformed(ActionEvent ae) {
 
         JTextArea t = (JTextArea) ae.getSource();
-        if (t.getCaretPosition() > t.getText().lastIndexOf(MtermUtil.INSTANCE.getPs1()) + MtermUtil.INSTANCE.getPs1().length()) {
+        if (t.getCaretPosition() > t.getText().lastIndexOf(MtermUtil.instance.ps1) + MtermUtil.instancel.ps1.length()) {
             action.actionPerformed(null);
         }
 

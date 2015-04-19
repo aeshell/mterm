@@ -10,52 +10,38 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package org.jboss.aesh.mterm.util;
+package org.jboss.aesh.mterm.util
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.net.InetAddress
+import java.net.UnknownHostException
 
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-public enum MtermUtil {
+@Singleton
+class MtermUtil {
 
-    INSTANCE;
+  String ps1
+  String currentDirectory
 
-    private String ps1;
-    private String currentDirectory;
+  private static final String START = '['
+  private static final String AT = '@'
+  private static final String END = ']$ '
 
-    private static final String START = '[';
-    private static final String AT = '@';
-    private static final String END = ']$ ';
-
-    public String createPs1(String currentDir) {
-        ps1 = START + System.getProperty('user.name') + AT;
-        try {
-            ps1 += InetAddress.getLocalHost().getHostName().split('\\.')[0] + currentDir + END;
-        }
-        catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        return ps1;
+  String createPs1(String currentDir) {
+    ps1 = START + System.getProperty('user.name') + AT
+    try {
+      ps1 += InetAddress.getLocalHost().getHostName().split('\\.')[0] + currentDir + END
+    } catch (UnknownHostException e) {
+      e.printStackTrace()
     }
+    ps1
+  }
 
-    public String getPs1() {
-        return ps1;
+  void checkUpdatePS1(String executedCommand) {
+    if (executedCommand.contains('cd')) {
+      executedCommand = executedCommand.replaceAll('cd', '')
+      createPs1(' ' + executedCommand.trim())
     }
-
-    public String getCurrentDirectory() {
-        return currentDirectory;
-    }
-
-    public void setCurrentDirectory(String currentDirectory) {
-        this.currentDirectory = currentDirectory;
-    }
-
-    public void checkUpdatePS1(String executedCommand) {
-        if (executedCommand.contains('cd')) {
-            executedCommand = executedCommand.replaceAll('cd', '');
-            createPs1(' ' + executedCommand.trim());
-        }
-    }
+  }
 }

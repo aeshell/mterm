@@ -40,8 +40,8 @@ public class TabAction extends BaseAction {
         catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.print(aesh.getResult() + MtermUtil.INSTANCE.getPs1());
-        aesh.reset();
+        System.out.print(aesh.getResult() + MtermUtil.instance.ps1)
+        aesh.reset()
     }
 
 }

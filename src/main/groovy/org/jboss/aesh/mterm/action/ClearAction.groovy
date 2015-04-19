@@ -36,8 +36,7 @@ public class ClearAction extends BaseAction {
         catch (BadLocationException e) {
             e.printStackTrace();
         }
-        System.out.print(MtermUtil.INSTANCE.getPs1());
-
+        System.out.print(MtermUtil.instance.ps1)
     }
 
     protected void perform() {

@@ -25,7 +25,7 @@ import org.jboss.aesh.mterm.util.MtermUtil
  */
 class MtermNavigationFilter extends NavigationFilter {
 
-  private int promptStringLength = MtermUtil.INSTANCE.getPs1().length()
+  private int promptStringLength = MtermUtil.instance.ps1.length()
   private static final String EVENT_KEY = 'delete-previous'
   private JTextArea textarea
 
@@ -41,11 +41,11 @@ class MtermNavigationFilter extends NavigationFilter {
   }
 
   void setDot(NavigationFilter.FilterBypass filter, int dot, Position.Bias bias) {
-    filter.setDot(Math.max(dot, this.textarea.getText().lastIndexOf(MtermUtil.INSTANCE.getPs1()) + MtermUtil.INSTANCE.getPs1().length()), bias)
+    filter.setDot(Math.max(dot, this.textarea.getText().lastIndexOf(MtermUtil.instance.ps1) + MtermUtil.instance.ps1.length()), bias)
   }
 
   void moveDot(NavigationFilter.FilterBypass filter, int dot, Position.Bias bias) {
-    filter.moveDot(Math.max(dot, this.textarea.getText().lastIndexOf(MtermUtil.INSTANCE.getPs1()) + MtermUtil.INSTANCE.getPs1().length()), bias)
+    filter.moveDot(Math.max(dot, this.textarea.getText().lastIndexOf(MtermUtil.instance.ps1) + MtermUtil.instance.ps1.length()), bias)
   }
 
 }

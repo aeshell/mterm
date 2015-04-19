@@ -36,7 +36,7 @@ abstract class BaseAction extends AbstractAction {
 
     protected String getCommand() {
         String command = readLine();
-        int promptStringLength = MtermUtil.INSTANCE.getPs1().length(); 
+        int promptStringLength = MtermUtil.instance.ps1.length()
         if (command.length() >= promptStringLength) {
             command = command.substring(promptStringLength);
         }

@@ -36,7 +36,7 @@ class MenuClearAction extends MenuBaseAction {
   void actionPerformed(ActionEvent e) {
     try {
       textArea.getDocument().remove(0, textArea.getDocument().getLength())
-      println MtermUtil.INSTANCE.getPs1()
+      System.out.println(MtermUtil.instance.ps1)
     } catch (BadLocationException ex) {
       ex.printStackTrace()
     }
