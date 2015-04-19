@@ -10,26 +10,23 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package org.jboss.aesh.mterm.action.menu;
+package org.jboss.aesh.mterm.action.menu
 
-import java.awt.event.ActionEvent;
-
-import javax.swing.ImageIcon;
-
-import org.jboss.aesh.mterm.util.AeshUtil;
+import java.awt.event.ActionEvent
+import javax.swing.ImageIcon
+import org.jboss.aesh.mterm.util.AeshUtil
 
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-@SuppressWarnings("serial")
-public class MenuExitAction extends MenuBaseAction {
+class MenuExitAction extends MenuBaseAction {
 
-    public MenuExitAction(String text, ImageIcon icon) {
-        super(text, icon);
-    }
+  MenuExitAction(String text, ImageIcon icon) {
+    super(text, icon)
+  }
 
-    public void actionPerformed(ActionEvent e) {
-        AeshUtil.INSTANCE.stop();
-        System.exit(0);
-    }
+  void actionPerformed(ActionEvent e) {
+    AeshUtil.INSTANCE.stop()
+    System.exit(0)
+  }
 }
