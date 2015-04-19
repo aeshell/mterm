@@ -34,7 +34,7 @@ public class AeshUtilTest {
     @Before
     public void setUp() {
         textArea = new JTextArea();
-        PrintStream printStream = new PrintStream(new MtermOutputStream(textArea));
+        PrintStream printStream = new PrintStream(new MtermOutputStream(textArea, System.out));
         System.setOut(printStream);
         aesh = AeshUtil.INSTANCE;
         aesh.start(printStream);
