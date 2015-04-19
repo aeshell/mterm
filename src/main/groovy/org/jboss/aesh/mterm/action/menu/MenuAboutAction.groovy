@@ -29,7 +29,6 @@ class MenuAboutAction extends MenuBaseAction {
   void actionPerformed(ActionEvent e) {
     def about = '''
 
-
     -=-=-=-= Mterm =-=-=-=-
     A simple java terminal emulator
 
