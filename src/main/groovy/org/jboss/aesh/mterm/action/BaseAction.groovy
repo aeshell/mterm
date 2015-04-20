@@ -33,11 +33,11 @@ abstract class BaseAction extends AbstractAction {
 
   protected abstract void perform()
 
-  protected String getCommand() {
+  protected String extractCommand() {
     String command = readLine()
     int promptStringLength = MtermUtil.instance.ps1.length()
     if (command.length() >= promptStringLength) {
-      command = command[promptStringLength..-1]
+      command = command.substring(promptStringLength)
     }
     command.trim()
   }

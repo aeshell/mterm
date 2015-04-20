@@ -47,14 +47,14 @@ public class BaseActionTest {
   @Test
   public void testGetCommand() {
     textArea.setText('clear')
-    Assert.assertEquals('clear', action.getCommand())
+    Assert.assertEquals('clear', action.extractCommand())
     textArea.setText('ls -l ')
-    Assert.assertEquals('ls -l', action.getCommand())
+    Assert.assertEquals('ls -l', action.extractCommand())
     textArea.setText(' ls -l ')
-    Assert.assertEquals('ls -l', action.getCommand())
+    Assert.assertEquals('ls -l', action.extractCommand())
     textArea.setText(' ls -l')
-    Assert.assertEquals('ls -l', action.getCommand())
+    Assert.assertEquals('ls -l', action.extractCommand())
     textArea.setText(' ls     -l')
-    Assert.assertEquals('ls     -l', action.getCommand())
+    Assert.assertEquals('ls     -l', action.extractCommand())
   }
 }

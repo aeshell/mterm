@@ -3,76 +3,71 @@
  * other contributors as indicated by the @authors tag. All rights reserved. See the copyright.txt
  * in the distribution for a full listing of individual contributors.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * Licensed under the Apache License, Version 2.0 (the 'License') you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in
- * writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * writing, software distributed under the License is distributed on an 'AS IS' BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package org.jboss.aesh.mterm.action;
+package org.jboss.aesh.mterm.action
 
-import java.awt.event.ActionEvent;
+import java.awt.event.ActionEvent
 
-import javax.swing.JTextArea;
-import javax.swing.text.BadLocationException;
+import javax.swing.JTextArea
+import javax.swing.text.BadLocationException
 
-import org.jboss.aesh.mterm.util.AeshUtil;
-import org.jboss.aesh.mterm.util.MtermUtil;
+import org.jboss.aesh.mterm.util.AeshUtil
+import org.jboss.aesh.mterm.util.MtermUtil
 
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-@SuppressWarnings("serial")
-public class RunAction extends BaseAction {
+class RunAction extends BaseAction {
 
-    public RunAction(JTextArea textArea) {
-        super(textArea);
-    }
+  RunAction(JTextArea textArea) {
+    super(textArea)
+  }
 
-    public void actionPerformed(ActionEvent ae) {
-        try {
-            String command = getCommand();
-            if (!command.contains("clear")) {
-                if (!command.isEmpty()) {
-                    aesh.run(command);
-                    if (!aesh.isRunning()) {
-                    	System.exit(0);
-                    }
-                }
-            }
-            else {
-                clear();
-            }
-
-            if (!command.isEmpty()) {
-                String result = aesh.getResult();
-                MtermUtil.instance.checkUpdatePS1(AeshUtil.INSTANCE.getExecutedCommand());
-                System.out.print(result + MtermUtil.instance.ps1);
-            }
-            else {
-                System.out.print("\n" + MtermUtil.instance.ps1);
-            }
-            aesh.reset();
-
+  @Override
+  void actionPerformed(ActionEvent ae) {
+    try {
+      String command = extractCommand()
+      if (command.contains('clear')) {
+        clear()
+      } else {
+        if (command) {
+          aesh.run(command)
+          if (!aesh.isRunning()) {
+            System.exit(0)
+          }
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+      }
 
+      if (command.isEmpty()) {
+        System.out.print('\n' + MtermUtil.instance.ps1)
+      } else {
+        String result = aesh.getResult()
+        MtermUtil.instance.checkUpdatePS1(AeshUtil.INSTANCE.getExecutedCommand())
+        System.out.print(result + MtermUtil.instance.ps1)
+      }
+      aesh.reset()
+    } catch (e) {
+      e.printStackTrace()
     }
+  }
 
-    private void clear() {
-        try {
-            textArea.getDocument().remove(0, textArea.getDocument().getLength());
-        }
-        catch (BadLocationException e) {
-            e.printStackTrace();
-        }
+  private void clear() {
+    try {
+      textArea.document.remove(0, textArea.document.length)
+    } catch (BadLocationException e) {
+      e.printStackTrace()
     }
+  }
 
-    protected void perform() {
+  @Override
+  protected void perform() {
 
-    }
+  }
 
 }

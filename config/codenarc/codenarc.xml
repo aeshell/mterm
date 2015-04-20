@@ -51,6 +51,7 @@
   </ruleset-ref>
   <ruleset-ref path="rulesets/security.xml">
     <exclude name="JavaIoPackageAccess"/>
+    <exclude name="SystemExit"/>
   </ruleset-ref>
   <ruleset-ref path="rulesets/serialization.xml">
     <exclude name="SerializableClassMustDefineSerialVersionUID"/>
