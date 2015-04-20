@@ -19,13 +19,13 @@ import javax.swing.JOptionPane
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-@SuppressWarnings("serial")
 class MenuAboutAction extends MenuBaseAction {
 
   MenuAboutAction(String text, ImageIcon icon) {
     super(text, icon)
   }
 
+  @Override
   void actionPerformed(ActionEvent e) {
     def about = '''
 

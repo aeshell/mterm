@@ -20,7 +20,6 @@ import javax.swing.ImageIcon
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-@SuppressWarnings("serial")
 class MenuBaseAction extends AbstractAction {
 
   String menuName

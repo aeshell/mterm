@@ -25,6 +25,7 @@ class MenuExitAction extends MenuBaseAction {
     super(text, icon)
   }
 
+  @Override
   void actionPerformed(ActionEvent e) {
     AeshUtil.INSTANCE.stop()
     System.exit(0)
