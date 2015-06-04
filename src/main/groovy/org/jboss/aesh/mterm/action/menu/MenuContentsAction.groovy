@@ -27,6 +27,7 @@ class MenuContentsAction extends MenuBaseAction {
     super(text, icon)
   }
 
+  @Override
   void actionPerformed(ActionEvent ae) {
     String url = 'https://github.com/aeshell/mterm'
     try {

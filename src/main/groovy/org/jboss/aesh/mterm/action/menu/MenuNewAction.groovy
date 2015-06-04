@@ -29,6 +29,7 @@ class MenuNewAction extends MenuBaseAction {
     super(text, icon)
   }
 
+  @Override
   void actionPerformed(ActionEvent e) {
     SwingUtilities.invokeLater(new Runnable() {
       @Override

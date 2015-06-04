@@ -32,6 +32,7 @@ class MenuTitleAction extends MenuBaseAction {
     this.mtermUI = mterrUi
   }
 
+  @Override
   void actionPerformed(ActionEvent e) {
     String newTitle =
       (String) JOptionPane.showInputDialog(null, 'Title:', 'Set Title',

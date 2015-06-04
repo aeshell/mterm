@@ -33,6 +33,7 @@ class MenuClearAction extends MenuBaseAction {
     this.textArea = textArea
   }
 
+  @Override
   void actionPerformed(ActionEvent e) {
     try {
       textArea.getDocument().remove(0, textArea.getDocument().getLength())

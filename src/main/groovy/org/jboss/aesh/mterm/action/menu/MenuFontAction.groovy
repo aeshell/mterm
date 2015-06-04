@@ -32,6 +32,7 @@ class MenuFontAction extends MenuBaseAction {
     this.textArea = textArea
   }
 
+  @Override
   void actionPerformed(ActionEvent e) {
 
     String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()
