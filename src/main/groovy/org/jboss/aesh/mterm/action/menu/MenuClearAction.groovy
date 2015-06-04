@@ -23,7 +23,7 @@ import org.jboss.aesh.mterm.util.MtermUtil
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-@SuppressWarnings("serial")
+@SuppressWarnings('serial')
 class MenuClearAction extends MenuBaseAction {
 
   JTextArea textArea
