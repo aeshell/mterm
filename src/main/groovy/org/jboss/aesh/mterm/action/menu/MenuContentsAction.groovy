@@ -14,7 +14,6 @@ package org.jboss.aesh.mterm.action.menu
 
 import java.awt.Desktop
 import java.awt.event.ActionEvent
-import java.net.URI
 
 import javax.swing.ImageIcon
 
