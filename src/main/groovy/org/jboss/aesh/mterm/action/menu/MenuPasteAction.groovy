@@ -35,6 +35,7 @@ class MenuPasteAction extends MenuBaseAction {
     this.textArea = textArea
   }
 
+  @Override
   void actionPerformed(ActionEvent e) {
     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard()
     Transferable transferable = clipboard.getContents(null)

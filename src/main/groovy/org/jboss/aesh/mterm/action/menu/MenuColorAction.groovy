@@ -36,6 +36,7 @@ class MenuColorAction extends MenuBaseAction {
     this.textArea = textArea
   }
 
+  @Override
   void actionPerformed(ActionEvent e) {
 
     String[] colors = [ '<html><font color=default>DEFAULT</font></html>',
