@@ -37,7 +37,7 @@ class TabAction extends BaseAction {
     } catch (IOException e) {
       e.printStackTrace()
     }
-    System.out.print(aesh.getResult() + MtermUtil.instance.ps1)
+    print(aesh.parseResult + MtermUtil.instance.ps1)
     aesh.reset()
   }
 

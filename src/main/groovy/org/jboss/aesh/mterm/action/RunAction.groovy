@@ -47,9 +47,9 @@ class RunAction extends BaseAction {
       if (command.isEmpty()) {
         System.out.print('\n' + MtermUtil.instance.ps1)
       } else {
-        String result = aesh.getResult()
+        String result = aesh.parseResult()
         MtermUtil.instance.checkUpdatePS1(AeshUtil.INSTANCE.getExecutedCommand())
-        System.out.print(result + MtermUtil.instance.ps1)
+        print(result + MtermUtil.instance.ps1)
       }
       aesh.reset()
     } catch (e) {

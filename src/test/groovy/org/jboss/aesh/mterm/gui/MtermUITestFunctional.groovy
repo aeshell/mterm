@@ -10,156 +10,146 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package org.jboss.aesh.mterm.gui;
+package org.jboss.aesh.mterm.gui
 
-import javax.swing.JFrame;
+import javax.swing.JFrame
 
-import org.fest.swing.edt.FailOnThreadViolationRepaintManager;
-import org.fest.swing.edt.GuiActionRunner;
-import org.fest.swing.edt.GuiQuery;
-import org.fest.swing.fixture.FrameFixture;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.fest.swing.edt.FailOnThreadViolationRepaintManager
+import org.fest.swing.edt.GuiActionRunner
+import org.fest.swing.edt.GuiQuery
+import org.fest.swing.fixture.FrameFixture
+import org.junit.After
+import org.junit.Before
+import org.junit.BeforeClass
+import org.junit.Test
 
 /**
  * The MtermUITest class.
  *
  * @author <a href="mailto:00hf11@gmail.com">Helio Frota</a>
  */
-public class MtermUITestFunctional {
+class MtermUITestFunctional {
 
-    FrameFixture frame;
+  FrameFixture frame
 
-    @BeforeClass
-    public static void setUpOnce() {
-        FailOnThreadViolationRepaintManager.install();
-    }
+  @BeforeClass
+  static void setUpOnce() {
+    FailOnThreadViolationRepaintManager.install()
+  }
 
-    @After
-    public void tearDown() {
-        frame.cleanUp();
-    }
+  @After
+  void tearDown() {
+    frame.cleanUp()
+  }
 
-    @Before
-    public void setUp() {
+  @Before
+  void setUp() {
+    JFrame.setDefaultLookAndFeelDecorated(true)
+    MtermUI mtermUI = GuiActionRunner.execute(new GuiQuery<MtermUI>() {
+          protected MtermUI executeInEDT() {
+            return new MtermUI()
+          }
+        })
+    frame = new FrameFixture(mtermUI)
+    frame.show()
+  }
 
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        MtermUI mtermUI = GuiActionRunner.execute(new GuiQuery<MtermUI>() {
-            protected MtermUI executeInEDT() {
-                return new MtermUI();
-            }
-        });
-        frame = new FrameFixture(mtermUI);
-        frame.show();
-    }
+  @Test
+  void menuFileClick() {
+    sleep(500)
+    frame.menuItem('File').click()
+    sleep(500)
+  }
 
-    @Test
-    public void menuFileClick() {
-        pause();
-        frame.menuItem("File").click();
-        pause();
-    }
+  @Test
+  void menuEditClick() {
+    sleep(500)
+    frame.menuItem('Edit').click()
+    sleep(500)
+  }
 
-    @Test
-    public void menuEditClick() {
-        pause();
-        frame.menuItem("Edit").click();
-        pause();
-    }
+  @Test
+  void menuViewClick() {
+    sleep(500)
+    frame.menuItem('View').click()
+    sleep(500)
+  }
 
-    @Test
-    public void menuViewClick() {
-        pause();
-        frame.menuItem("View").click();
-        pause();
-    }
+  @Test
+  void menuTerminalClick() {
+    sleep(500)
+    frame.menuItem('Terminal').click()
+    sleep(500)
+  }
 
-    @Test
-    public void menuTerminalClick() {
-        pause();
-        frame.menuItem("Terminal").click();
-        pause();
-    }
+  @Test
+  void menuHelpClick() {
+    sleep(500)
+    frame.menuItem('Help').click()
+    sleep(500)
+  }
 
-    @Test
-    public void menuHelpClick() {
-        pause();
-        frame.menuItem("Help").click();
-        pause();
-    }
+  @Test
+  void subMenuNewClick() {
+    sleep(500)
+    frame.menuItem('New').click()
+    sleep(500)
+  }
 
-    @Test
-    public void subMenuNewClick() {
-        pause();
-        frame.menuItem("New").click();
-        pause();
-    }
+  @Test
+  void subMenuCopyClick() {
+    sleep(500)
+    frame.menuItem('Copy').click()
+    sleep(500)
+  }
 
-    @Test
-    public void subMenuCopyClick() {
-        pause();
-        frame.menuItem("Copy").click();
-        pause();
-    }
+  @Test
+  void subMenuPasteClick() {
+    sleep(500)
+    frame.menuItem('Paste').click()
+    sleep(500)
+  }
 
-    @Test
-    public void subMenuPasteClick() {
-        pause();
-        frame.menuItem("Paste").click();
-        pause();
-    }
+  @Test
+  void subMenuFontClick() {
+    sleep(500)
+    frame.menuItem('Font').click()
+    sleep(500)
+  }
 
-    @Test
-    public void subMenuFontClick() {
-        pause();
-        frame.menuItem("Font").click();
-        pause();
-    }
+  @Test
+  void subMenuColorClick() {
+    sleep(500)
+    frame.menuItem('Color').click()
+    sleep(500)
+  }
 
-    @Test
-    public void subMenuColorClick() {
-        pause();
-        frame.menuItem("Color").click();
-        pause();
-    }
+  @Test
+  void subMenuFullScreenClick() {
+    sleep(500)
+    frame.menuItem('Full Screen').click()
+    sleep(500)
+  }
 
-    @Test
-    public void subMenuFullScreenClick() {
-        pause();
-        frame.menuItem("Full Screen").click();
-        pause();
-    }
+  @Test
+  void subMenuClearClick() {
+    sleep(500)
+    frame.menuItem('Clear').click()
+    sleep(500)
+  }
 
-    @Test
-    public void subMenuClearClick() {
-        pause();
-        frame.menuItem("Clear").click();
-        pause();
-    }
+  @Test
+  void subMenuSetTitleClick() {
+    sleep(500)
+    frame.menuItem('Set Title').click()
+    sleep(500)
+  }
 
-    @Test
-    public void subMenuSetTitleClick() {
-        pause();
-        frame.menuItem("Set Title").click();
-        pause();
-    }
-    
-    @Test
-    public void subMenuAboutClick() {
-        pause();
-        frame.menuItem("About").click();
-        pause();
-    }
-
-    private void pause() {
-        try {
-            Thread.sleep(500);
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+  @Test
+  void subMenuAboutClick() {
+    sleep(500)
+    frame.menuItem('About').click()
+    sleep(500)
+  }
 
 }

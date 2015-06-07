@@ -27,10 +27,10 @@ class MenuAboutAction extends MenuBaseAction {
 
   @Override
   void actionPerformed(ActionEvent e) {
-    def about = '''
+    String about = '''
 
-    -=-=-=-= Mterm =-=-=-=-
-    A simple java terminal emulator
+    Mterm
+    A simple terminal emulator
 
     Created by Aesh Team'''
     JOptionPane.showMessageDialog(null, about)

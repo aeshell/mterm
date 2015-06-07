@@ -35,7 +35,7 @@ class ClearAction extends BaseAction {
     } catch (BadLocationException e) {
       e.printStackTrace()
     }
-    System.out.print(MtermUtil.instance.ps1)
+    print(MtermUtil.instance.ps1)
   }
 
   @Override

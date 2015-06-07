@@ -33,12 +33,12 @@ class MenuFullScreenAction extends MenuBaseAction {
 
   @Override
   void actionPerformed(ActionEvent e) {
-    if (!mterrUi.isFullScreen()) {
+    if (!mterrUi.fullScreen) {
       mterrUi.setExtendedState(Frame.MAXIMIZED_BOTH)
-      mterrUi.setFullScreen(true)
+      mterrUi.fullScreen = true
     } else {
       mterrUi.setExtendedState(Frame.NORMAL)
-      mterrUi.setFullScreen(false)
+      mterrUi.fullScreen = false
     }
   }
 }

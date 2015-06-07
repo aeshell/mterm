@@ -18,7 +18,6 @@ import java.awt.Font
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
-import java.io.PrintStream
 
 import javax.swing.ImageIcon
 import javax.swing.JFrame
@@ -45,14 +44,14 @@ import org.jboss.aesh.mterm.util.MtermUtil
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-public class MtermUI extends JFrame {
+class MtermUI extends JFrame {
 
   private JTextArea textArea
   private JScrollPane scrollPane
-  private boolean fullScreen
-  private static final String ICON_PATH = "/org/jboss/aesh/mterm/gui/icons/"
+  boolean fullScreen
+  private static final String ICON_PATH = '/org/jboss/aesh/mterm/gui/icons/'
 
-  public MtermUI() {
+  MtermUI() {
     configureGraphics()
     configureStreams()
     configureEvents()
@@ -63,7 +62,7 @@ public class MtermUI extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
     setSize(730, 505)
     setMinimumSize(new Dimension(320, 150))
-    setIconImage(new ImageIcon(getClass().getResource(ICON_PATH + "icon.png")).getImage())
+    setIconImage(new ImageIcon(getClass().getResource(ICON_PATH + 'icon.png')).getImage())
     configureTextArea()
     setJMenuBar(createMenuBar())
     scrollPane = new JScrollPane(textArea)
@@ -93,7 +92,7 @@ public class MtermUI extends JFrame {
   private void configureTextArea() {
     MtermUtil.instance.createPs1("")
     textArea = new JTextArea(MtermUtil.instance.ps1, 21, 80)
-    textArea.setFont(new Font("Monospaced", Font.PLAIN, 15))
+    textArea.setFont(new Font('Monospaced', Font.PLAIN, 15))
     textArea.setLineWrap(true)
     textArea.setWrapStyleWord(true)
     textArea.setBackground(new Color(0, 43, 54))
@@ -104,18 +103,18 @@ public class MtermUI extends JFrame {
 
   private JMenuBar createMenuBar() {
     Menu m = new Menu()
-    m.addMenu("File","Edit","View","Terminal","Help")
-    m.addSubMenu(0, new MenuNewAction("New", addIcon("new.png")))
-    m.addSubMenu(0, new MenuExitAction("Exit", addIcon("exit.png")))
-    m.addSubMenu(1, new MenuCopyAction("Copy", addIcon("copy.png"), textArea))
-    m.addSubMenu(1, new MenuPasteAction("Paste", addIcon("paste.png"), textArea))
-    m.addSubMenu(1, new MenuFontAction("Font", addIcon("font-chooser.png"), textArea))
-    m.addSubMenu(1, new MenuColorAction("Color", addIcon("bg-fg-chooser.png"), textArea))
-    m.addSubMenu(2, new MenuFullScreenAction("Full Screen", addIcon("full_screen.png"), this))
-    m.addSubMenu(3, new MenuClearAction("Clear", addIcon("clear.png"), textArea))
-    m.addSubMenu(3, new MenuTitleAction("Set Title", addIcon("set-title.png"), this))
-    m.addSubMenu(4, new MenuContentsAction("Contents", addIcon("content.png")))
-    m.addSubMenu(4, new MenuAboutAction("About", addIcon("about.png")))
+    m.addMenu('File','Edit','View','Terminal','Help')
+    m.addSubMenu(0, new MenuNewAction('New', addIcon('new.png')))
+    m.addSubMenu(0, new MenuExitAction('Exit', addIcon('exit.png')))
+    m.addSubMenu(1, new MenuCopyAction('Copy', addIcon('copy.png'), textArea))
+    m.addSubMenu(1, new MenuPasteAction('Paste', addIcon('paste.png'), textArea))
+    m.addSubMenu(1, new MenuFontAction('Font', addIcon('font-chooser.png'), textArea))
+    m.addSubMenu(1, new MenuColorAction('Color', addIcon('bg-fg-chooser.png'), textArea))
+    m.addSubMenu(2, new MenuFullScreenAction('Full Screen', addIcon('full_screen.png'), this))
+    m.addSubMenu(3, new MenuClearAction('Clear', addIcon('clear.png'), textArea))
+    m.addSubMenu(3, new MenuTitleAction('Set Title', addIcon('set-title.png'), this))
+    m.addSubMenu(4, new MenuContentsAction('Contents', addIcon('content.png')))
+    m.addSubMenu(4, new MenuAboutAction('About', addIcon('about.png')))
     m.create()
   }
 
@@ -136,14 +135,6 @@ public class MtermUI extends JFrame {
 
   JTextArea getTextArea() {
     textArea
-  }
-
-  boolean isFullScreen() {
-    fullScreen
-  }
-
-  void setFullScreen(boolean fullScreen) {
-    this.fullScreen = fullScreen
   }
 
 }

@@ -82,11 +82,11 @@ enum AeshUtil {
    *
    * @return String
    */
-  String getResult() {
+  String parseResult() {
     String result = Parser.stripAwayAnsiCodes(getStream().toString())
     executedCommand = result.split('\n')[0]
     result = result.replaceAll(executedCommand, '')
-    return result
+    result
   }
 
   /**
