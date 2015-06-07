@@ -45,7 +45,6 @@ import org.jboss.aesh.mterm.util.MtermUtil
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-@SuppressWarnings("serial")
 public class MtermUI extends JFrame {
 
   private JTextArea textArea

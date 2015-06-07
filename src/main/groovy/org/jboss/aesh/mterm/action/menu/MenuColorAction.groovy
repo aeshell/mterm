@@ -23,7 +23,6 @@ import javax.swing.JTextArea
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-@SuppressWarnings('serial')
 class MenuColorAction extends MenuBaseAction {
 
   JTextArea textArea

@@ -43,7 +43,7 @@ abstract class BaseAction extends AbstractAction {
   }
 
   protected String readLine() {
-    def line = null
+    String line = null
     try {
       int lineOffset = textArea.getLineOfOffset(textArea.caretPosition)
       int lineStart = textArea.getLineStartOffset(lineOffset)

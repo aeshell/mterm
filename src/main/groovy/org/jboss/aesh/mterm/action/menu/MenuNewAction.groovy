@@ -22,7 +22,6 @@ import org.jboss.aesh.mterm.gui.MtermUI
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-@SuppressWarnings('serial')
 class MenuNewAction extends MenuBaseAction {
 
   MenuNewAction(String text, ImageIcon icon) {

@@ -36,142 +36,138 @@ import org.jboss.aesh.parser.Parser
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-public enum AeshUtil {
+enum AeshUtil {
 
-    INSTANCE
+  INSTANCE
 
-    private PipedOutputStream pos
-    private PipedInputStream pis
-    private ByteArrayOutputStream stream
-    private Settings settings
-    private AeshConsole aeshConsole
-    private CommandRegistry registry
-    private String executedCommand
+  private PipedOutputStream pos
+  private PipedInputStream pis
+  private ByteArrayOutputStream stream
+  private Settings settings
+  private AeshConsole aeshConsole
+  private CommandRegistry registry
+  private String executedCommand
 
-    @SuppressWarnings("unchecked")
-    void start(PrintStream ps) {
-        pos = new PipedOutputStream()
-        try {
-            pis = new PipedInputStream(pos)
-        }
-        catch (IOException e) {
-            e.printStackTrace()
-        }
-        stream = new ByteArrayOutputStream()
-
-        settings =
-            new SettingsBuilder().inputStream(pis)
-                .outputStreamError(new PrintStream(stream))
-                .outputStream(new PrintStream(stream)).create()
-
-        try {
-            add(Cd.class, Ls.class, Mkdir.class, Pwd.class, Rm.class, Mv.class, Touch.class, Cat.class,
-                Clear.class, Echo.class, Exit.class)
-        }
-        catch (IOException e) {
-            e.printStackTrace()
-        }
+  void start(PrintStream ps) {
+    pos = new PipedOutputStream()
+    try {
+      pis = new PipedInputStream(pos)
     }
-
-    /**
-     * Resets the stream.
-     */
-    void reset() {
-        getStream().reset()
+    catch (IOException e) {
+      e.printStackTrace()
     }
+    stream = new ByteArrayOutputStream()
 
-    /**
-     * Gets the result of the command.
-     *
-     * @return String
-     */
-    String getResult() {
-        String result = Parser.stripAwayAnsiCodes(getStream().toString())
-        executedCommand = result.split('\n')[0]
-        result = result.replaceAll(executedCommand, '')
-        return result
+    settings =
+        new SettingsBuilder().inputStream(pis)
+        .outputStreamError(new PrintStream(stream))
+        .outputStream(new PrintStream(stream)).create()
+
+    try {
+      add(Cd, Ls, Mkdir, Pwd, Rm, Mv, Touch, Cat, Clear, Echo, Exit)
+    } catch (IOException e) {
+      e.printStackTrace()
     }
+  }
 
-    /**
-     * Runs the desired command.
-     *
-     * @param command String
-     * @throws IOException exception
-     */
-    void run(String command) throws IOException {
-        getPos().write(command.getBytes())
-        getPos().write(Config.getLineSeparator().getBytes())
-        getPos().flush()
-        pause()
+  /**
+   * Resets the stream.
+   */
+  void reset() {
+    getStream().reset()
+  }
+
+  /**
+   * Gets the result of the command.
+   *
+   * @return String
+   */
+  String getResult() {
+    String result = Parser.stripAwayAnsiCodes(getStream().toString())
+    executedCommand = result.split('\n')[0]
+    result = result.replaceAll(executedCommand, '')
+    return result
+  }
+
+  /**
+   * Runs the desired command.
+   *
+   * @param command String
+   * @throws IOException exception
+   */
+  void run(String command) throws IOException {
+    getPos().write(command.getBytes())
+    getPos().write(Config.getLineSeparator().getBytes())
+    getPos().flush()
+    pause()
+  }
+
+  private void pause() {
+    try {
+      Thread.sleep(100)
     }
-
-    private void pause() {
-        try {
-            Thread.sleep(100);
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace()
-        }
+    catch (InterruptedException e) {
+      e.printStackTrace()
     }
+  }
 
-    private void add(Class<? extends Command>... commands) throws IOException {
+  private void add(Class<? extends Command>... commands) throws IOException {
 
-        registry = new AeshCommandRegistryBuilder().commands(commands).create()
+    registry = new AeshCommandRegistryBuilder().commands(commands).create()
 
-        AeshConsoleBuilder consoleBuilder =
-            new AeshConsoleBuilder().settings(settings).commandRegistry(registry)
+    AeshConsoleBuilder consoleBuilder =
+        new AeshConsoleBuilder().settings(settings).commandRegistry(registry)
 
-        aeshConsole = consoleBuilder.create()
-        aeshConsole.start()
-        getStream().flush()
-    }
+    aeshConsole = consoleBuilder.create()
+    aeshConsole.start()
+    getStream().flush()
+  }
 
-    private PipedOutputStream getPos() {
-        return pos
-    }
+  private PipedOutputStream getPos() {
+    return pos
+  }
 
-    private ByteArrayOutputStream getStream() {
-        return stream
-    }
+  private ByteArrayOutputStream getStream() {
+    return stream
+  }
 
-    /**
-     * Gets all registered commands.
-     *
-     * @return Set<String>
-     */
-    public Set<String> getRegisteredCommands() {
-        return registry.getAllCommandNames()
-    }
+  /**
+   * Gets all registered commands.
+   *
+   * @return Set<String>
+   */
+  public Set<String> getRegisteredCommands() {
+    return registry.getAllCommandNames()
+  }
 
-    /**
-     * Gets the current working directory.
-     *
-     * @return String
-     */
-    public String getCurrentDirectory() {
-        return aeshConsole.getAeshContext().getCurrentWorkingDirectory().getName()
-    }
+  /**
+   * Gets the current working directory.
+   *
+   * @return String
+   */
+  public String getCurrentDirectory() {
+    return aeshConsole.getAeshContext().getCurrentWorkingDirectory().getName()
+  }
 
-    /**
-     * Checks if aesh is running.
-     * @return
-     */
-    public boolean isRunning() {
-        return aeshConsole.isRunning()
-    }
+  /**
+   * Checks if aesh is running.
+   * @return
+   */
+  public boolean isRunning() {
+    return aeshConsole.isRunning()
+  }
 
-    /**
-     * Stops the aesh console.
-     */
-    public void stop() {
-        aeshConsole.stop()
-    }
+  /**
+   * Stops the aesh console.
+   */
+  public void stop() {
+    aeshConsole.stop()
+  }
 
-    /**
-     * Gets the last executed command.
-     */
-    public String getExecutedCommand() {
-        return executedCommand
-    }
-
+  /**
+   * Gets the last executed command.
+   */
+  public String getExecutedCommand() {
+    return executedCommand
+  }
 }

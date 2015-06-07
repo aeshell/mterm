@@ -22,7 +22,6 @@ import org.jboss.aesh.mterm.gui.MtermUI
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
-@SuppressWarnings('serial')
 class MenuTitleAction extends MenuBaseAction {
 
   private MtermUI mtermUI

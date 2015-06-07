@@ -10,28 +10,27 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
  * language governing permissions and limitations under the License.
  */
-package org.jboss.aesh.mterm.util;
+package org.jboss.aesh.mterm.util
 
-import java.io.*;
-import javax.swing.*;
+import javax.swing.JTextArea
 
 /**
  * @author Helio Frota  00hf11 at gmail.com
  */
 public class MtermOutputStream extends PrintStream {
 
-    private JTextArea textArea;
+  private JTextArea textArea
 
-    public MtermOutputStream(JTextArea textarea, OutputStream os) {
-        super(os);
-        textArea = textarea;
-    }
+  public MtermOutputStream(JTextArea textarea, OutputStream os) {
+    super(os)
+    textArea = textarea
+  }
 
-    public void println(String content) {
-        textArea.append(content + "\n");
-    }
+  public void println(String content) {
+    textArea.append(content + "\n")
+  }
 
-    public void print(String content) {
-        textArea.append(content);
-    }
+  public void print(String content) {
+    textArea.append(content)
+  }
 }
