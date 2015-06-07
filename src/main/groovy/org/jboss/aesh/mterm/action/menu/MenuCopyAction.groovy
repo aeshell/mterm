@@ -32,6 +32,7 @@ class MenuCopyAction extends MenuBaseAction {
     this.textArea = textArea
   }
 
+  @Override
   void actionPerformed(ActionEvent e) {
     Clipboard clipboard = Toolkit.defaultToolkit.systemClipboard
     StringSelection string = new StringSelection(textArea.getSelectedText())
