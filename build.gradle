@@ -25,7 +25,7 @@ apply plugin: 'application'
 apply plugin: 'codenarc'
 
 group = 'org.jboss.aesh'
-version = '0.61-SNAPSHOT'
+version = '0.61'
 
 mainClassName = 'org.jboss.aesh.mterm.Mterm'
 
@@ -52,11 +52,7 @@ test {
 dependencies {
   compile group: 'org.jboss.aesh', name: 'aesh', version: version
   compile group: 'org.jboss.aesh', name: 'aesh-extensions', version: version
-  compile 'org.codehaus.groovy:groovy-all:2.4.3'
+  compile 'org.codehaus.groovy:groovy:2.4.3'
   testCompile group: 'junit', name: 'junit', version: '4.+'
   testCompile group: 'org.easytesting', name: 'fest-swing', version: '1.2.1'
-}
-
-task wrapper(type: Wrapper) {
-  gradleVersion = '2.4'
 }
