@@ -7,6 +7,9 @@ A simple java terminal emulator running on top of [aesh](https://github.com/aesh
 ![Alt mterm](https://raw.githubusercontent.com/aeshell/mterm/master/mterm.png)
 
 
+![Alt mterm_kde](https://raw.githubusercontent.com/aeshell/mterm/master/mterm_kde.png)
+
+
 Download:
 ---------
 
