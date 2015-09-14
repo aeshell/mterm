@@ -35,7 +35,7 @@ class MenuFontAction extends MenuBaseAction {
   @Override
   void actionPerformed(ActionEvent e) {
 
-    String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()
+    String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().availableFontFamilyNames
     String selectedFont = (String) JOptionPane.showInputDialog(null,
         'Font:',
         'Set Font',
@@ -45,8 +45,8 @@ class MenuFontAction extends MenuBaseAction {
         fonts[getCurrentFontIndex(fonts)])
 
     if (selectedFont) {
-      Font currentFont = textArea.getFont()
-      textArea.setFont(new Font(selectedFont, currentFont.getStyle(), currentFont.getSize()))
+      Font currentFont = textArea.font
+      textArea.setFont(new Font(selectedFont, currentFont.style, currentFont.size))
     }
 
   }
@@ -54,7 +54,7 @@ class MenuFontAction extends MenuBaseAction {
   private int getCurrentFontIndex(String[] fonts) {
     int result = 0
     for (int i = 0; i < fonts.length; i++) {
-      if (fonts[i].equals(textArea.getFont().getName())) {
+      if (fonts[i] == textArea.font.name) {
         result = i
       }
     }

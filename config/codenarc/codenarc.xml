@@ -56,10 +56,6 @@
   <ruleset-ref path="rulesets/serialization.xml">
     <exclude name="SerializableClassMustDefineSerialVersionUID"/>
   </ruleset-ref>
-  <!--<ruleset-ref path="rulesets/size.xml"/>-->
-  <ruleset-ref path="rulesets/unnecessary.xml">
-    <exclude name="UnnecessaryPackageReference"/>
-  </ruleset-ref>
   <ruleset-ref path="rulesets/unused.xml"/>
 
 </ruleset>

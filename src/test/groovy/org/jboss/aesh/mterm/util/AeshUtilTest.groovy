@@ -66,9 +66,9 @@ class AeshUtilTest {
   @Test
   void testGetResult() throws IOException {
     aesh.run('echo abc')
-    Assert.assertEquals('\nabc\n', aesh.parseResult)
+    Assert.assertEquals('\nabc\n', aesh.parseResult())
     aesh.run('\t') // same as TabAction
-    Assert.assertTrue(aesh.parseResult.contains('echo'))
+    Assert.assertTrue(aesh.parseResult().contains('echo'))
   }
 
   @After
