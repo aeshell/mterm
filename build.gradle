@@ -22,17 +22,14 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 apply plugin: 'groovy'
 apply plugin: 'application'
-apply plugin: 'codenarc'
 
 group = 'org.jboss.aesh'
-version = '0.64'
+version = '0.66'
 
 mainClassName = 'org.jboss.aesh.mterm.Mterm'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-project.codenarc.ignoreFailures = true
 
 jar {
   manifest {
@@ -42,7 +39,6 @@ jar {
 
 repositories {
   mavenCentral()
-  mavenLocal()
 }
 
 test {
