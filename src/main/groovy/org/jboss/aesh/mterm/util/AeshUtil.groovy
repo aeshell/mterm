@@ -31,7 +31,6 @@ import org.jboss.aesh.extensions.pwd.Pwd
 import org.jboss.aesh.extensions.rm.Rm
 import org.jboss.aesh.extensions.mv.Mv
 import org.jboss.aesh.extensions.touch.Touch
-import org.jboss.aesh.parser.Parser
 
 /**
  * @author Helio Frota  00hf11 at gmail.com
@@ -74,7 +73,7 @@ enum AeshUtil {
    * Resets the stream.
    */
   void reset() {
-    getStream().reset()
+    stream.reset()
   }
 
   /**
@@ -83,10 +82,9 @@ enum AeshUtil {
    * @return String
    */
   String parseResult() {
-    String result = Parser.stripAwayAnsiCodes(getStream().toString())
-    executedCommand = result.split('\n')[0]
-    result = result.replaceAll(executedCommand, '')
-    result
+    String result = stream.toString()
+    executedCommand = result.split('(\\r)?(\\n)')[0]
+    result.replaceAll(executedCommand, '')
   }
 
   /**
@@ -96,9 +94,9 @@ enum AeshUtil {
    * @throws IOException exception
    */
   void run(String command) throws IOException {
-    getPos().write(command.getBytes())
-    getPos().write(Config.getLineSeparator().getBytes())
-    getPos().flush()
+    pos.write(command.getBytes())
+    pos.write(Config.getLineSeparator().getBytes())
+    pos.flush()
     pause()
   }
 
@@ -120,15 +118,7 @@ enum AeshUtil {
 
     aeshConsole = consoleBuilder.create()
     aeshConsole.start()
-    getStream().flush()
-  }
-
-  private PipedOutputStream getPos() {
-    return pos
-  }
-
-  private ByteArrayOutputStream getStream() {
-    return stream
+    stream.flush()
   }
 
   /**
