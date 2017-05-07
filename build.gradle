@@ -24,7 +24,7 @@ apply plugin: 'groovy'
 apply plugin: 'application'
 
 group = 'org.jboss.aesh'
-version = '0.66'
+version = '0.66.15'
 
 mainClassName = 'org.jboss.aesh.mterm.Mterm'
 
